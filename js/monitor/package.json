@@ -1,0 +1,20 @@
+{
+  "name": "simple_monitoring",
+  "version": "1.0.0",
+  "description": "Simple services HTTP monitoring",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec spec/index.js",
+    "start": "node ./run"
+  },
+  "dependencies" : {
+      "nodemailer" : "*"
+  },
+  "devDependencies": {
+    "should": "*",
+    "mocha": "*",
+    "sinon": "*"
+  },
+  "author": "Jacek Wysocki <jacek.wysocki@gmail.com>",
+  "license": "BSD"
+}

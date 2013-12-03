@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+HOST="10.0.0.222"
+PORT=8600
+
+if [ "$1" == "tunel" ] ; then
+    HOST="127.0.0.1"
+fi
+
+if [ "$1" == "ext" ] ; then
+    HOST="194.50.37.222"
+    PORT=28600
+fi
+
+URL="$HOST:$PORT/lorem"
+LAST=0
+echo "checking data ($URL)"
+
+echo "lp  ;  timestamp  ; diff ;  code" > test_$HOST.txt
+
+for I in {1..100001}; do
+    STATUS=$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' $URL)
+    if [ "$STATUS" == "200" ] ; then
+        curl -L $URL 2&>1 /dev/null
+        CODE="OK"
+    else
+        CODE="ERROR: status code $STATUS"
+        echo $CODE
+    fi
+
+    CURRENT=$(date +%s%N | cut -b1-13)
+    DIFF=$((CURRENT-LAST))
+    echo "$I  ;  $CURRENT  ; $DIFF ;  $CODE" >> test_$HOST.txt
+    LAST=$CURRENT
+done

@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+apt-get -y install apache2
+apt-get -y install php5 php5-gd php5-pgsql php5-dev php5-cli php-pear
+apt-get -y install libapache2-mod-php5
+apt-get -y install make libpcre3-dev curl wget
+apt-get -y install subversion git htop mc emacs multitail
+
+
+# wkhtmltopdf setup
+wget https://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2
+tar xf wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2
+mv wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf
+
+#php config
+pecl install apc
+echo 'extension=apc.so' > /etc/php5/conf.d/apc.ini
+sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php5/apache2/php.ini
+service apache2 restart
+
+
+#postgresql installed on sys install
+#apt-get -y install postgresql-9.1-plproxy
+
+#setup basic QARSON vhost
+mkdir -p /srv/www/qarson/site/application
+chown -R www-data:www-data /srv/www
+
+echo '<VirtualHost *:80>
+    ServerName qarson.fr
+    ServerAlias www.qarson.fr
+    ServerAlias lts.qarson.fr
+
+    DocumentRoot /srv/www/qarson/site/application
+
+    ErrorLog /var/log/apache2/qarson-error_log
+    CustomLog /var/log/apache2/qarson-access_log combined
+
+    HostnameLookups Off
+</VirtualHost>' > /etc/apache2/sites-available/qarson
+
+a2ensite qarson
+echo 'ServerName qarson' >> /etc/apache2/httpd.conf
+a2enmod rewrite
+service apache2 restart
+
+#Qarson deploy should be configured in Jenkins
+
+#locales
+echo 'pl_PL ISO-8859-2' > /var/lib/locales/supported.d/pl
+echo 'pl_PL.UTF-8 UTF-8' >> /var/lib/locales/supported.d/pl
+echo 'fr_FR.UTF-8 UTF-8' > /var/lib/locales/supported.d/fr
+echo 'de_DE.UTF-8 UTF-8' > /var/lib/locales/supported.d/de
+dpkg-reconfigure locales
+

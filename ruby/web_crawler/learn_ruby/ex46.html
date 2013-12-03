@@ -1,0 +1,207 @@
+<div class="body">
+            
+  <div class="section" id="exercise-46-a-project-skeleton">
+<h1>Exercise 46: A Project Skeleton<a class="headerlink" href="#exercise-46-a-project-skeleton" title="Permalink to this headline">¶</a>
+</h1>
+<p>This will be where you start learning how to setup a good project
+"skeleton" directory. This skeleton directory will have all the basics
+you need to get a new project up and running. It will have your project
+layout, automated tests, modules, and install scripts.</p>
+<div class="section" id="skeleton-contents-linux-osx">
+<h2>Skeleton Contents: Linux/OSX<a class="headerlink" href="#skeleton-contents-linux-osx" title="Permalink to this headline">¶</a>
+</h2>
+<p>First, create the structure of your skeleton directory with these
+commands:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> mkdir -p projects
+<span class="gp">$</span> <span class="nb">cd </span>projects/
+<span class="gp">$</span> mkdir skeleton
+<span class="gp">$</span> <span class="nb">cd </span>skeleton
+<span class="gp">$</span> mkdir bin lib lib/NAME <span class="nb">test</span>
+</pre></div>
+</div>
+<p>I use a directory named projects to store all the various things I'm
+working on. Inside that directory I have my skeleton directory that I
+put the basis of my projects into. The directory NAME will be renamed to
+whatever you are calling your project's main module when you use the
+skeleton.</p>
+<p>Next we need to setup some initial files:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> touch lib/NAME.rb
+<span class="gp">$</span> touch lib/NAME/version.rb
+</pre></div>
+</div>
+<p>Then we can create a <tt class="docutils literal"><span class="pre">NAME.gemspec</span></tt> file in our project's root
+directory which we can use to install our project later if we want:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="c1"># -*- encoding: utf-8 -*-</span>
+<span class="vg">$:</span><span class="o">.</span><span class="n">push</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="s2">"../lib"</span><span class="p">,</span> <span class="bp">__FILE__</span><span class="p">)</span>
+<span class="nb">require</span> <span class="s2">"NAME/version"</span>
+
+<span class="no">Gem</span><span class="o">::</span><span class="no">Specification</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">name</span>        <span class="o">=</span> <span class="s2">"NAME"</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">version</span>     <span class="o">=</span> <span class="no">NAME</span><span class="o">::</span><span class="no">VERSION</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">authors</span>     <span class="o">=</span> <span class="o">[</span><span class="s2">"Rob Sobers"</span><span class="o">]</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">email</span>       <span class="o">=</span> <span class="o">[</span><span class="s2">"rsobers@gmail.com"</span><span class="o">]</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">homepage</span>    <span class="o">=</span> <span class="s2">""</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">summary</span>     <span class="o">=</span> <span class="sx">%q{TODO: Write a gem summary}</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="sx">%q{TODO: Write a gem description}</span>
+
+  <span class="n">s</span><span class="o">.</span><span class="n">rubyforge_project</span> <span class="o">=</span> <span class="s2">"NAME"</span>
+
+  <span class="n">s</span><span class="o">.</span><span class="n">files</span>         <span class="o">=</span> <span class="sb">`git ls-files`</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">test_files</span>    <span class="o">=</span> <span class="sb">`git ls-files -- {test,spec,features}/*`</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">executables</span>   <span class="o">=</span> <span class="sb">`git ls-files -- bin/*`</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">require_paths</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"lib"</span><span class="o">]</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>Edit this file so that it has your contact information and is ready to
+go for when you copy it.</p>
+<p>Finally you will want a simple skeleton file for unit tests (which will
+talk about more in the next lesson) named <tt class="docutils literal"><span class="pre">test/test_NAME.rb</span></tt>:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="nb">require</span> <span class="s1">'test/unit'</span>
+
+<span class="k">class</span> <span class="nc">MyUnitTests</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
+
+  <span class="k">def</span> <span class="nf">setup</span>
+    <span class="nb">puts</span> <span class="s2">"setup!"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">teardown</span>
+    <span class="nb">puts</span> <span class="s2">"teardown!"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">test_basic</span>
+    <span class="nb">puts</span> <span class="s2">"I RAN!"</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+</div>
+<div class="section" id="installing-gems">
+<h2>Installing Gems<a class="headerlink" href="#installing-gems" title="Permalink to this headline">¶</a>
+</h2>
+<p>Gems are packages of Ruby code that help you get things done, so you
+will need to know how to install them and use them. Here's the problem
+though. You are at a point where it's difficult for me to help you do
+that and keep this book sane and clean. There are so many ways to
+install software on so many computers that I'd have to spend 10 pages
+walking you through every step, and let me tell you I am a lazy guy.</p>
+<p>Rather than tell you how to do it exactly, I'm going to tell you what
+you should install, and then tell you to figure it out and get it
+working. This will be really good for you since it will open a whole
+world of software you can use that other people have released to the
+world.</p>
+<p>Next, install the following software packages:</p>
+<ul class="simple">
+<li>git - <a class="reference external" href="http://git-scm.com/">http://git-scm.com/</a>
+</li>
+<li>rake - <a class="reference external" href="http://rake.rubyforge.org/">http://rake.rubyforge.org/</a>
+</li>
+<li>rvm - <a class="reference external" href="https://rvm.beginrescueend.com/">https://rvm.beginrescueend.com/</a>
+</li>
+<li>rubygems - <a class="reference external" href="http://rubygems.org/pages/download">http://rubygems.org/pages/download</a>
+</li>
+<li>bundler - <a class="reference external" href="http://gembundler.com/">http://gembundler.com/</a>
+</li>
+</ul>
+<p>Do not just download these packages and install them by hand. Instead
+see how other people recommend you install these packages and use them
+for your particular system. The process will be different for most
+versions of Linux, OSX, and definitely different for Windows.</p>
+<p>I am warning you, this will be frustrating. In the business we call this
+"yak shaving". Yak shaving is any activity that is mind numblingly
+irritatingly boring and tedious that you have to do before you can do
+something else that's more fun. You want to create cool Ruby projects,
+but you can't do that until you setup a skeleton directory, but you
+can't setup a skeleton directory until you install some packages, but
+you can't install packages until you install package installers, and you
+can't install package installers until you figure out how your system
+installs software in general, and so on.</p>
+<p>Struggle through this anyway. Consider it your trial-by-annoyance to get
+into the programmer club. Every programmer has to do these annoying
+tedious tasks before they can do something cool.</p>
+</div>
+<div class="section" id="using-the-skeleton">
+<h2>Using The Skeleton<a class="headerlink" href="#using-the-skeleton" title="Permalink to this headline">¶</a>
+</h2>
+<p>You are now done with most of your yak shaving. Whenever you want to
+start a new project, just do this:</p>
+<ol class="arabic simple">
+<li>Make a copy of your skeleton directory. Name it after your new
+project.</li>
+<li>Rename (move) the NAME directory and <tt class="docutils literal"><span class="pre">NAME.rb</span></tt> file to be the name
+of your project.</li>
+<li>Edit your <tt class="docutils literal"><span class="pre">NAME.gemspec</span></tt> file to have all the information for your
+project.</li>
+<li>Rename <tt class="docutils literal"><span class="pre">test/test_NAME.rb</span></tt> to also have your project name.</li>
+<li>Start coding.</li>
+</ol>
+</div>
+<div class="section" id="required-quiz">
+<h2>Required Quiz<a class="headerlink" href="#required-quiz" title="Permalink to this headline">¶</a>
+</h2>
+<p>This exercise doesn't have extra credit but a quiz you should complete:</p>
+<ol class="arabic simple">
+<li>Read about how to use all of the things you installed.</li>
+<li>Read about the <tt class="docutils literal"><span class="pre">NAME.gemspec</span></tt> file and all it has to offer.</li>
+<li>Make a project and start writing some code in the <tt class="docutils literal"><span class="pre">NAME.rb</span></tt> script.</li>
+<li>Put a script in the <tt class="docutils literal"><span class="pre">bin</span></tt> directory that you can run. Read about
+how you can make a Ruby script that's runnable for your system.</li>
+<li>Make sure the <tt class="docutils literal"><span class="pre">bin</span></tt> script you created is referenced in your
+<tt class="docutils literal"><span class="pre">NAME.gemspec</span></tt> so that it gets installed.</li>
+<li>Use your <tt class="docutils literal"><span class="pre">NAME.gemspec</span></tt> and <tt class="docutils literal"><span class="pre">gem</span> <span class="pre">build</span></tt> <tt class="docutils literal"><span class="pre">gem</span> <span class="pre">install</span></tt> to
+install your own library and make sure it works, then use
+<tt class="docutils literal"><span class="pre">gem</span> <span class="pre">uninstall</span></tt> to uninstall it.</li>
+<li>Figure out how you can use Bundler to generate a skeleton directory
+automatically.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

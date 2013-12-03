@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Calc</title>
+    <meta name="description" content="D:evolve">
+    <meta name="author" content="Jacek Wysocki">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/number-format.js"></script>
+    <script src="js/kalkulatory.utf8.js"></script>
+    <script src="js/studia.js"></script>
+</head>
+<body>
+<div class="belka">
+    <a href="index.html"> &laquo; Lista kalkulatorów </a>
+</div>
+
+<form name="form">
+    <div class="userInput">
+        <!-- czesc w ktorej user wprowadza dane -->
+        <table>
+            <tbody><tr>
+            <td class="label">
+                Za ile lat Twoje dziecko rozpocznie studia:
+            </td>
+            <td class="input">
+                <input size="8" class="inputbox" type="text" value="10" name="rozps"> lat
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Obecny koszt studiów:
+            </td>
+            <td class="input">
+                <input size="8" class="inputbox" type="text" value="20000" name="koszto"> zł            
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Przewidywana średnia stopa inflacji w okresie:
+            </td>
+            <td class="input">
+                <input size="8" class="inputbox" type="text" value="5" name="inflacja"> %
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Koszt studiów w momencie rozpoczęcia:
+            </td>
+            <td class="input">
+                <input size="8" class="inputbox" type="text" disabled="disabled" value="32577.89" name="kosztp"> zł
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Jaką kwotą dysponujesz teraz:
+            </td>
+            <td class="input">
+                <input size="8" class="inputbox" type="text" value="5000" name="ilemasz"> zł
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Ile jesteś w stanie miesięcznie zaoszczędzić na ten cel:
+            </td>
+            <td class="input">
+                <input size="8" class="inputbox" type="text" value="100" name="ilemies"> zł
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Twoja stopa zwrotu:
+            </td>
+            <td class="input">
+                <input size="8" class="inputbox" type="text" value="10" name="sz"> %
+            </td>
+            </tr>
+
+        </tbody></table>
+    <div class="button">
+        <input size="8" type="button" class="button1" onclick="wylicz()" name="cmdCalc" value="◀ Oblicz"> 
+    </div>
+
+    </div>
+
+    <div class="middleOutput">
+        <table>
+            <tbody><tr>
+                <td class="first">
+                    Zobacz wyniki symulacji
+                </td>
+                <td class="last">
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+
+    <div class="userOutput">
+        <!-- wyniki -->
+        <table>
+            <tbody><tr>
+                <td class="label">
+                    Ile uzbierasz do momentu rozpoczęcia studiów przez Twoje dziecko:
+                    <br>
+                    <input size="8" class="inputbox" type="text" value="" name="ilebedziesz" disabled="disabled"> zł
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label">
+                    Tyle musiałbyś miesięcznie oszczędzać, żeby dokładnie osiągnąć cel:
+                    <br>
+                    <input size="8" class="inputbox" type="text" value="" name="ilemiesmus" disabled="disabled"> zł
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label">
+                    Czy osiągniesz swój cel:
+                    <br>
+                    <input size="8" class="inputbox" type="text" value="" name="cel" disabled="disabled">
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+</form>
+
+</body>
+</html>
+
+

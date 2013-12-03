@@ -1,0 +1,116 @@
+<div class="body">
+            
+  <div class="section" id="exercise-19-functions-and-variables">
+<h1>Exercise 19: Functions And Variables<a class="headerlink" href="#exercise-19-functions-and-variables" title="Permalink to this headline">¶</a>
+</h1>
+<p>Functions may have been a mind-blowing amount of information, but do not
+worry. Just keep doing these exercises and going through your checklist
+from the last exercise and you will eventually get it.</p>
+<p>There is one tiny point though that you might not have realized which
+we'll reinforce right now: The variables in your function are not
+connected to the variables in your script. Here's an exercise to get you
+thinking about this:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">cheese_and_crackers</span><span class="p">(</span><span class="n">cheese_count</span><span class="p">,</span> <span class="n">boxes_of_crackers</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"You have </span><span class="si">#{</span><span class="n">cheese_count</span><span class="si">}</span><span class="s2"> cheeses!"</span>
+  <span class="nb">puts</span> <span class="s2">"You have </span><span class="si">#{</span><span class="n">boxes_of_crackers</span><span class="si">}</span><span class="s2"> boxes of crackers!"</span>
+  <span class="nb">puts</span> <span class="s2">"Man that's enough for a party!"</span>
+  <span class="nb">puts</span> <span class="s2">"Get a blanket."</span>
+  <span class="nb">puts</span> <span class="c1"># a blank line</span>
+<span class="k">end</span>
+
+<span class="nb">puts</span> <span class="s2">"We can just give the function numbers directly:"</span>
+<span class="n">cheese_and_crackers</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">"OR, we can use variables from our script:"</span>
+<span class="n">amount_of_cheese</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">amount_of_crackers</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">cheese_and_crackers</span><span class="p">(</span><span class="n">amount_of_cheese</span><span class="p">,</span> <span class="n">amount_of_crackers</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">"We can even do math inside too:"</span>
+<span class="n">cheese_and_crackers</span><span class="p">(</span><span class="mi">10</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">"And we can combine the two, variables and math:"</span>
+<span class="n">cheese_and_crackers</span><span class="p">(</span><span class="n">amount_of_cheese</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span> <span class="n">amount_of_crackers</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>This shows all different ways we're able to give our function
+<tt class="docutils literal"><span class="pre">cheese_and_crackers</span></tt> the values it needs to print them. We can give
+it straight numbers. We can give it variables. We can give it math. We
+can even combine math and variables.</p>
+<p>In a way, the arguments to a function are kind of like our <tt class="docutils literal"><span class="pre">=</span></tt>
+character when we make a variable. In fact, if you can use <tt class="docutils literal"><span class="pre">=</span></tt> to name
+something, you can usually pass it to a function as an argument.</p>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<p>You should study the output of this script and compare it with what you
+think you should get for each of the examples in the script.</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex19.rb
+<span class="go">We can just give the function numbers directly:</span>
+<span class="go">You have 20 cheeses!</span>
+<span class="go">You have 30 boxes of crackers!</span>
+<span class="go">Man that's enough for a party!</span>
+<span class="go">Get a blanket.</span>
+
+<span class="go">OR, we can use variables from our script:</span>
+<span class="go">You have 10 cheeses!</span>
+<span class="go">You have 50 boxes of crackers!</span>
+<span class="go">Man that's enough for a party!</span>
+<span class="go">Get a blanket.</span>
+
+<span class="go">We can even do math inside too:</span>
+<span class="go">You have 30 cheeses!</span>
+<span class="go">You have 11 boxes of crackers!</span>
+<span class="go">Man that's enough for a party!</span>
+<span class="go">Get a blanket.</span>
+
+<span class="go">And we can combine the two, variables and math:</span>
+<span class="go">You have 110 cheeses!</span>
+<span class="go">You have 1050 boxes of crackers!</span>
+<span class="go">Man that's enough for a party!</span>
+<span class="go">Get a blanket.</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Go back through the script and type a comment above each line
+explaining in English what it does.</li>
+<li>Start at the bottom and read each line backwards, saying all the
+important characters.</li>
+<li>Write at least one more function of your own design, and run it 10
+different ways.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

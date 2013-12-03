@@ -1,0 +1,15 @@
+{
+    "name": "ExuExt",
+    "version": "1.0",
+    "description": "Exu extension",
+    "browser_action": {
+        "default_icon": "app.png"
+    },
+    "permissions": [
+        "tabs"
+    ],
+    "browser_action": {
+        "default_icon": "app.png",
+        "popup": "popup.html"
+    }
+}

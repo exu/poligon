@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# I'm using version 0.10 RC2 because 0.11 don't work with both X and no X env's
+
+ARCH=$(uname -i)
+TMPDIR='tmp-1w2e3r4'
+
+mkdir $TMPDIR
+cd $TMPDIR
+
+if [[ $ARCH = 'x86_64' ]]; then
+    #new version don't work on production server without X
+    wget http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.10.0_rc2-static-amd64.tar.bz2 -O wkhtmltopdf.tar.bz2
+    #wget https://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2 -O wkhtmltopdf.tar.bz2
+    tar jxf wkhtmltopdf.tar.bz2
+    sudo mv wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf
+else
+    wget https://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.10.0_rc2-static-i386.tar.bz2 -O wkhtmltopdf.tar.bz2
+    #wget https://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-i386.tar.bz2 -O wkhtmltopdf.tar.bz2
+    tar jxf wkhtmltopdf.tar.bz2
+    sudo mv wkhtmltopdf-i386 /usr/bin/wkhtmltopdf
+fi
+
+
+cd ..
+echo "Cleaning directory $TMPDIR"
+rm -rf $TMPDIR
+

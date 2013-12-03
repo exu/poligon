@@ -1,0 +1,572 @@
+<div class="body">
+            
+  <div class="section" id="exercise-51-getting-input-from-a-browser">
+<h1>Exercise 51: Getting Input From A Browser<a class="headerlink" href="#exercise-51-getting-input-from-a-browser" title="Permalink to this headline">¶</a>
+</h1>
+<p>While it's exciting to see the browser display "Hello World", it's even
+more exciting to let the user submit text to your application from a
+form. In this exercise we'll improve our starter web application using
+forms and figure out how to do automated testing for a web application.</p>
+<div class="section" id="how-the-web-works">
+<h2>How The Web Works<a class="headerlink" href="#how-the-web-works" title="Permalink to this headline">¶</a>
+</h2>
+<p>Time for some boring stuff. You need to understand a bit more about how
+the web works before you can make a form. This description isn't
+complete, but it's accurate and will help you figure out what might be
+going wrong with your application. Also, creating forms will be easier
+if you know what they do.</p>
+<p>I'll start with a simple diagram that shows you the different parts of a
+web request and how the information flows:</p>
+<div class="figure align-center">
+<img alt="http request diagram" src="http://learnpythonthehardway.org/book/_images/http_request_diagram.png"><p class="caption">http request diagram</p>
+</div>
+<p>I've labeled the lines with letters so I can walk you through a regular
+request process:</p>
+<ol class="arabic simple">
+<li>You type in the url <a class="reference external" href="http://learnpythonthehardway.org/">http://learnpythonthehardway.org/</a> into your
+browser and it sends the request out on <tt class="docutils literal"><span class="pre">line</span> <span class="pre">(A)</span></tt> to your
+computer's network interface.</li>
+<li>Your request goes out over the internet on <tt class="docutils literal"><span class="pre">line</span> <span class="pre">(B)</span></tt> and then to
+the remote computer on <tt class="docutils literal"><span class="pre">line</span> <span class="pre">(C)</span></tt> where my server accepts the
+request.</li>
+<li>Once my computer accepts it, my web application gets it on
+<tt class="docutils literal"><span class="pre">line</span> <span class="pre">(D)</span></tt>, and my web application code runs the <tt class="docutils literal"><span class="pre">/</span></tt> (index)
+handler.</li>
+<li>The response comes out of my web server when I return it, and goes
+back to your browser over <tt class="docutils literal"><span class="pre">line</span> <span class="pre">(D)</span></tt> again.</li>
+<li>The server running this site takes the response off <tt class="docutils literal"><span class="pre">line</span> <span class="pre">(D)</span></tt> then
+sends it back over the internet on <tt class="docutils literal"><span class="pre">line</span> <span class="pre">(C)</span></tt>.</li>
+<li>The response from the server then comes off the internet on
+<tt class="docutils literal"><span class="pre">line</span> <span class="pre">(B)</span></tt>, and your computer's network interface hands it to your
+browser on <tt class="docutils literal"><span class="pre">line</span> <span class="pre">(A)</span></tt>.</li>
+<li>Finally, your browser then displays the response.</li>
+</ol>
+<p>In this description there are a few terms you should know so that you
+have a common vocabulary to work with when talking about your web
+application:</p>
+<div class="section" id="browser">
+<h3>Browser<a class="headerlink" href="#browser" title="Permalink to this headline">¶</a>
+</h3>
+<p>The software that you're probably using every day. Most people don't
+know what it really does, they just call it "the internet". Its job is
+to take addresses (like <a class="reference external" href="http://learnpythonthehardway.org">http://learnpythonthehardway.org</a>) you type into
+the URL bar, then use that information to make requests to the server at
+that address.</p>
+</div>
+<div class="section" id="address">
+<h3>Address<a class="headerlink" href="#address" title="Permalink to this headline">¶</a>
+</h3>
+<p>This is normally a URL (Uniform Resource Locator) like
+<a class="reference external" href="http://learnpythonthehardway.org/">http://learnpythonthehardway.org/</a> and indicates where a browser should
+go. The first part <tt class="docutils literal"><span class="pre">http</span></tt> indicates the protocol you want to use, in
+this case "Hyper-Text Transport Protocol". You can also try
+<a class="reference external" href="ftp://ibiblio.org/">ftp://ibiblio.org/</a> to see how "File Transport Protocol" works. The
+<tt class="docutils literal"><span class="pre">learnpythonthehardway.org</span></tt> part is the "hostname", or a human
+readable address you can remember and which maps to a number called an
+IP address, similar to a telephone number for a computer on the
+Internet. Finally, URLs can have a trailing <tt class="docutils literal"><span class="pre">path</span></tt> like the <tt class="docutils literal"><span class="pre">/book/</span></tt>
+part of <a class="reference external" href="http://learnpythonthehardway.org/book/">http://learnpythonthehardway.org/book/</a> which indicates a file or
+some resource <em>on</em> the server to retrieve with a request. There are many
+other parts, but those are the main ones.</p>
+</div>
+<div class="section" id="connection">
+<h3>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a>
+</h3>
+<p>Once a browser knows what protocol you want to use (http), what server
+you want to talk to (learnpythonthehardway.org), and what resource on
+that server to get, it must make a connection. The browser simply asks
+your Operating System (OS) to open a "port" to the computer, usually
+port 80. When it works the OS hands back to your program something that
+works like a file, but is actually sending and receiving bytes over the
+network wires between your computer and the other computer at
+"learnpythonthehardway.org". This is also the same thing that happens
+with <a class="reference external" href="http://localhost:8080/">http://localhost:8080/</a> but in this case you're telling the browser
+to connect to your own computer (localhost) and use port 4567 rather
+than the default of 80. You could also do
+<a class="reference external" href="http://learnpythonthehardway.org:80/">http://learnpythonthehardway.org:80/</a> and get the same result, except
+you're explicitly saying to use port 80 instead of letting it be that by
+default.</p>
+</div>
+<div class="section" id="request">
+<h3>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a>
+</h3>
+<p>Your browser is connected using the address you gave. Now it needs to
+ask for the resource it wants (or you want) on the remote server. If you
+gave <tt class="docutils literal"><span class="pre">/book/</span></tt> at the end of the URL, then you want the file (resource)
+at <tt class="docutils literal"><span class="pre">/book/</span></tt>, and most servers will use the real file
+<tt class="docutils literal"><span class="pre">/book/index.html</span></tt> but pretend it doesn't exist. What the browser does
+to get this resource is send a request to the server. I won't get into
+exactly how it does this, but just understand that it has to send
+something to query the server for the request. The interesting thing is
+that these "resources" don't have to be files. For instance, when the
+browser in your application asks for something, the server is returning
+something your code generated.</p>
+</div>
+<div class="section" id="server">
+<h3>Server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a>
+</h3>
+<p>The server is the computer at the end of a browser's connection that
+knows how to answer your browser's requests for files/resources. Most
+web servers just send files, and that's actually the majority of
+traffic. But you're actually building a server in Ruby that knows how to
+take requests for resources, and then return strings that you craft
+using Ruby. When you do this crafting, <em>you</em> are pretending to be a file
+to the browser, but really it's just code. As you can see from Ex. 50,
+it also doesn't take much code to create a response.</p>
+</div>
+<div class="section" id="response">
+<h3>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a>
+</h3>
+<p>This is the HTML (css, javascript, or images) your server wants to send
+back to the browser as the answer to the browser's request. In the case
+of files, it just reads them off the disk and sends them to the browser,
+but it wraps the contents of the disk in a special "header" so the
+browser knows what it's getting. In the case of your application, you're
+still sending the same thing, including the header, but you generate
+that data on the fly with your Ruby code.</p>
+<p>That is the fastest crash course in how a web browser accesses
+information on servers on the internet. It should work well enough for
+you to understand this exercise, but if not, read about it as much as
+you can until you get it. A really good way to do that is to take the
+diagram, and break different parts of the web application you did in
+Exercise 50. If you can break your web application in predictable ways
+using the diagram, you'll start to understand how it works.</p>
+</div>
+</div>
+<div class="section" id="how-forms-work">
+<h2>How Forms Work<a class="headerlink" href="#how-forms-work" title="Permalink to this headline">¶</a>
+</h2>
+<p>The best way to play with forms is to write some code that accepts form
+data, and then see what you can do. Take your <tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt> file
+and make it look like this:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">require_relative</span> <span class="s2">"gothonweb/version"</span>
+<span class="nb">require</span> <span class="s2">"sinatra"</span>
+<span class="nb">require</span> <span class="s2">"erb"</span>
+
+<span class="k">module</span> <span class="nn">Gothonweb</span>
+  <span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+    <span class="n">greeting</span> <span class="o">=</span> <span class="s2">"Hello, World!"</span>
+    <span class="n">erb</span> <span class="ss">:index</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:greeting</span> <span class="o">=&gt;</span> <span class="n">greeting</span><span class="p">}</span>
+  <span class="k">end</span>
+  
+  <span class="n">get</span> <span class="s1">'/hello'</span> <span class="k">do</span>
+    <span class="nb">name</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span> <span class="o">||</span> <span class="s2">"Nobody"</span>
+    <span class="n">greeting</span> <span class="o">=</span> <span class="s2">"Hello, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">erb</span> <span class="ss">:index</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:greeting</span> <span class="o">=&gt;</span> <span class="n">greeting</span><span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>Restart Sinatra (hit CTRL-C and then run it again) to make sure it loads
+again, then with your browser go to <tt class="docutils literal"><span class="pre">http://localhost:4567/hello</span></tt>
+which should display, "I just wanted to say Hello, Nobody." Next, change
+the URL in your browser to <tt class="docutils literal"><span class="pre">http://localhost:4567/hello?name=Frank</span></tt>
+and you'll see it say "Hello, Frank." Finally, change the <tt class="docutils literal"><span class="pre">name=Frank</span></tt>
+part to be your name. Now it's saying hello to you.</p>
+<p>Let's break down the changes I made to your script.</p>
+<ol class="arabic simple">
+<li>Instead of just a string for greeting I'm now using the <tt class="docutils literal"><span class="pre">params</span></tt>
+hash to get data from the browser. Sinatra takes all of the key/value
+pairs after the <tt class="docutils literal"><span class="pre">?</span></tt> part of the URL and adds them to the <tt class="docutils literal"><span class="pre">params</span></tt>
+hash for you to work with.</li>
+<li>I then construct the <tt class="docutils literal"><span class="pre">greeting</span></tt> from the <tt class="docutils literal"><span class="pre">name</span></tt> value we
+extracted via the <tt class="docutils literal"><span class="pre">params[:name]</span></tt> hash lookup, which should be very
+familiar to you by now.</li>
+<li>Everything else about the file is the same as before.</li>
+</ol>
+<p>You're also not restricted to just one parameter on the URL. Change this
+example to give two variables like this:
+<tt class="docutils literal"><span class="pre">http://localhost:4567/hello?name=Frank&amp;greet=Hola</span></tt>. Then change the
+code to get <tt class="docutils literal"><span class="pre">params[:name]</span></tt> and <tt class="docutils literal"><span class="pre">params[:greet]</span></tt> like this:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">greeting</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">greet</span><span class="si">}</span><span class="s2">, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-html-forms">
+<h2>Creating HTML Forms<a class="headerlink" href="#creating-html-forms" title="Permalink to this headline">¶</a>
+</h2>
+<p>Passing the parameters on the URL works, but it's kind of ugly and not
+easy to use for regular people. What you really want is a "POST form",
+which is a special HTML file that has a <tt class="docutils literal"><span class="pre">&lt;form&gt;</span></tt> tag in it. This form
+will collect information from the user, then send it to your web
+application just like you did above.</p>
+<p>Let's make a quick one so you can see how it works. Here's the new HTML
+file you need to create, in <tt class="docutils literal"><span class="pre">lib/views/hello_form.erb</span></tt>:</p>
+<div class="highlight-erb"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="x">&lt;html&gt;</span>
+<span class="x">    &lt;head&gt;</span>
+<span class="x">        &lt;title&gt;Sample Web Form&lt;/title&gt;</span>
+<span class="x">    &lt;/head&gt;</span>
+<span class="x">&lt;body&gt;</span>
+
+<span class="x">&lt;h1&gt;Fill Out This Form&lt;/h1&gt;</span>
+
+<span class="x">&lt;form action="/hello" method="POST"&gt;</span>
+<span class="x">    A Greeting: &lt;input type="text" name="greet"&gt;</span>
+<span class="x">    &lt;br/&gt;</span>
+<span class="x">    Your Name: &lt;input type="text" name="name"&gt;</span>
+<span class="x">    &lt;br/&gt;</span>
+<span class="x">    &lt;input type="submit"&gt;</span>
+<span class="x">&lt;/form&gt;</span>
+
+<span class="x">&lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>You should then change <tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt> to look like this:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">require_relative</span> <span class="s2">"gothonweb/version"</span>
+<span class="nb">require</span> <span class="s2">"sinatra"</span>
+<span class="nb">require</span> <span class="s2">"erb"</span>
+
+<span class="k">module</span> <span class="nn">Gothonweb</span>
+
+  <span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+    <span class="n">greeting</span> <span class="o">=</span> <span class="s2">"Hello, World!"</span>
+    <span class="n">erb</span> <span class="ss">:index</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:greeting</span> <span class="o">=&gt;</span> <span class="n">greeting</span><span class="p">}</span>
+  <span class="k">end</span>
+  
+  <span class="n">get</span> <span class="s1">'/hello'</span> <span class="k">do</span>
+    <span class="n">erb</span> <span class="ss">:hello_form</span>
+  <span class="k">end</span>
+
+  <span class="n">post</span> <span class="s1">'/hello'</span> <span class="k">do</span>
+    <span class="n">greeting</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:greet</span><span class="o">]</span> <span class="o">||</span> <span class="s2">"Hello"</span><span class="si">}</span><span class="s2">, </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span> <span class="o">||</span> <span class="s2">"Nobody"</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">erb</span> <span class="ss">:index</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:greeting</span> <span class="o">=&gt;</span> <span class="n">greeting</span><span class="p">}</span> 
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>Once you've got those written up, simply restart the web application
+again and hit it with your browser like before.</p>
+<p>This time you'll get a form asking you for "A Greeting" and "Your Name".
+When you hit the Submit button on the form, it will give you the same
+greeting you normally get, but this time look at the URL in your
+browser. See how it's <tt class="docutils literal"><span class="pre">http://localhost:4567/hello</span></tt> even though you
+sent in parameters.</p>
+<p>The part of the <tt class="docutils literal"><span class="pre">hello_form.erb</span></tt> file that makes this work is the line
+with <tt class="docutils literal"><span class="pre">&lt;form</span> <span class="pre">action="/hello"</span> <span class="pre">method="POST"&gt;</span></tt>. This tells your browser
+to:</p>
+<ol class="arabic simple">
+<li>Collect data from the user using the form fields inside the form.</li>
+<li>Send them to the server using a POST type of request, which is just
+another browser request that "hides" the form fields.</li>
+<li>Send that to the <tt class="docutils literal"><span class="pre">/hello</span></tt> URL (as shown in the <tt class="docutils literal"><span class="pre">action="/hello"</span></tt>
+part).</li>
+<li>You can then see how the two <tt class="docutils literal"><span class="pre">&lt;input&gt;</span></tt> tags match the names of the
+variables in your new code. Also notice that instead of just a GET
+method inside class index, I have another method POST.</li>
+</ol>
+<p>How this new application works is:</p>
+<ol class="arabic simple">
+<li>The browser first hits the web application at <tt class="docutils literal"><span class="pre">/hello</span></tt> but it sends
+a GET, so our <tt class="docutils literal"><span class="pre">get</span> <span class="pre">'/hello/'</span></tt> block runs and returns the
+<tt class="docutils literal"><span class="pre">hello_form</span></tt>.</li>
+<li>You fill out the form in the browser, and the browser does what the
+<tt class="docutils literal"><span class="pre">&lt;form&gt;</span></tt> says and sends the data as a POST.</li>
+<li>The web application then runs the <tt class="docutils literal"><span class="pre">post</span> <span class="pre">'/hello'</span></tt> block rather than
+the <tt class="docutils literal"><span class="pre">get</span> <span class="pre">'/hello'</span></tt> block to handle this request.</li>
+<li>This <tt class="docutils literal"><span class="pre">post</span> <span class="pre">'/hello'</span></tt> block then does what it normally does to send
+back the <tt class="docutils literal"><span class="pre">hello</span></tt> page like before. There's really nothing new in
+here, it's just moved into a new block.</li>
+</ol>
+<p>As an exercise, go into the <tt class="docutils literal"><span class="pre">lib/views/index.erb</span></tt> file and add a link
+back to just <tt class="docutils literal"><span class="pre">/hello</span></tt> so that you can keep filling out the form and
+seeing the results. Make sure you can explain how this link works and
+how it's letting you cycle between <tt class="docutils literal"><span class="pre">lib/views/index.erb</span></tt> and
+<tt class="docutils literal"><span class="pre">lib/views/hello_form.erb</span></tt> and what's being run inside this latest
+Ruby code.</p>
+</div>
+<div class="section" id="creating-a-layout-template">
+<h2>Creating A Layout Template<a class="headerlink" href="#creating-a-layout-template" title="Permalink to this headline">¶</a>
+</h2>
+<p>When you work on your game in the next Exercise, you'll need to make a
+bunch of little HTML pages. Writing a full web page each time will
+quickly become tedious. Luckily you can create a "layout" template, or a
+kind of shell that will wrap all your other pages with common headers
+and footers. Good programmers try to reduce repetition, so layouts are
+essential for being a good programmer.</p>
+<p>Change <tt class="docutils literal"><span class="pre">lib/views/index.erb</span></tt> to be like this:</p>
+<div class="highlight-erb"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">greeting</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;p&gt;I just wanted to say &lt;em style="color: green; font-size: 2em;"&gt;</span><span class="cp">&lt;%=</span> <span class="n">greeting</span> <span class="cp">%&gt;</span><span class="x">&lt;/em&gt;.</span>
+<span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;em&gt;Hello&lt;/em&gt;, world!</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x">&gt;</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>Change <tt class="docutils literal"><span class="pre">lib/views/hello_form.erb</span></tt> to be like this:</p>
+<div class="highlight-erb"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="x">&lt;h1&gt;Fill Out This Form&lt;/h1&gt;</span>
+
+<span class="x">&lt;form action="/hello" method="POST"&gt;</span>
+<span class="x">  A Greeting: &lt;input type="text" name="greet"&gt;</span>
+<span class="x">  &lt;br/&gt;</span>
+<span class="x">  Your Name: &lt;input type="text" name="name"&gt;</span>
+<span class="x">  &lt;br/&gt;</span>
+<span class="x">  &lt;input type="submit"&gt;</span>
+<span class="x">&lt;/form&gt;</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>All we're doing is stripping out the "boilerplate" at the top and the
+bottom which is always on every page. We'll put that back into a single
+<tt class="docutils literal"><span class="pre">lib/views/layout.erb</span></tt> file that handles it for us from now on.</p>
+<p>Once you have those changes, create a <tt class="docutils literal"><span class="pre">lib/views/layout.erb</span></tt> file with
+this in it:</p>
+<div class="highlight-erb"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="x">&lt;html&gt;</span>
+<span class="x">  &lt;head&gt;</span>
+<span class="x">    &lt;title&gt;Gothons From Planet Percal #25&lt;/title&gt;</span>
+<span class="x">  &lt;/head&gt;</span>
+<span class="x">  &lt;body&gt;</span>
+<span class="x">    </span><span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>Sinatra automatically looks for a layout template called <tt class="docutils literal"><span class="pre">layout</span></tt> by
+default to use as the <em>base</em> template for all other templates. You can
+customize which template is used as the base for any given page, too.
+Restart your application and then try to change the layout in
+interesting ways, but without changing the other templates.</p>
+</div>
+<div class="section" id="writing-automated-tests-for-forms">
+<h2>Writing Automated Tests For Forms<a class="headerlink" href="#writing-automated-tests-for-forms" title="Permalink to this headline">¶</a>
+</h2>
+<p>It's easy to test a web application with your browser by just hitting
+refresh, but come on, we're programmers here. Why do some repetitive
+task when we can write some code to test our application? What you're
+going to do next is write a little test for your web application form
+based on what you learned in Exercise 47. If you don't remember Exercise
+47, read it again.</p>
+<p>I've created a simple little function for that lets you assert things
+about your web application's response, aptly named <tt class="docutils literal"><span class="pre">assert_response</span></tt>.
+Create the file <tt class="docutils literal"><span class="pre">test/test_gothonweb.rb</span></tt> with these contents:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="nb">require</span> <span class="s1">'test/unit'</span>
+
+<span class="k">def</span> <span class="nf">assert_response</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">contains</span><span class="o">=</span><span class="kp">nil</span><span class="p">,</span> <span class="n">matches</span><span class="o">=</span><span class="kp">nil</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kp">nil</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+  <span class="n">assert_equal</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="s2">"Expected response </span><span class="si">#{</span><span class="n">status</span><span class="si">}</span><span class="s2"> not in </span><span class="si">#{</span><span class="n">resp</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="s2">"Response data is empty."</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">if</span> <span class="n">contains</span>
+    <span class="n">assert</span><span class="p">((</span><span class="n">resp</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">include?</span> <span class="n">contains</span><span class="p">),</span> <span class="s2">"Response does not contain </span><span class="si">#{</span><span class="n">contains</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">if</span> <span class="n">matches</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="no">Regexp</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+    <span class="n">assert</span> <span class="n">reg</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">contains</span><span class="p">),</span> <span class="s2">"Response does not match </span><span class="si">#{</span><span class="n">matches</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">if</span> <span class="n">headers</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>Finally, run <tt class="docutils literal"><span class="pre">test/test_gothonweb.rb</span></tt> to test your web application:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby <span class="nb">test</span>/test_gothonweb.rb
+<span class="go">Loaded suite test/test_gothonweb</span>
+<span class="go">Started</span>
+<span class="go">.</span>
+<span class="go">Finished in 0.023839 seconds.</span>
+
+<span class="go">1 tests, 9 assertions, 0 failures, 0 errors, 0 skips</span>
+
+<span class="go">Test run options: --seed 57414</span>
+</pre></div>
+</div>
+<p>What I'm doing here is I'm actually importing the whole application from
+the <tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt> library, then running it manually.</p>
+<p>The <tt class="docutils literal"><span class="pre">rack/test</span></tt> library we have included has a very simple API for
+processing requests. Its <tt class="docutils literal"><span class="pre">get</span></tt>, <tt class="docutils literal"><span class="pre">put</span></tt>, <tt class="docutils literal"><span class="pre">post</span></tt>, <tt class="docutils literal"><span class="pre">delete</span></tt>, and
+<tt class="docutils literal"><span class="pre">head</span></tt> methods simulate the respective type of request on the
+application.</p>
+<p>All mock request methods have the same argument signature:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">get</span> <span class="s1">'/path'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{},</span> <span class="n">rack</span><span class="p">\</span><span class="n">_env</span><span class="o">=</span><span class="p">{}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>
+<tt class="docutils literal"><span class="pre">/path</span></tt> is the request path and may optionally include a query
+string.</li>
+<li>
+<tt class="docutils literal"><span class="pre">params</span></tt> is a Hash of query/post parameters, a String request body,
+or nil.</li>
+<li>
+<tt class="docutils literal"><span class="pre">rack_env</span></tt> is a Hash of Rack environment values. This can be used
+to set request headers and other request related information, such as
+session data.</li>
+</ul>
+<p>This works without running an actual web server so you can do tests with
+automated tests and also use your browser to test a running server.</p>
+<p>To validate responses from this function, use the <tt class="docutils literal"><span class="pre">assert_response</span></tt>
+function from <tt class="docutils literal"><span class="pre">test/test_gothonweb.rb</span></tt> which has:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">assert_response</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">contains</span><span class="o">=</span><span class="kp">nil</span><span class="p">,</span> <span class="n">matches</span><span class="o">=</span><span class="kp">nil</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kp">nil</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pass in the response you get from calling <tt class="docutils literal"><span class="pre">get</span></tt> or <tt class="docutils literal"><span class="pre">post</span></tt> then add
+things you want checked. Use the <tt class="docutils literal"><span class="pre">contains</span></tt> parameter to make sure
+that the response contains certain values. Use the <tt class="docutils literal"><span class="pre">status</span></tt> parameter
+to check for certain responses. There's actually quite a lot of
+information in this little function so it would be good for you to study
+it.</p>
+<p>In the <tt class="docutils literal"><span class="pre">test/test_gothonweb.rb</span></tt> automated test I'm first making sure
+the <tt class="docutils literal"><span class="pre">/foo</span></tt> URL returns a "404 Not Found" response, since it actually
+doesn't exist. Then I'm checking that <tt class="docutils literal"><span class="pre">/hello</span></tt> works with both a GET
+and POST form. Following the test should be fairly simple, even if you
+might not totally know what's going on.</p>
+<p>Take some time studying this latest application, especially how the
+automated testing works.</p>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Read even more about HTML, and give the simple form a better layout.
+It helps to draw what you want to do on paper and <em>then</em> implement it
+with HTML.</li>
+<li>This one is hard, but try to figure out how you'd do a file upload
+form so that you can upload an image and save it to the disk.</li>
+<li>This is even more mind-numbing, but go find the HTTP RFC (which is
+the document that describes how HTTP works) and read as much of it as
+you can. It is really boring, but comes in handy once in a while.</li>
+<li>This will also be really difficult, but see if you can find someone
+to help you setup a web server like Apache, Nginx, or thttpd. Try to
+serve a couple of your .html and .css files with it just to see if
+you can. Don't worry if you can't, web servers kind of suck.</li>
+<li>Take a break after this and just try making as many different web
+applications as you can. You should definitely read about sessions in
+Sinatra so you can understand how to keep state for a user.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

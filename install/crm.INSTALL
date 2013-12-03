@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+apt-get -y install apache2
+apt-get -y install php5 php5-gd php5-pgsql php5-dev php5-cli php-pear php5-curl
+apt-get -y install libapache2-mod-php5
+apt-get -y install make
+apt-get -y install libpcre3-dev
+pecl install apc
+#pecl install ssh2 # not stable yet
+pecl install pecl.php.net/ssh2-0.11.3
+apt-get -y install libssh2
+apt-get -y install libssh2-1 libssh2-1-dev
+# apt-get -y install php5-openssl # n/a on new server?
+pecl install pecl.php.net/ssh2-0.11.3
+pear channel-discover pear.twig-project.org &&  pear install twig/Twig
+pear channel-discover pear.symfony-project.com && pear install symfony/Symfony
+
+pear channel-discover pear.phing.info
+pear install phing/phing
+
+echo 'extension=ssh2.so' > /etc/php5/conf.d/ssh2.ini
+echo 'extension=apc.so' > /etc/php5/conf.d/apc.ini
+
+apt-get -y install subversion git
+apt-get -y install ranger htop mc emacs
+apt-get -y install nodejs rabbitmq-server supervisor
+
+#postgresql installed on sys install
+apt-get -y install postgresql-9.1-plproxy
+
+
+#setup basic CRM vhost
+mkdir -p /srv/www/crm/web
+chown -R www-data:www-data /srv/www
+echo '<VirtualHost *:80>
+    ServerName crm.lts
+    ServerAlias crm
+    DocumentRoot /srv/www/crm/web
+
+    ErrorLog /var/log/apache2/crm.lts-error_log
+    CustomLog /var/log/apache2/crm.lts-access_log combined
+
+    HostnameLookups Off
+
+    <Directory "/srv/www/crm/web">
+        AllowOverride All
+        Allow from All
+    </Directory>
+
+    Alias /sf "/usr/share/php/data/symfony/web/sf"
+    <Directory "/usr/share/php/data/symfony/web/sf">
+        AllowOverride All
+        Allow from All
+    </Directory>
+</VirtualHost>
+' > /etc/apache2/sites-available/crm
+a2ensite crm
+echo 'ServerName lts' >> /etc/apache2/httpd.conf
+a2enmod rewrite
+service apache2 restart
+
+#setup CRM
+rm -rf /srv/www/crm
+svn co svn+ssh://jacek.wysocki@10.0.0.206/home/projects/svn/qarson/trunk/CRM2 /srv/www/crm
+chown -R www-data:www-data /srv/www/crm
+cd /srv/www/crm
+php symfony project:permissions
+php symfony cc
+
+
+sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php5/apache2/php.ini
+service apache2 restart
+
+
+#locales
+echo 'pl_PL ISO-8859-2' > /var/lib/locales/supported.d/pl
+echo 'pl_PL.UTF-8 UTF-8' >> /var/lib/locales/supported.d/pl
+echo 'fr_FR.UTF-8 UTF-8' > /var/lib/locales/supported.d/fr
+echo 'de_DE.UTF-8 UTF-8' > /var/lib/locales/supported.d/de
+dpkg-reconfigure locales

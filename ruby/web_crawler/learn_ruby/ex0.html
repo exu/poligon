@@ -1,0 +1,287 @@
+<div class="body">
+            
+  <div class="section" id="exercise-0-the-setup">
+<h1>Exercise 0: The Setup<a class="headerlink" href="#exercise-0-the-setup" title="Permalink to this headline">¶</a>
+</h1>
+<p>This exercise has no code. It is simply the exercise you complete to get
+your computer setup to run Ruby. You should follow these instructions as
+exactly as possible.</p>
+<p>This tutorial assumes that you are using Ruby version 1.9.2.</p>
+<p>Your system might already have Ruby installed. Open up a console and try
+running:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby -v
+<span class="go">ruby 1.9.2</span>
+</pre></div>
+</div>
+<p>If you don't already have Ruby installed on your system, I highly
+recommend using <a class="reference external" href="https://rvm.beginrescueend.com/">Ruby Version Manager
+(RVM)</a> to install it, regardless of
+which OS you are running.</p>
+<div class="section" id="mac-osx">
+<h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this headline">¶</a>
+</h2>
+<p>To complete this exercise, complete the following tasks:</p>
+<ol class="arabic simple">
+<li>Go to
+<a class="reference external" href="http://learnpythonthehardway.org/exercise0.html">http://learnpythonthehardway.org/exercise0.html</a>
+with your browser, get the <tt class="docutils literal"><span class="pre">gedit</span></tt> text editor, and install it.</li>
+<li>Put gedit (your editor) in your Dock so you can reach it easily.<ol class="arabic">
+<li>Run gedit so we can fix some stupid defaults it has.</li>
+<li>Open <tt class="docutils literal"><span class="pre">Preferences</span></tt> from the <tt class="docutils literal"><span class="pre">gedit</span> <span class="pre">menu</span></tt> and select the
+<tt class="docutils literal"><span class="pre">Editor</span></tt> tab.</li>
+<li>Change <tt class="docutils literal"><span class="pre">Tab</span> <span class="pre">width</span></tt>: to 2.</li>
+<li>Select (make sure a check mark is in)
+<tt class="docutils literal"><span class="pre">Insert</span> <span class="pre">spaces</span> <span class="pre">instead</span> <span class="pre">of</span> <span class="pre">tabs</span></tt>.</li>
+<li>Turn on "Automatic indentation" as well.</li>
+<li>Open the <tt class="docutils literal"><span class="pre">View</span></tt> tab and turn on "Display line numbers".</li>
+</ol>
+</li>
+<li>Find your "Terminal" program. Search for it. You will find it.</li>
+<li>Put your Terminal in your Dock as well.</li>
+<li>Run your Terminal program. It won't look like much.</li>
+<li>In your Terminal program, run <tt class="docutils literal"><span class="pre">irb</span></tt> (Interactive Ruby). You run
+things in Terminal by just typing their name and hitting RETURN.<ol class="arabic">
+<li>If you run <tt class="docutils literal"><span class="pre">irb</span></tt> and it's not there (<tt class="docutils literal"><span class="pre">irb</span></tt> is not
+recognized..). Install it using <a class="reference external" href="https://rvm.beginrescueend.com/">Ruby Version Manager
+(RVM)</a>.</li>
+</ol>
+</li>
+<li>Hit CTRL-D (<tt class="docutils literal"><span class="pre">^D</span></tt>) and get out of <tt class="docutils literal"><span class="pre">irb</span></tt>.</li>
+<li>You should be back at a prompt similar to what you had before you
+typed <tt class="docutils literal"><span class="pre">irb</span></tt>. If not find out why.</li>
+<li>Learn how to make a directory in the Terminal. Search online for
+help.</li>
+<li>Learn how to change into a directory in the Terminal. Again search
+online.</li>
+<li>Use your editor to create a file in this directory. You will make
+the file, "Save" or "Save As...", and pick this directory.</li>
+<li>Go back to Terminal using just the keyboard to switch windows. Look
+it up if you can't figure it out.</li>
+<li>Back in Terminal, see if you can list the directory to see your
+newly created file. Search online for how to list a directory.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have problems with gedit, which is possible with
+non-English keyboard layouts, then I suggest you try Textwrangler
+found at
+<a class="reference external" href="http://www.barebones.com/products/textwrangler/">http://www.barebones.com/products/textwrangler/</a>
+instead.</p>
+</div>
+</div>
+<div class="section" id="osx-what-you-should-see">
+<h2>OSX: What You Should See<a class="headerlink" href="#osx-what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<p>Here's me doing the above on my computer in Terminal. Your computer
+would be different, so see if you can figure out all the differences
+between what I did and what you should do.</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="go">Last login: Sat Apr 24 00:56:54 on ttys001</span>
+<span class="go">~ $ irb</span>
+<span class="go">ruby-1.9.2-p180 :001 &gt;</span>
+<span class="go">ruby-1.9.2-p180 :002 &gt; ^D</span>
+<span class="go">~ $ mkdir mystuff</span>
+<span class="go">~ $ cd mystuff</span>
+<span class="go">mystuff $ ls</span>
+<span class="gp">#</span> ... Use Gedit here to edit test.txt....
+<span class="go">mystuff $ ls</span>
+<span class="go">test.txt</span>
+<span class="go">mystuff $</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a>
+</h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Contributed by zhmark.</p>
+</div>
+<ol class="arabic simple">
+<li>Go to
+<a class="reference external" href="http://learnpythonthehardway.org/wiki/ExerciseZero">http://learnpythonthehardway.org/wiki/ExerciseZero</a>
+with your browser, get the <tt class="docutils literal"><span class="pre">gedit</span></tt> text editor, and install it.
+You do not need to be administrator to do this.</li>
+<li>Make sure you can get to gedit easily by putting it on your desktop
+and/or in Quick Launch. Both options are available during setup.<ol class="arabic">
+<li>Run gedit so we can fix some stupid defaults it has.</li>
+<li>Open <tt class="docutils literal"><span class="pre">Edit-&gt;Preferences</span></tt> select the <tt class="docutils literal"><span class="pre">Editor</span></tt> tab.</li>
+<li>Change <tt class="docutils literal"><span class="pre">Tab</span> <span class="pre">width</span></tt>: to 2.</li>
+<li>Select (make sure a check mark is in)
+<tt class="docutils literal"><span class="pre">Insert</span> <span class="pre">spaces</span> <span class="pre">instead</span> <span class="pre">of</span> <span class="pre">tabs</span></tt>.</li>
+<li>Turn on "Automatic indentation" as well.</li>
+<li>Open the View tab turn on "Display line numbers".</li>
+</ol>
+</li>
+<li>Find your "Terminal" program. It's called <tt class="docutils literal"><span class="pre">Command</span> <span class="pre">Prompt</span></tt>.
+Alternatively just run <tt class="docutils literal"><span class="pre">cmd</span></tt>.</li>
+<li>Make a shortcut to it on your desktop and/or <tt class="docutils literal"><span class="pre">Quick</span> <span class="pre">Launch</span></tt> for
+your convenience.</li>
+<li>Run your Terminal program. It won't look like much.</li>
+<li>In your Terminal program, run <tt class="docutils literal"><span class="pre">irb</span></tt> (Interactive Ruby). You run
+things in Terminal by just typing their name and hitting RETURN.<ol class="arabic">
+<li>If you run <tt class="docutils literal"><span class="pre">irb</span></tt> and it's not there (<tt class="docutils literal"><span class="pre">irb</span></tt> is not
+recognized..). Install it using <a class="reference external" href="https://rvm.beginrescueend.com/">Ruby Version Manager
+(RVM)</a>.</li>
+</ol>
+</li>
+<li>Hit CTRL-Z (^Z), Enter and get out of <tt class="docutils literal"><span class="pre">irb</span></tt>.</li>
+<li>You should be back at a prompt similar to what you had before you
+typed <tt class="docutils literal"><span class="pre">irb</span></tt>. If not find out why.</li>
+<li>Learn how to make a directory in the Terminal. Search online for
+help.</li>
+<li>Learn how to change into a directory in the Terminal. Again search
+online.</li>
+<li>Use your editor to create a file in this directory. Make the file,
+"Save" or "Save As...", and pick this directory.</li>
+<li>Go back to Terminal using just the keyboard to switch windows. Look
+it up if you can't figure it out.</li>
+<li>Back in Terminal, see if you can list the directory to see your
+newly created file. Search online for how to list a directory.</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Windows is a big problem for Ruby. Sometimes you
+install Ruby and one computer will have no problems, and another
+computer will be missing important features. If you have problems,
+please visit:
+<a class="reference external" href="http://rubyinstaller.org/">http://rubyinstaller.org/</a></p>
+</div>
+</div>
+<div class="section" id="windows-what-you-should-see">
+<h2>Windows: What You Should See<a class="headerlink" href="#windows-what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="go">C:\Documents and Settings\you&gt;irb</span>
+<span class="go">ruby-1.9.2-p180 :001 &gt;</span>
+<span class="go">ruby-1.9.2-p180 :001 &gt; ^Z</span>
+
+<span class="go">C:\Documents and Settings\you&gt;mkdir mystuff</span>
+
+<span class="go">C:\Documents and Settings\you&gt;cd mystuff</span>
+
+<span class="go">... Here you would use gedit to make test.txt in mystuff ...</span>
+
+<span class="go">C:\Documents and Settings\you\mystuff&gt;</span>
+<span class="go">   &lt;bunch of unimportant errors if you istalled it as non-admin - ignore them - hit Enter&gt;</span>
+<span class="go">C:\Documents and Settings\you\mystuff&gt;dir</span>
+<span class="go"> Volume in drive C is</span>
+<span class="go"> Volume Serial Number is 085C-7E02</span>
+
+<span class="go"> Directory of C:\Documents and Settings\you\mystuff</span>
+
+<span class="go">04.05.2010  23:32    &lt;DIR&gt;          .</span>
+<span class="go">04.05.2010  23:32    &lt;DIR&gt;          ..</span>
+<span class="go">04.05.2010  23:32                 6 test.txt</span>
+<span class="go">               1 File(s)              6 bytes</span>
+<span class="go">               2 Dir(s)  14 804 623 360 bytes free</span>
+
+<span class="go">C:\Documents and Settings\you\mystuff&gt;</span>
+</pre></div>
+</div>
+<p>You will probably see a very different prompt, Ruby information, and
+other stuff but this is the general idea. If your system is different
+let us know and we'll fix it.</p>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a>
+</h2>
+<p>Linux is a varied operating system with a bunch of different ways to
+install software. I'm assuming if you are running Linux then you know
+how to install packages so here are your instructions:</p>
+<ol class="arabic simple">
+<li>Go to
+<a class="reference external" href="http://learnpythonthehardway.org/wiki/ExerciseZero">http://learnpythonthehardway.org/wiki/ExerciseZero</a>
+with your browser, get the <tt class="docutils literal"><span class="pre">gedit</span></tt> text editor, and install it.</li>
+<li>Make sure you can get to gedit easily by putting it in your window
+manager's menu.<ol class="arabic">
+<li>Run gedit so we can fix some stupid defaults it has.</li>
+<li>Open <tt class="docutils literal"><span class="pre">Preferences</span></tt> select the <tt class="docutils literal"><span class="pre">Editor</span></tt> tab.</li>
+<li>Change <tt class="docutils literal"><span class="pre">Tab</span> <span class="pre">width</span></tt>: to 2.</li>
+<li>Select (make sure a check mark is in)
+<tt class="docutils literal"><span class="pre">Insert</span> <span class="pre">spaces</span> <span class="pre">instead</span> <span class="pre">of</span> <span class="pre">tabs</span></tt>.</li>
+<li>Turn on "Automatic indentation" as well.</li>
+<li>Open the <tt class="docutils literal"><span class="pre">View</span></tt> tab turn on "Display line numbers".</li>
+</ol>
+</li>
+<li>Find your "Terminal" program. It could be called GNOME Terminal,
+Konsole, or xterm.</li>
+<li>Put your Terminal in your Dock as well.</li>
+<li>Run your Terminal program. It won't look like much.</li>
+<li>In your Terminal program, run <tt class="docutils literal"><span class="pre">irb</span></tt> (Interactive Ruby). You run
+things in Terminal by just typing their name and hitting RETURN.<ol class="arabic">
+<li>If you run <tt class="docutils literal"><span class="pre">irb</span></tt> and it's not there (<tt class="docutils literal"><span class="pre">irb</span></tt> is not
+recognized..). Install it using <a class="reference external" href="https://rvm.beginrescueend.com/">Ruby Version Manager
+(RVM)</a>.</li>
+</ol>
+</li>
+<li>Hit CTRL-D (<tt class="docutils literal"><span class="pre">^D</span></tt>) and get out of <tt class="docutils literal"><span class="pre">irb</span></tt>.</li>
+<li>You should be back at a prompt similar to what you had before you
+typed <tt class="docutils literal"><span class="pre">irb</span></tt>. If not find out why.</li>
+<li>Learn how to make a directory in the Terminal. Search online for
+help.</li>
+<li>Learn how to change into a directory in the Terminal. Again search
+online.</li>
+<li>Use your editor to create a file in this directory. Typically you
+will make the file, "Save" or "Save As..", and pick this directory.</li>
+<li>Go back to Terminal using just the keyboard to switch windows. Look
+it up if you can't figure it out.</li>
+<li>Back in Terminal see if you can list the directory to see your newly
+created file. Search online for how to list a directory.</li>
+</ol>
+</div>
+<div class="section" id="linux-what-you-should-see">
+<h2>Linux: What You Should See<a class="headerlink" href="#linux-what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> irb
+<span class="go">ruby-1.9.2-p180 :001 &gt;</span>
+<span class="go">ruby-1.9.2-p180 :002 &gt; ^D</span>
+<span class="gp">$</span> mkdir mystuff
+<span class="gp">$</span> <span class="nb">cd </span>mystuff
+<span class="gp">#</span> ... Use gedit here to edit test.txt ...
+<span class="gp">$</span> ls
+<span class="go">test.txt</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>You will probably see a very different prompt, Ruby information, and
+other stuff but this is the general idea.</p>
+</div>
+<div class="section" id="warnings-for-beginners">
+<h2>Warnings For Beginners<a class="headerlink" href="#warnings-for-beginners" title="Permalink to this headline">¶</a>
+</h2>
+<p>You are done with this exercise. This exercise might be hard for you
+depending on your familiarity with your computer. If it is difficult,
+take the time to read and study and get through it, because until you
+can do these very basic things you will find it difficult to get much
+programming done.</p>
+<p>If a programmer tells you to use <tt class="docutils literal"><span class="pre">vim</span></tt> or <tt class="docutils literal"><span class="pre">emacs</span></tt>, tell them, "No."
+These editors are for when you are a better programmer. All you need
+right now is an editor that lets you put text into a file. We will use
+<tt class="docutils literal"><span class="pre">gedit</span></tt> because it is simple and the same on all computers.
+Professional programmers use <tt class="docutils literal"><span class="pre">gedit</span></tt> so it's good enough for you
+starting out.</p>
+<p>A programmer will eventually tell you to use Mac OSX or Linux. If the
+programmer likes fonts and typography, they'll tell you to get a Mac OSX
+computer. If they like control and have a huge beard, they'll tell you
+to install Linux. Again, use whatever computer you have right now that
+works. All you need is <tt class="docutils literal"><span class="pre">gedit</span></tt>, a Terminal, and Ruby.</p>
+<p>Finally the purpose of this setup is so you can do three things very
+reliably while you work on the exercises:</p>
+<ol class="arabic simple">
+<li>
+<em>Write</em> exercises using <tt class="docutils literal"><span class="pre">gedit</span></tt>.</li>
+<li>
+<em>Run</em> the exercises you wrote.</li>
+<li>
+<em>Fix</em> them when they are broken.</li>
+<li>Repeat.</li>
+</ol>
+<p>Anything else will only confuse you, so stick to the plan.</p>
+</div>
+</div>
+
+
+          </div>

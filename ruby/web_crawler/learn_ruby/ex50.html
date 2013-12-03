@@ -1,0 +1,279 @@
+<div class="body">
+            
+  <div class="section" id="exercise-50-your-first-website">
+<h1>Exercise 50: Your First Website<a class="headerlink" href="#exercise-50-your-first-website" title="Permalink to this headline">¶</a>
+</h1>
+<p>These final three exercises will be very hard and you should take your
+time with them. In this first one you'll build a simple web version of
+one of your games. Before you attempt this exercise you must have
+completed Exercise 46 successfully and have a working <strong>RubyGems</strong>
+installed such that you can install packages and know how to make a
+skeleton project directory. If you don't remember how to do this, go
+back to Exercise 46 and do it all over again.</p>
+<div class="section" id="installing-sinatra">
+<h2>Installing Sinatra<a class="headerlink" href="#installing-sinatra" title="Permalink to this headline">¶</a>
+</h2>
+<p>Before creating your first web application, you'll first need to install
+the "web framework" called <strong>Sinatra</strong>. The term "framework" generally
+means "some package that makes it easier for me to do something". In the
+world of web applications, people create "web frameworks" to compensate
+for the difficult problems they've encountered when making their own
+sites. They share these common solutions in the form of a package you
+can download to bootstrap your own projects.</p>
+<p>In our case, we'll be using the Sinatra framework, but there are many,
+many, many others you can choose from. For now, learn Sinatra then
+branch out to another one when you're ready (or just keep using Sinatra
+since it's good enough).</p>
+<p>Using <tt class="docutils literal"><span class="pre">gem</span></tt> install Sinatra:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> gem install sinatra
+<span class="go">Fetching: tilt-1.3.2.gem (100%)</span>
+<span class="go">Fetching: sinatra-1.2.6.gem (100%)</span>
+<span class="go">Successfully installed tilt-1.3.2</span>
+<span class="go">Successfully installed sinatra-1.2.6</span>
+<span class="go">2 gems installed</span>
+<span class="go">Installing ri documentation for tilt-1.3.2...</span>
+<span class="go">Installing ri documentation for sinatra-1.2.6...</span>
+<span class="go">Installing RDoc documentation for tilt-1.3.2...</span>
+<span class="go">Installing RDoc documentation for sinatra-1.2.6...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-a-simple-hello-world-project">
+<h2>Make A Simple "Hello World" Project<a class="headerlink" href="#make-a-simple-hello-world-project" title="Permalink to this headline">¶</a>
+</h2>
+<p>Now you're going to make an initial very simple "Hello World" web
+application and project directory using Sinatra. First, make your
+project directory:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>projects
+<span class="gp">$</span> bundle gem gothonweb
+</pre></div>
+</div>
+<p>You'll be taking the game from Exercise 42 and making it into a web
+application, so that's why you're calling it <tt class="docutils literal"><span class="pre">gothonweb</span></tt>. Before you
+do that, we need to create the most basic Sinatra application possible.
+Put the following code into <tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt>:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">require_relative</span> <span class="s2">"gothonweb/version"</span>
+<span class="nb">require</span> <span class="s2">"sinatra"</span>
+
+<span class="k">module</span> <span class="nn">Gothonweb</span>
+  <span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+    <span class="n">greeting</span> <span class="o">=</span> <span class="s2">"Hello, World!"</span>
+    <span class="k">return</span> <span class="n">greeting</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>Then run the application like this:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby lib/gothonweb.rb
+<span class="go">== Sinatra/1.2.6 has taken the stage on 4567 for development with backup from WEBrick</span>
+<span class="go">[2011-07-18 11:27:07] INFO  WEBrick 1.3.1</span>
+<span class="go">[2011-07-18 11:27:07] INFO  ruby 1.9.2 (2011-02-18) [x86_64-linux]</span>
+<span class="go">[2011-07-18 11:27:07] INFO  WEBrick::HTTPServer#start: pid=6599 port=4567</span>
+</pre></div>
+</div>
+<p>Finally, use your web browser and go to the URL
+<tt class="docutils literal"><span class="pre">http://localhost:4567/</span></tt> and you should see two things. First, in your
+browser you'll see <tt class="docutils literal"><span class="pre">Hello,</span> <span class="pre">World!</span></tt>. Second, you'll see your terminal
+with new output like this:</p>
+<div class="highlight-python">
+<pre>127.0.0.1 - - [18/Jul/2011 11:29:10] "GET / HTTP/1.1" 200 12 0.0015
+localhost - - [18/Jul/2011:11:29:10 EDT] "GET / HTTP/1.1" 200 12
+- -&gt; /
+127.0.0.1 - - [18/Jul/2011 11:29:10] "GET /favicon.ico HTTP/1.1" 404 447 0.0008
+localhost - - [18/Jul/2011:11:29:10 EDT] "GET /favicon.ico HTTP/1.1" 404 447
+- -&gt; /favicon.ico</pre>
+</div>
+<p>Those are log messages that Sinatra prints out so you can see that the
+server is working, and what the browser is doing behind the scenes. The
+log messages help you debug and figure out when you have problems. For
+example, it's saying that your browser tried to get <tt class="docutils literal"><span class="pre">/favicon.ico</span></tt> but
+that file didn't exist so it returned <tt class="docutils literal"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></tt> status code.</p>
+<p>I haven't explained the way any of this web stuff works yet, because I
+want to get you setup and ready to roll so that I can explain it better
+in the next two exercises. To accomplish this, I'll have you break your
+Sinatra application in various ways and then restructure it so that you
+know how it's setup.</p>
+</div>
+<div class="section" id="what-s-going-on">
+<h2>What's Going On?<a class="headerlink" href="#what-s-going-on" title="Permalink to this headline">¶</a>
+</h2>
+<p>Here's what's happening when your browser hits your application:</p>
+<ol class="arabic simple">
+<li>Your browser makes a network connection to your own computer, which
+is called <tt class="docutils literal"><span class="pre">localhost</span></tt> and is a standard way of saying "whatever my
+own computer is called on the network". It also uses <tt class="docutils literal"><span class="pre">port</span> <span class="pre">4567</span></tt>.</li>
+<li>Once it connects, it makes an HTTP request to the
+<tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt> application and asks for the <tt class="docutils literal"><span class="pre">/</span></tt> URL, which is
+commonly the first URL on any website.</li>
+<li>Inside <tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt> you've got blocks of code that map to
+URLs. The only one we have is the <tt class="docutils literal"><span class="pre">'/'</span></tt> mapping. This means that
+whenever someone goes to <tt class="docutils literal"><span class="pre">/</span></tt> with a browser, Sinatra will find the
+code block to handle the request.</li>
+<li>Sinatra calls the matching block, which simply returns a string for
+what Sinatra should send to the browser.</li>
+<li>Finally, Sinatra has handled the request and sends this response to
+the browser which is what you are seeing.</li>
+</ol>
+<p>Make sure you really understand this. Draw up a diagram of how this
+information flows from your browser, to Sinatra, then to the <tt class="docutils literal"><span class="pre">/</span></tt> block
+and back to your browser.</p>
+</div>
+<div class="section" id="fixing-errors">
+<h2>Fixing Errors<a class="headerlink" href="#fixing-errors" title="Permalink to this headline">¶</a>
+</h2>
+<p>First, delete line 6 where you assign the <tt class="docutils literal"><span class="pre">greeting</span></tt> variable, then
+hit refresh in your browser. You should see an error page now that gives
+you lots of information on how your application just exploded. You know
+that the variable <tt class="docutils literal"><span class="pre">greeting</span></tt> is now missing, but Sinatra gives you
+this nice error page to track down exactly where. Do each of the
+following with this page:</p>
+<ol class="arabic simple">
+<li>Look at the <tt class="docutils literal"><span class="pre">sinatra.error</span></tt> variable.</li>
+<li>Look at the <tt class="docutils literal"><span class="pre">REQUEST_</span></tt> variables and see if they match anything
+you're already familiar with. This is information that your web
+browser is sending to your gothonweb application. You normally don't
+even know that it's sending this stuff, so now you get to see what it
+does.</li>
+</ol>
+</div>
+<div class="section" id="create-basic-templates">
+<h2>Create Basic Templates<a class="headerlink" href="#create-basic-templates" title="Permalink to this headline">¶</a>
+</h2>
+<p>You can break your Sinatra application, but did you notice that "Hello
+World" isn't a very good HTML page? This is a web application, and as
+such it needs a proper HTML response. To do that you will create a
+simple template that says "Hello World" in a big green font.</p>
+<p>The first step is to create a <tt class="docutils literal"><span class="pre">lib/views/index.erb</span></tt> file that looks
+like this:</p>
+<div class="highlight-erb"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="x">&lt;html&gt;</span>
+<span class="x">  &lt;head&gt;</span>
+<span class="x">    &lt;title&gt;Gothons Of Planet Percal #25&lt;/title&gt;</span>
+<span class="x">  &lt;/head&gt;</span>
+<span class="x">  &lt;body&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">greeting</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">      &lt;p&gt;I just wanted to say &lt;em style="color: green; font-size: 2em;"&gt;</span><span class="cp">&lt;%=</span> <span class="n">greeting</span> <span class="cp">%&gt;</span><span class="x">&lt;/em&gt;.</span>
+<span class="x">    </span><span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">      &lt;em&gt;Hello&lt;/em&gt;, world!</span>
+<span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+
+<span class="x">  &lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>What is a <tt class="docutils literal"><span class="pre">.erb</span></tt> file? ERB stands for Embedded Ruby.
+<tt class="docutils literal"><span class="pre">.erb</span></tt> files are HTML with bits of Ruby code embedded within. If you
+know what HTML is then this should look fairly familiar. If not,
+research HTML and try writing a few web pages by hand so you know how it
+works. Since this is an <tt class="docutils literal"><span class="pre">erb</span></tt> template, Sinatra will fill in "holes"
+in the text depending on variables you pass in to the template. Every
+place you see <tt class="docutils literal"><span class="pre">&lt;%=</span> <span class="pre">greeting</span> <span class="pre">%&gt;</span></tt> will be a variable you'll pass to the
+template that alters its contents.</p>
+<p>To make your <tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt> script do this, you need to add some
+code to tell Sinatra where to load the template and to render it. Take
+that file and change it like this:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">require_relative</span> <span class="s2">"gothonweb/version"</span>
+<span class="nb">require</span> <span class="s2">"sinatra"</span>
+<span class="nb">require</span> <span class="s2">"erb"</span>
+
+<span class="k">module</span> <span class="nn">Gothonweb</span>
+  <span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+    <span class="n">greeting</span> <span class="o">=</span> <span class="s2">"Hello, World!"</span>
+    <span class="n">erb</span> <span class="ss">:index</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:greeting</span> <span class="o">=&gt;</span> <span class="n">greeting</span><span class="p">}</span> 
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>Pay close attention to how I changed the last line of the <tt class="docutils literal"><span class="pre">/</span></tt> block so
+it calls <tt class="docutils literal"><span class="pre">erb</span></tt> passing in your greeting variable.</p>
+<p>Once you have that in place, reload the web page in your browser and you
+should see a different message in green. You should also be able to do a
+View Source on the page in your browser to see that it is valid HTML.</p>
+<p>This may have flown by you very fast, so let me explain how a template
+works:</p>
+<ol class="arabic simple">
+<li>In your <tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt> you've added a new <tt class="docutils literal"><span class="pre">erb</span></tt> method call.</li>
+<li>The <tt class="docutils literal"><span class="pre">erb</span></tt> method knows how to load <tt class="docutils literal"><span class="pre">.erb</span></tt> files out of the
+<tt class="docutils literal"><span class="pre">lib/views/</span></tt> directory. It knows which file to grab (<tt class="docutils literal"><span class="pre">index.erb</span></tt>
+in this case) because you pass it as a parameter
+(<tt class="docutils literal"><span class="pre">erb</span> <span class="pre">:index</span> <span class="pre">...</span></tt>).</li>
+<li>Now, when the browser hits <tt class="docutils literal"><span class="pre">/</span></tt> and <tt class="docutils literal"><span class="pre">lib/gothonweb.rb</span></tt> matches and
+executes the <tt class="docutils literal"><span class="pre">get</span> <span class="pre">'/'</span> <span class="pre">do</span></tt> block, instead of just returning the
+string <tt class="docutils literal"><span class="pre">greeting</span></tt>, it calls <tt class="docutils literal"><span class="pre">erb</span></tt> and pass <tt class="docutils literal"><span class="pre">greeting</span></tt> to it as
+a variable.</li>
+<li>Finally, you have the HTML in <tt class="docutils literal"><span class="pre">lib/views/index.erb</span></tt> that contains a
+bit of Ruby code that tests the <tt class="docutils literal"><span class="pre">greeting</span> <span class="pre">variable</span></tt>, and if it's
+there, prints one message using the <tt class="docutils literal"><span class="pre">greeting</span></tt>, or a default
+message.</li>
+</ol>
+<p>To get deeper into this, change the <tt class="docutils literal"><span class="pre">greeting</span></tt> variable and the HTML
+to see what effect it has. Also create another template named
+<tt class="docutils literal"><span class="pre">lib/views/foo.lib</span></tt> and render that using <tt class="docutils literal"><span class="pre">erb</span> <span class="pre">:foo</span></tt> instead of
+<tt class="docutils literal"><span class="pre">erb</span> <span class="pre">:index</span></tt> like before. This will show you how the first parameter
+you pass to <tt class="docutils literal"><span class="pre">erb</span></tt> is just matched to a <tt class="docutils literal"><span class="pre">.erb</span></tt> file in
+<tt class="docutils literal"><span class="pre">lib/views/</span></tt>.</p>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Read the documentation at
+<a class="reference external" href="http://www.sinatrarb.com">http://www.sinatrarb.com</a>.</li>
+<li>Experiment with everything you can find there, including their
+example code.</li>
+<li>Read about HTML5 and CSS3 and make some <tt class="docutils literal"><span class="pre">.html</span></tt> and <tt class="docutils literal"><span class="pre">.css</span></tt> files
+for practice.</li>
+<li>If you have a friend who knows <strong>Rails</strong> and is willing to help you,
+then consider doing Ex 50, 51, and 52 in Rails instead to see what
+that's like.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

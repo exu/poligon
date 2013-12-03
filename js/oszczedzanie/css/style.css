@@ -1,0 +1,67 @@
+a, input[type='button'] {
+    background-image: linear-gradient(bottom, rgb(40,22,97) 7%, rgb(143,23,143) 89%);
+    background-image: -o-linear-gradient(bottom, rgb(40,22,97) 7%, rgb(143,23,143) 89%);
+    background-image: -moz-linear-gradient(bottom, rgb(40,22,97) 7%, rgb(143,23,143) 89%);
+    background-image: -webkit-linear-gradient(bottom, rgb(40,22,97) 7%, rgb(143,23,143) 89%);
+    background-image: -ms-linear-gradient(bottom, rgb(40,22,97) 7%, rgb(143,23,143) 89%);
+
+    background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.07, rgb(40,22,97)),
+    color-stop(0.89, rgb(143,23,143))
+    );
+
+    color: white;
+    text-shadow: 1px 1px 0 #000;
+}
+
+input[type='button'] {
+    border: 1px solid rgb(40,22,97);
+    box-shadow: 2px 2px 2px #000;
+    border-radius: 5px;
+    color: white;
+    padding: 2px 15px;
+}
+
+input { font-size: 1.2em; border-radius: 5px; text-align: right;}
+
+body { font-size: 18px; margin: 0; padding: 0; font-family: sans-serif; }
+.belka {
+    background: url('../img/logo-89x20.png') #333 no-repeat right 50%;
+    margin:0; padding: 5px; color: white; }
+.belka a { text-decoration:none;  display: inline-block; margin: 5px;padding: 5px; color: white; border-radius: 5px;}
+.belka a:focus { background: silver;}
+table { margin-top: 10px; border-collapse: collapse; }
+table td.input { white-space: nowrap; }
+.userOutput table th { font-size: 0.9em; padding: 3px; text-align:center; background: gray; color: silver; }
+.userOutput table tr th+th{ border-left: 1px solid silver; }
+.userOutput table tr td+td{ border-left: 1px solid silver; }
+.userOutput table tr td {padding: 3px; text-align:right; border-bottom: 1px solid silver; }
+.userOutput table .wynik { font-weight: bold; background: yellow; }
+.button { background: #fff0ff; text-align: right; padding: 5px 25px 5px 5px; border: 5px solid #ffe0ff; border-width: 5px 0; }
+.button input { font-size: 1.3em; text-shadow: -1px -1px 0 #000; }
+
+.label { color: gray; font-size: 0.9em; font-weight: bold;}
+.first { color: silver;}
+.menu {
+    margin: 10px auto 0 auto; 
+    font-size: 0.9em; 
+    padding: 0px; 
+    width: 320px;}
+.menu a { 
+    text-align: center; 
+    min-height:60px;;
+    display: block;
+    width: 120px;
+    border: 1px solid black; 
+    border-radius: 5px; 
+    float: left; 
+    text-decoration:none; 
+    overflow: hidden; 
+    padding: 5px; 
+    margin: 0 5px 5px 0;
+    box-shadow: 2px 2px 5px #000;
+}
+

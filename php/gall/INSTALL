@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+curl -L https://raw.github.com/exu/galeriana/master/Gallery.php > galeriana
+chmod +x galeriana
+sudo mv galeriana /usr/bin/

@@ -1,0 +1,27 @@
+Linux padaka32 3.5.0-17-generic #28-Ubuntu SMP Tue Oct 9 19:32:08 UTC 2012 i686 athlon i686 GNU/Linux
+1.25	0m 0s 98ms		98ms
+73.25	0m 0s 336ms		336ms
+81.00	0m 0s 796ms		796ms
+31.00	0m 0s 196ms		196ms
+73.25	0m 0s 256ms		256ms
+80.75	0m 0s 656ms		656ms
+31.00	0m 0s 206ms		206ms
+157.25	0m 0s 638ms		638ms
+164.75	0m 1s 28ms		1028ms
+115.00	0m 0s 504ms		504ms
+157.25	0m 0s 790ms		790ms
+73.25	0m 0s 370ms		370ms
+81.00	0m 0s 652ms		652ms
+31.00	0m 0s 206ms		206ms
+73.25	0m 0s 266ms		266ms
+81.00	0m 0s 657ms		657ms
+31.00	0m 0s 205ms		205ms
+119.00	0m 0s 345ms		345ms
+126.75	0m 0s 880ms		880ms
+87.25	0m 0s 478ms		478ms
+225.75	0m 0s 855ms		855ms
+233.50	0m 1s 541ms		1541ms
+183.75	0m 1s 5ms		1005ms
+225.75	0m 0s 871ms		871ms
+233.50	0m 1s 548ms		1548ms
+183.75	0m 0s 980ms		980ms

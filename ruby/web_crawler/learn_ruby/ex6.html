@@ -1,0 +1,115 @@
+<div class="body">
+            
+  <div class="section" id="exercise-6-strings-and-text">
+<h1>Exercise 6: Strings And Text<a class="headerlink" href="#exercise-6-strings-and-text" title="Permalink to this headline">¶</a>
+</h1>
+<p>While you have already been writing strings, you still do not know what
+they do. In this exercise we create a bunch of variables with complex
+strings so you can see what they are for. First an explanation of
+strings.</p>
+<p>A string is usually a bit of text you want to display to someone, or
+"export" out of the program you are writing. Ruby knows you want
+something to be a string when you put either <tt class="docutils literal"><span class="pre">"</span></tt> (double-quotes) or
+<tt class="docutils literal"><span class="pre">'</span></tt> (single-quotes) around the text. You saw this many times with your
+use of <tt class="docutils literal"><span class="pre">puts</span></tt> when you put the text you want to go to the string
+inside <tt class="docutils literal"><span class="pre">"</span></tt> or <tt class="docutils literal"><span class="pre">'</span></tt> after the <tt class="docutils literal"><span class="pre">puts</span></tt>. Then Ruby displays it.</p>
+<p>Strings may contain the format characters you have discovered so far.
+You simply put the formatted variables in the string, and then a <tt class="docutils literal"><span class="pre">%</span></tt>
+(percent) character, followed by the variable. The only catch is that if
+you want multiple formats in your string to print multiple variables,
+you need to put them inside <tt class="docutils literal"><span class="pre">[</span> <span class="pre">]</span></tt> (brackets) separated by <tt class="docutils literal"><span class="pre">,</span></tt>
+(commas). It's as if you were telling me to buy you a list of items from
+the store and you said, "I want milk, eggs, bread, and soup." Only as a
+programmer we say, "[milk, eggs, bread, soup]".</p>
+<p>Another way of injecting variables into your strings is to use something
+called "string interpolation", which uses the <tt class="docutils literal"><span class="pre">#{</span> <span class="pre">}</span></tt> (pound and curly
+brace) characters. So, instead of using format strings:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">name1</span> <span class="o">=</span> <span class="s2">"Joe"</span> <span class="n">name2</span> <span class="o">=</span> <span class="s2">"Mary"</span> <span class="nb">puts</span> <span class="s2">"Hello %s, where is %s?"</span> <span class="o">%</span> <span class="o">[</span><span class="n">name1</span><span class="p">,</span> <span class="n">name2</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>We can type:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">name1</span> <span class="o">=</span> <span class="s2">"Joe"</span> <span class="n">name2</span> <span class="o">=</span> <span class="s2">"Mary"</span> <span class="nb">puts</span> <span class="s2">"Hello </span><span class="si">#{</span><span class="n">name1</span><span class="si">}</span><span class="s2">, where is </span><span class="si">#{</span><span class="n">name2</span><span class="si">}</span><span class="s2">?"</span>
+</pre></div>
+</div>
+<p>We will now type in a whole bunch of strings, variables, formats, and
+print them. You will also practice using short abbreviated variable
+names. Programmers love saving themselves time at your expense by using
+annoying cryptic variable names, so let's get you started being able to
+read and write them early on.</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="s2">"There are </span><span class="si">#{</span><span class="mi">10</span><span class="si">}</span><span class="s2"> types of people."</span>
+<span class="n">binary</span> <span class="o">=</span> <span class="s2">"binary"</span>
+<span class="n">do_not</span> <span class="o">=</span> <span class="s2">"don't"</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s2">"Those who know </span><span class="si">#{</span><span class="n">binary</span><span class="si">}</span><span class="s2"> and those who </span><span class="si">#{</span><span class="n">do_not</span><span class="si">}</span><span class="s2">."</span>
+
+<span class="nb">puts</span> <span class="n">x</span>
+<span class="nb">puts</span> <span class="n">y</span>
+
+<span class="nb">puts</span> <span class="s2">"I said: </span><span class="si">#{</span><span class="n">x</span><span class="si">}</span><span class="s2">."</span>
+<span class="nb">puts</span> <span class="s2">"I also said: '</span><span class="si">#{</span><span class="n">y</span><span class="si">}</span><span class="s2">'."</span>
+
+<span class="n">hilarious</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="n">joke_evaluation</span> <span class="o">=</span> <span class="s2">"Isn't that joke so funny?! </span><span class="si">#{</span><span class="n">hilarious</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nb">puts</span> <span class="n">joke_evaluation</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="s2">"This is the left side of..."</span>
+<span class="n">e</span> <span class="o">=</span> <span class="s2">"a string with a right side."</span>
+
+<span class="nb">puts</span> <span class="n">w</span> <span class="o">+</span> <span class="n">e</span>
+</pre></div>
+</td>
+</tr></table></div>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-python">
+<pre>There are 10 types of people.
+Those who know binary and those who don't.
+I said: There are 10 types of people..
+I also said: 'Those who know binary and those who don't.'.
+Isn't that joke so funny?! false
+This is the left side of...a string with a right side.</pre>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Go through this program and write a comment above each line
+explaining it.</li>
+<li>Find all the places where a string is put inside a string. There are
+four places.</li>
+<li>Are you sure there's only four places? How do you know? Maybe I like
+lying.</li>
+<li>Explain why adding the two strings <tt class="docutils literal"><span class="pre">w</span></tt> and <tt class="docutils literal"><span class="pre">e</span></tt> with <tt class="docutils literal"><span class="pre">+</span></tt> makes a
+longer string.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

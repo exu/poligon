@@ -1,0 +1,134 @@
+<div class="body">
+            
+  <div class="section" id="exercise-24-more-practice">
+<h1>Exercise 24: More Practice<a class="headerlink" href="#exercise-24-more-practice" title="Permalink to this headline">¶</a>
+</h1>
+<p>You are getting to the end of this section. You should have enough Ruby
+"under your fingers" to move onto learning about how programming really
+works, but you should do some more practice. This exercise is longer and
+all about building up stamina. The next exercise will be similar. Do
+them, get them exactly right, and do your checks.</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="nb">puts</span> <span class="s2">"Let's practice everything."</span>
+<span class="nb">puts</span> <span class="s2">"You</span><span class="se">\'</span><span class="s2">d need to know </span><span class="se">\'</span><span class="s2">bout escapes with </span><span class="se">\\</span><span class="s2"> that do </span><span class="se">\n</span><span class="s2"> newlines and </span><span class="se">\t</span><span class="s2"> tabs."</span>
+
+<span class="n">poem</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="no">MULTI_LINE_STRING</span>
+
+<span class="sh">\tThe lovely world</span>
+<span class="sh">with logic so firmly planted</span>
+<span class="sh">cannot discern \n the needs of love</span>
+<span class="sh">nor comprehend passion from intuition</span>
+<span class="sh">and requires an explanation</span>
+<span class="sh">\n\t\twhere there is none.</span>
+
+<span class="no">MULTI_LINE_STRING</span>
+
+<span class="nb">puts</span> <span class="s2">"--------------"</span>
+<span class="nb">puts</span> <span class="n">poem</span>
+<span class="nb">puts</span> <span class="s2">"--------------"</span>
+
+<span class="n">five</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">6</span>
+<span class="nb">puts</span> <span class="s2">"This should be five: </span><span class="si">#{</span><span class="n">five</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="k">def</span> <span class="nf">secret_formula</span><span class="p">(</span><span class="n">started</span><span class="p">)</span>
+  <span class="n">jelly_beans</span> <span class="o">=</span> <span class="n">started</span> <span class="o">*</span> <span class="mi">500</span>
+  <span class="n">jars</span> <span class="o">=</span> <span class="n">jelly_beans</span> <span class="o">/</span> <span class="mi">1000</span>
+  <span class="n">crates</span> <span class="o">=</span> <span class="n">jars</span> <span class="o">/</span> <span class="mi">100</span>
+  <span class="k">return</span> <span class="n">jelly_beans</span><span class="p">,</span> <span class="n">jars</span><span class="p">,</span> <span class="n">crates</span>
+<span class="k">end</span>
+
+<span class="n">start_point</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">beans</span><span class="p">,</span> <span class="n">jars</span><span class="p">,</span> <span class="n">crates</span> <span class="o">=</span> <span class="n">secret_formula</span><span class="p">(</span><span class="n">start_point</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">"With a starting point of: </span><span class="si">#{</span><span class="n">start_point</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">puts</span> <span class="s2">"We'd have </span><span class="si">#{</span><span class="n">beans</span><span class="si">}</span><span class="s2"> beans, </span><span class="si">#{</span><span class="n">jars</span><span class="si">}</span><span class="s2"> jars, and </span><span class="si">#{</span><span class="n">crates</span><span class="si">}</span><span class="s2"> crates."</span>
+
+<span class="n">start_point</span> <span class="o">=</span> <span class="n">start_point</span> <span class="o">/</span> <span class="mi">10</span>
+
+<span class="nb">puts</span> <span class="s2">"We can also do that this way:"</span>
+<span class="nb">puts</span> <span class="s2">"We'd have %s beans, %s jars, and %s crates."</span> <span class="o">%</span> <span class="n">secret_formula</span><span class="p">(</span><span class="n">start_point</span><span class="p">)</span>
+</pre></div>
+</td>
+</tr></table></div>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex24.rb
+<span class="go">Let's practice everything.</span>
+<span class="go">You'd need to know 'bout escapes with \ that do</span>
+<span class="go"> newlines and    tabs.</span>
+<span class="go">--------------</span>
+
+<span class="go">    The lovely world</span>
+<span class="go">with logic so firmly planted</span>
+<span class="go">cannot discern</span>
+<span class="go"> the needs of love</span>
+<span class="go">nor comprehend passion from intuition</span>
+<span class="go">and requires an explanation</span>
+
+<span class="go">        where there is none.</span>
+
+<span class="go">--------------</span>
+<span class="go">This should be five: 5</span>
+<span class="go">With a starting point of: 10000</span>
+<span class="go">We'd have 5000000 beans, 5000 jars, and 50 crates.</span>
+<span class="go">We can also do that this way:</span>
+<span class="go">We'd have 500000 beans, 500 jars, and 5 crates.</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Make sure to do your checks: read it backwards, read it out loud, put
+comments above confusing parts.</li>
+<li>Break the file on purpose, then run it to see what kinds of errors
+you get. Make sure you can fix it.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

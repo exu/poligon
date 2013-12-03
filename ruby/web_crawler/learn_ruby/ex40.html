@@ -1,0 +1,179 @@
+<div class="body">
+            
+  <div class="section" id="exercise-40-dictionaries-oh-lovely-dictionaries">
+<h1>Exercise 40: Dictionaries, Oh Lovely Dictionaries<a class="headerlink" href="#exercise-40-dictionaries-oh-lovely-dictionaries" title="Permalink to this headline">¶</a>
+</h1>
+<p>Now I have to hurt you with another container you can use, because once
+you learn this container a massive world of ultra-cool will be yours. It
+is the most useful container ever: the hash.</p>
+<p>Ruby calls them "hashes", other languages call them, "dictionaries". I
+tend to use both names, but it doesn't matter. What does matter is what
+they do when compared to arrays. You see, an array lets you do this:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">015</span> <span class="o">&gt;</span> <span class="n">things</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'c'</span><span class="p">,</span><span class="s1">'d'</span><span class="o">]</span>
+<span class="o">=&gt;</span> <span class="o">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="o">]</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">016</span> <span class="o">&gt;</span> <span class="nb">print</span> <span class="n">things</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+<span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">017</span> <span class="o">&gt;</span> <span class="n">things</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="s1">'z'</span>
+<span class="o">=&gt;</span> <span class="s2">"z"</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">01</span><span class="mi">8</span> <span class="o">&gt;</span> <span class="nb">print</span> <span class="n">things</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+<span class="n">z</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">01</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="nb">print</span> <span class="n">things</span>
+<span class="o">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"z"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="o">]</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">020</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You can use numbers to "index" into an array, meaning you can use
+numbers to find out what's in arrays. You should know this by now, but
+what a hash does is let you use <em>anything</em>, not just numbers. Yes, a
+hash associates one thing to another, no matter what it is. Take a look:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="n">stuff</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"Rob"</span><span class="p">,</span> <span class="ss">:age</span> <span class="o">=&gt;</span> <span class="mi">30</span><span class="p">,</span>
+<span class="ss">:height</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">\</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="mi">10</span><span class="p">}</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"Rob"</span><span class="p">,</span> <span class="ss">:age</span> <span class="o">=&gt;</span> <span class="mi">30</span><span class="p">,</span>
+<span class="ss">:height</span> <span class="o">=&gt;</span> <span class="mi">70</span><span class="p">}</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">stuff</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span>
+<span class="no">Rob</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">003</span> <span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">stuff</span><span class="o">[</span><span class="ss">:age</span><span class="o">]</span>
+<span class="mi">30</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">004</span> <span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">stuff</span><span class="o">[</span><span class="ss">:height</span><span class="o">]</span>
+<span class="mi">70</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">005</span> <span class="o">&gt;</span> <span class="n">stuff</span><span class="o">[</span><span class="ss">:city</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"New York"</span>
+<span class="o">=&gt;</span> <span class="s2">"New York"</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">006</span> <span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">stuff</span><span class="o">[</span><span class="ss">:city</span><span class="o">]</span>
+<span class="no">New</span> <span class="no">York</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">007</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You will see that instead of just numbers we're using symbols, which are
+just lightweight strings (think name tags) in Ruby, to say what we want
+from the <tt class="docutils literal"><span class="pre">stuff</span></tt> hash. We can also put new things into the hash with
+symbols. It doesn't have to be symbols though, we can also do this:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">004</span> <span class="o">&gt;</span> <span class="n">stuff</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"Wow"</span>
+<span class="o">=&gt;</span> <span class="s2">"Wow"</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">005</span> <span class="o">&gt;</span> <span class="n">stuff</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"Neato"</span>
+<span class="o">=&gt;</span> <span class="s2">"Neato"</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">006</span> <span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">stuff</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+<span class="no">Wow</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">007</span> <span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">stuff</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+<span class="no">Neato</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">00</span><span class="mi">8</span> <span class="o">&gt;</span> <span class="nb">puts</span> <span class="n">stuff</span>
+<span class="p">{</span><span class="ss">:name</span><span class="o">=&gt;</span><span class="s2">"Rob"</span><span class="p">,</span> <span class="ss">:age</span><span class="o">=&gt;</span><span class="mi">30</span><span class="p">,</span> <span class="ss">:height</span><span class="o">=&gt;</span><span class="mi">70</span><span class="p">,</span> <span class="ss">:city</span><span class="o">=&gt;</span><span class="s2">"New York"</span><span class="p">,</span>
+<span class="mi">1</span><span class="o">=&gt;</span><span class="s2">"Wow"</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="s2">"Neato"</span><span class="p">}</span> <span class="o">=&gt;</span> <span class="kp">nil</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In this one I just used numbers. I could use anything. Well almost but
+just pretend you can use anything for now.</p>
+<p>Of course, a hash that you can only put things in is pretty stupid, so
+here's how you delete things, with the <tt class="docutils literal"><span class="pre">delete</span></tt> function:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="n">stuff</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:city</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">"New York"</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="n">stuff</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">"Wow"</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">011</span> <span class="o">&gt;</span> <span class="n">stuff</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">"Neato"</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">012</span> <span class="o">&gt;</span> <span class="n">stuff</span>
+<span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:name</span><span class="o">=&gt;</span><span class="s2">"Rob"</span><span class="p">,</span> <span class="ss">:age</span><span class="o">=&gt;</span><span class="mi">30</span><span class="p">,</span> <span class="ss">:height</span><span class="o">=&gt;</span><span class="mi">70</span><span class="p">}</span>
+<span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">p180</span> <span class="p">:</span><span class="mo">013</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We'll now do an exercise that you must study <em>very</em> carefully. I want
+you to type this exercise in and try to understand what's going on. It
+is a very interesting exercise that will hopefully make a big light turn
+on in your head very soon.</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">cities</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'CA'</span> <span class="o">=&gt;</span> <span class="s1">'San Francisco'</span><span class="p">,</span> 
+  <span class="s1">'MI'</span> <span class="o">=&gt;</span> <span class="s1">'Detroit'</span><span class="p">,</span>
+  <span class="s1">'FL'</span> <span class="o">=&gt;</span> <span class="s1">'Jacksonville'</span><span class="p">}</span>
+
+<span class="n">cities</span><span class="o">[</span><span class="s1">'NY'</span><span class="o">]</span> <span class="o">=</span> <span class="s1">'New York'</span>
+<span class="n">cities</span><span class="o">[</span><span class="s1">'OR'</span><span class="o">]</span> <span class="o">=</span> <span class="s1">'Portland'</span>
+
+<span class="k">def</span> <span class="nf">find_city</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">map</span><span class="o">.</span><span class="n">include?</span> <span class="n">state</span>
+    <span class="k">return</span> <span class="n">map</span><span class="o">[</span><span class="n">state</span><span class="o">]</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="s2">"Not found."</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># ok pay attention!</span>
+<span class="n">cities</span><span class="o">[</span><span class="ss">:find</span><span class="o">]</span> <span class="o">=</span> <span class="nb">method</span><span class="p">(</span><span class="ss">:find_city</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kp">true</span>
+  <span class="nb">print</span> <span class="s2">"State? (ENTER to quit) "</span>
+  <span class="n">state</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span>
+
+  <span class="k">break</span> <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">empty?</span>
+
+  <span class="c1"># this line is the most important ever! study!</span>
+  <span class="nb">puts</span> <span class="n">cities</span><span class="o">[</span><span class="ss">:find</span><span class="o">].</span><span class="n">call</span><span class="p">(</span><span class="n">cities</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex40.rb
+<span class="go">State? (ENTER to quit) &gt; CA</span>
+<span class="go">San Francisco</span>
+<span class="go">State? (ENTER to quit) &gt; FL</span>
+<span class="go">Jacksonville</span>
+<span class="go">State? (ENTER to quit) &gt; O</span>
+<span class="go">Not found.</span>
+<span class="go">State? (ENTER to quit) &gt; OR</span>
+<span class="go">Portland</span>
+<span class="go">State? (ENTER to quit) &gt; VT</span>
+<span class="go">Not found.</span>
+<span class="go">State? (ENTER to quit) &gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Go find the Ruby documentation for hashes and try to do even more
+things to them.</li>
+<li>Find out what you can't do with hashes. A big one is that they do not
+have order, so try playing with that.</li>
+<li>Try doing a <tt class="docutils literal"><span class="pre">for-loop</span></tt> over them, and then try the <tt class="docutils literal"><span class="pre">each</span></tt> method
+of iterating through a hash.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

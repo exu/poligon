@@ -1,0 +1,97 @@
+<div class="body">
+            
+  <div class="section" id="exercise-13-parameters-unpacking-variables">
+<h1>Exercise 13: Parameters, Unpacking, Variables<a class="headerlink" href="#exercise-13-parameters-unpacking-variables" title="Permalink to this headline">¶</a>
+</h1>
+<p>In this exercise we will cover one more input method you can use to pass
+variables to a script (script being another name for your <tt class="docutils literal"><span class="pre">.rb</span></tt>
+files). You know how you type <tt class="docutils literal"><span class="pre">ruby</span> <span class="pre">ex13.rb</span></tt> to run the <tt class="docutils literal"><span class="pre">ex13.rb</span></tt>
+file? Well the <tt class="docutils literal"><span class="pre">ex13.rb</span></tt> part of the command is called an "argument".
+What we'll do now is write a script that also accepts arguments.</p>
+<p>Type this program and I'll explain it in detail:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">third</span> <span class="o">=</span> <span class="no">ARGV</span> 
+
+<span class="nb">puts</span> <span class="s2">"The script is called: </span><span class="si">#{</span><span class="vg">$0</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">puts</span> <span class="s2">"Your first variable is: </span><span class="si">#{</span><span class="n">first</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">puts</span> <span class="s2">"Your second variable is: </span><span class="si">#{</span><span class="n">second</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">puts</span> <span class="s2">"Your third variable is: </span><span class="si">#{</span><span class="n">third</span><span class="si">}</span><span class="s2">"</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>The <tt class="docutils literal"><span class="pre">ARGV</span></tt> is the "argument variable", a very standard name in
+programming, that you will find used in many other languages. It's in
+all caps because it's a constant, meaning you shouldn't change the value
+once it's been assigned. This variable holds the arguments you pass to
+your Ruby script when you run it. In the exercises you will get to play
+with this more and see what happens.</p>
+<p>Line 1 "unpacks" <tt class="docutils literal"><span class="pre">ARGV</span></tt> so that, rather than holding all the
+arguments, it gets assigned to three variables you can work with:
+<tt class="docutils literal"><span class="pre">first</span></tt>, <tt class="docutils literal"><span class="pre">second</span></tt>, and <tt class="docutils literal"><span class="pre">third</span></tt>. The name of the script itself is
+stored in a special variable <tt class="docutils literal"><span class="pre">$0</span></tt>, which we don't need to unpack. This
+may look strange, but "unpack" is probably the best word to describe
+what it does. It just says, "Take whatever is in <tt class="docutils literal"><span class="pre">ARGV</span></tt>, unpack it,
+and assign it to all of these variables on the left in order."</p>
+<p>After that we just print them out like normal.</p>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<p>Run the program like this:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="go">ruby ex13.rb first 2nd 3rd</span>
+</pre></div>
+</div>
+<p>This is what you should see when you do a few different runs with
+different arguments:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex13.rb first 2nd 3rd
+<span class="go">The script is called: ex13.rb</span>
+<span class="go">Your first variable is: first</span>
+<span class="go">Your second variable is: 2nd</span>
+<span class="go">Your third variable is: 3rd</span>
+
+<span class="gp">$</span> ruby ex13.rb cheese apples bread
+<span class="go">The script is called: ex13.rb</span>
+<span class="go">Your first variable is: cheese</span>
+<span class="go">Your second variable is: apples</span>
+<span class="go">Your third variable is: bread</span>
+
+<span class="gp">$</span> ruby ex13.rb Zed A. Shaw
+<span class="go">The script is called: ex13.rb</span>
+<span class="go">Your first variable is: Zed</span>
+<span class="go">Your second variable is: A.</span>
+<span class="go">Your third variable is: Shaw</span>
+</pre></div>
+</div>
+<p>You can actually replace "first", "2nd", and "3rd" with any three
+things. You do not have to give these parameters either, you can give
+any 3 strings you want:</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="go">ruby ex13.rb stuff I like</span>
+<span class="go">ruby ex13.rb anything 6 7</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Try giving fewer than three arguments to your script. What values are
+used for the missing arguments?</li>
+<li>Write a script that has fewer arguments and one that has more. Make
+sure you give the unpacked variables good names.</li>
+<li>Combine <tt class="docutils literal"><span class="pre">gets.chomp()</span></tt> with <tt class="docutils literal"><span class="pre">ARGV</span></tt> to make a script that gets
+more input from a user.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

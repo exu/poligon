@@ -1,0 +1,1199 @@
+<div class="body">
+            
+  <div class="section" id="exercise-42-gothons-are-getting-classy">
+<h1>Exercise 42: Gothons Are Getting Classy<a class="headerlink" href="#exercise-42-gothons-are-getting-classy" title="Permalink to this headline">¶</a>
+</h1>
+<p>While it's fun to put functions inside of hashes, you'd think there'd be
+something in Ruby that does this for you. There is: the <tt class="docutils literal"><span class="pre">class</span></tt>
+keyword. Using <tt class="docutils literal"><span class="pre">class</span></tt> is how you create an even more awesome "hash
+with functions" than the one you made in the last exercise. Classes have
+all sorts of powerful features and uses that I could never go into in
+this book. Instead, you'll just use them like they're fancy <tt class="docutils literal"><span class="pre">hashes</span></tt>
+with functions.</p>
+<p>A programming language that uses classes is called "Object Oriented
+Programming". This is an old style of programming where you make
+"things" and you "tell" those things to do work. You've been doing a lot
+of this. A whole lot. You just didn't know it. Remember when you were
+doing this:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Game</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="vi">@quips</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s2">"You died.  You kinda suck at this."</span><span class="p">,</span>
+      <span class="s2">"Nice job, you died ...jackass."</span><span class="p">,</span>
+      <span class="s2">"Such a luser."</span><span class="p">,</span>
+      <span class="s2">"I have a small puppy that's better at this."</span>
+    <span class="o">]</span>
+    <span class="vi">@start</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="nb">puts</span> <span class="s2">"in init @start = "</span> <span class="o">+</span> <span class="vi">@start</span><span class="o">.</span><span class="n">inspect</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">prompt</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="s2">"&gt; "</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">play</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"@start =&gt; "</span> <span class="o">+</span> <span class="vi">@start</span><span class="o">.</span><span class="n">inspect</span>
+    <span class="n">next_room</span> <span class="o">=</span> <span class="vi">@start</span>
+
+    <span class="k">while</span> <span class="kp">true</span>
+      <span class="nb">puts</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">--------"</span>
+      <span class="n">room</span> <span class="o">=</span> <span class="nb">method</span><span class="p">(</span><span class="n">next_room</span><span class="p">)</span>
+      <span class="n">next_room</span> <span class="o">=</span> <span class="n">room</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">death</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="vi">@quips</span><span class="o">[</span><span class="nb">rand</span><span class="p">(</span><span class="vi">@quips</span><span class="o">.</span><span class="n">length</span><span class="p">())</span><span class="o">]</span>
+    <span class="no">Process</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">central_corridor</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"The Gothons of Planet Percal #25 have invaded your ship and destroyed"</span>
+    <span class="nb">puts</span> <span class="s2">"your entire crew.  You are the last surviving member and your last"</span>
+    <span class="nb">puts</span> <span class="s2">"mission is to get the neutron destruct bomb from the Weapons Armory,"</span>
+    <span class="nb">puts</span> <span class="s2">"put it in the bridge, and blow the ship up after getting into an "</span>
+    <span class="nb">puts</span> <span class="s2">"escape pod."</span>
+    <span class="nb">puts</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="nb">puts</span> <span class="s2">"You're running down the central corridor to the Weapons Armory when"</span>
+    <span class="nb">puts</span> <span class="s2">"a Gothon jumps out, red scaly skin, dark grimy teeth, and evil clown costume"</span>
+    <span class="nb">puts</span> <span class="s2">"flowing around his hate filled body.  He's blocking the door to the"</span>
+    <span class="nb">puts</span> <span class="s2">"Armory and about to pull a weapon to blast you."</span>
+
+    <span class="n">prompt</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"shoot!"</span>
+      <span class="nb">puts</span> <span class="s2">"Quick on the draw you yank out your blaster and fire it at the Gothon."</span>
+      <span class="nb">puts</span> <span class="s2">"His clown costume is flowing and moving around his body, which throws"</span>
+      <span class="nb">puts</span> <span class="s2">"off your aim.  Your laser hits his costume but misses him entirely.  This"</span>
+      <span class="nb">puts</span> <span class="s2">"completely ruins his brand new costume his mother bought him, which"</span>
+      <span class="nb">puts</span> <span class="s2">"makes him fly into an insane rage and blast you repeatedly in the face until"</span>
+      <span class="nb">puts</span> <span class="s2">"you are dead.  Then he eats you."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"dodge!"</span>
+      <span class="nb">puts</span> <span class="s2">"Like a world class boxer you dodge, weave, slip and slide right"</span>
+      <span class="nb">puts</span> <span class="s2">"as the Gothon's blaster cranks a laser past your head."</span>
+      <span class="nb">puts</span> <span class="s2">"In the middle of your artful dodge your foot slips and you"</span>
+      <span class="nb">puts</span> <span class="s2">"bang your head on the metal wall and pass out."</span>
+      <span class="nb">puts</span> <span class="s2">"You wake up shortly after only to die as the Gothon stomps on"</span>
+      <span class="nb">puts</span> <span class="s2">"your head and eats you."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"tell a joke"</span>
+      <span class="nb">puts</span> <span class="s2">"Lucky for you they made you learn Gothon insults in the academy."</span>
+      <span class="nb">puts</span> <span class="s2">"You tell the one Gothon joke you know:"</span>
+      <span class="nb">puts</span> <span class="s2">"Lbhe zbgure vf fb sng, jura fur fvgf nebhaq gur ubhfr, fur fvgf nebhaq gur ubhfr."</span>
+      <span class="nb">puts</span> <span class="s2">"The Gothon stops, tries not to laugh, then busts out laughing and can't move."</span>
+      <span class="nb">puts</span> <span class="s2">"While he's laughing you run up and shoot him square in the head"</span>
+      <span class="nb">puts</span> <span class="s2">"putting him down, then jump through the Weapon Armory door."</span>
+      <span class="k">return</span> <span class="ss">:laser_weapon_armory</span>
+
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"DOES NOT COMPUTE!"</span>
+      <span class="k">return</span> <span class="ss">:central_corridor</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">laser_weapon_armory</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You do a dive roll into the Weapon Armory, crouch and scan the room"</span>
+    <span class="nb">puts</span> <span class="s2">"for more Gothons that might be hiding.  It's dead quiet, too quiet."</span>
+    <span class="nb">puts</span> <span class="s2">"You stand up and run to the far side of the room and find the"</span>
+    <span class="nb">puts</span> <span class="s2">"neutron bomb in its container.  There's a keypad lock on the box"</span>
+    <span class="nb">puts</span> <span class="s2">"and you need the code to get the bomb out.  If you get the code"</span>
+    <span class="nb">puts</span> <span class="s2">"wrong 10 times then the lock closes forever and you can't"</span>
+    <span class="nb">puts</span> <span class="s2">"get the bomb.  The code is 3 digits."</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s2">"%s%s%s"</span> <span class="o">%</span> <span class="o">[</span><span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span>
+    <span class="nb">print</span> <span class="s2">"[keypad]&gt; "</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+    <span class="n">guesses</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="n">guess</span> <span class="o">!=</span> <span class="n">code</span> <span class="ow">and</span> <span class="n">guesses</span> <span class="o">&lt;</span> <span class="mi">10</span>
+      <span class="nb">puts</span> <span class="s2">"BZZZZEDDD!"</span>
+      <span class="n">guesses</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="nb">print</span> <span class="s2">"[keypad]&gt; "</span>
+      <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+    <span class="k">end</span>
+
+    <span class="k">if</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">code</span>
+      <span class="nb">puts</span> <span class="s2">"The container clicks open and the seal breaks, letting gas out."</span>
+      <span class="nb">puts</span> <span class="s2">"You grab the neutron bomb and run as fast as you can to the"</span>
+      <span class="nb">puts</span> <span class="s2">"bridge where you must place it in the right spot."</span>
+      <span class="k">return</span> <span class="ss">:the_bridge</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"The lock buzzes one last time and then you hear a sickening"</span>
+      <span class="nb">puts</span> <span class="s2">"melting sound as the mechanism is fused together."</span>
+      <span class="nb">puts</span> <span class="s2">"You decide to sit there, and finally the Gothons blow up the"</span>
+      <span class="nb">puts</span> <span class="s2">"ship from their ship and you die."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">the_bridge</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You burst onto the Bridge with the netron destruct bomb"</span>
+    <span class="nb">puts</span> <span class="s2">"under your arm and surprise 5 Gothons who are trying to"</span>
+    <span class="nb">puts</span> <span class="s2">"take control of the ship.  Each of them has an even uglier"</span>
+    <span class="nb">puts</span> <span class="s2">"clown costume than the last.  They haven't pulled their"</span>
+    <span class="nb">puts</span> <span class="s2">"weapons out yet, as they see the active bomb under your"</span>
+    <span class="nb">puts</span> <span class="s2">"arm and don't want to set it off."</span>
+
+    <span class="n">prompt</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"throw the bomb"</span>
+      <span class="nb">puts</span> <span class="s2">"In a panic you throw the bomb at the group of Gothons"</span>
+      <span class="nb">puts</span> <span class="s2">"and make a leap for the door.  Right as you drop it a"</span>
+      <span class="nb">puts</span> <span class="s2">"Gothon shoots you right in the back killing you."</span>
+      <span class="nb">puts</span> <span class="s2">"As you die you see another Gothon frantically try to disarm"</span>
+      <span class="nb">puts</span> <span class="s2">"the bomb. You die knowing they will probably blow up when"</span>
+      <span class="nb">puts</span> <span class="s2">"it goes off."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"slowly place the bomb"</span>
+      <span class="nb">puts</span> <span class="s2">"You point your blaster at the bomb under your arm"</span>
+      <span class="nb">puts</span> <span class="s2">"and the Gothons put their hands up and start to sweat."</span>
+      <span class="nb">puts</span> <span class="s2">"You inch backward to the door, open it, and then carefully"</span>
+      <span class="nb">puts</span> <span class="s2">"place the bomb on the floor, pointing your blaster at it."</span>
+      <span class="nb">puts</span> <span class="s2">"You then jump back through the door, punch the close button"</span>
+      <span class="nb">puts</span> <span class="s2">"and blast the lock so the Gothons can't get out."</span>
+      <span class="nb">puts</span> <span class="s2">"Now that the bomb is placed you run to the escape pod to"</span>
+      <span class="nb">puts</span> <span class="s2">"get off this tin can."</span>
+      <span class="k">return</span> <span class="ss">:escape_pod</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"DOES NOT COMPUTE!"</span>
+      <span class="k">return</span> <span class="ss">:the_bridge</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">escape_pod</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You rush through the ship desperately trying to make it to"</span>
+    <span class="nb">puts</span> <span class="s2">"the escape pod before the whole ship explodes.  It seems like"</span>
+    <span class="nb">puts</span> <span class="s2">"hardly any Gothons are on the ship, so your run is clear of"</span>
+    <span class="nb">puts</span> <span class="s2">"interference.  You get to the chamber with the escape pods, and"</span>
+    <span class="nb">puts</span> <span class="s2">"now need to pick one to take.  Some of them could be damaged"</span>
+    <span class="nb">puts</span> <span class="s2">"but you don't have time to look.  There's 5 pods, which one"</span>
+    <span class="nb">puts</span> <span class="s2">"do you take?"</span>
+
+    <span class="n">good_pod</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> 
+    <span class="nb">print</span> <span class="s2">"[pod #]&gt;"</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">guess</span><span class="o">.</span><span class="n">to_i</span> <span class="o">!=</span> <span class="n">good_pod</span>
+      <span class="nb">puts</span> <span class="s2">"You jump into pod %s and hit the eject button."</span> <span class="o">%</span> <span class="n">guess</span>
+      <span class="nb">puts</span> <span class="s2">"The pod escapes out into the void of space, then"</span>
+      <span class="nb">puts</span> <span class="s2">"implodes as the hull ruptures, crushing your body"</span>
+      <span class="nb">puts</span> <span class="s2">"into jam jelly."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"You jump into pod %s and hit the eject button."</span> <span class="o">%</span> <span class="n">guess</span>
+      <span class="nb">puts</span> <span class="s2">"The pod easily slides out into space heading to"</span>
+      <span class="nb">puts</span> <span class="s2">"the planet below.  As it flies to the planet, you look"</span>
+      <span class="nb">puts</span> <span class="s2">"back and see your ship implode then explode like a"</span>
+      <span class="nb">puts</span> <span class="s2">"bright star, taking out the Gothon ship at the same"</span>
+      <span class="nb">puts</span> <span class="s2">"time.  You won!"</span>
+      <span class="no">Process</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">a_game</span> <span class="o">=</span> <span class="no">Game</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:central_corridor</span><span class="p">)</span>
+<span class="n">a_game</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>You were actually using classes. The variable stuff is actually an Array
+class. The <tt class="docutils literal"><span class="pre">stuff.join('</span> <span class="pre">')</span></tt> is calling the <tt class="docutils literal"><span class="pre">join</span></tt> function of the
+<tt class="docutils literal"><span class="pre">Array</span></tt> and passing <tt class="docutils literal"><span class="pre">'</span> <span class="pre">'</span></tt> (just an empty space), which is also a
+class, a <tt class="docutils literal"><span class="pre">String</span></tt> class. It's all classes!</p>
+<p>Well, and objects, but let's just skip that word for now. You'll learn
+what those are after you make some classes. How do you make classes?
+Very similar to how you made the <tt class="docutils literal"><span class="pre">ROOMS</span></tt> hash, but easier:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Game</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="vi">@quips</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s2">"You died.  You kinda suck at this."</span><span class="p">,</span>
+      <span class="s2">"Nice job, you died ...jackass."</span><span class="p">,</span>
+      <span class="s2">"Such a luser."</span><span class="p">,</span>
+      <span class="s2">"I have a small puppy that's better at this."</span>
+    <span class="o">]</span>
+    <span class="vi">@start</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="nb">puts</span> <span class="s2">"in init @start = "</span> <span class="o">+</span> <span class="vi">@start</span><span class="o">.</span><span class="n">inspect</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">prompt</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="s2">"&gt; "</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">play</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"@start =&gt; "</span> <span class="o">+</span> <span class="vi">@start</span><span class="o">.</span><span class="n">inspect</span>
+    <span class="n">next_room</span> <span class="o">=</span> <span class="vi">@start</span>
+
+    <span class="k">while</span> <span class="kp">true</span>
+      <span class="nb">puts</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">--------"</span>
+      <span class="n">room</span> <span class="o">=</span> <span class="nb">method</span><span class="p">(</span><span class="n">next_room</span><span class="p">)</span>
+      <span class="n">next_room</span> <span class="o">=</span> <span class="n">room</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">death</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="vi">@quips</span><span class="o">[</span><span class="nb">rand</span><span class="p">(</span><span class="vi">@quips</span><span class="o">.</span><span class="n">length</span><span class="p">())</span><span class="o">]</span>
+    <span class="no">Process</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">central_corridor</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"The Gothons of Planet Percal #25 have invaded your ship and destroyed"</span>
+    <span class="nb">puts</span> <span class="s2">"your entire crew.  You are the last surviving member and your last"</span>
+    <span class="nb">puts</span> <span class="s2">"mission is to get the neutron destruct bomb from the Weapons Armory,"</span>
+    <span class="nb">puts</span> <span class="s2">"put it in the bridge, and blow the ship up after getting into an "</span>
+    <span class="nb">puts</span> <span class="s2">"escape pod."</span>
+    <span class="nb">puts</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="nb">puts</span> <span class="s2">"You're running down the central corridor to the Weapons Armory when"</span>
+    <span class="nb">puts</span> <span class="s2">"a Gothon jumps out, red scaly skin, dark grimy teeth, and evil clown costume"</span>
+    <span class="nb">puts</span> <span class="s2">"flowing around his hate filled body.  He's blocking the door to the"</span>
+    <span class="nb">puts</span> <span class="s2">"Armory and about to pull a weapon to blast you."</span>
+
+    <span class="n">prompt</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"shoot!"</span>
+      <span class="nb">puts</span> <span class="s2">"Quick on the draw you yank out your blaster and fire it at the Gothon."</span>
+      <span class="nb">puts</span> <span class="s2">"His clown costume is flowing and moving around his body, which throws"</span>
+      <span class="nb">puts</span> <span class="s2">"off your aim.  Your laser hits his costume but misses him entirely.  This"</span>
+      <span class="nb">puts</span> <span class="s2">"completely ruins his brand new costume his mother bought him, which"</span>
+      <span class="nb">puts</span> <span class="s2">"makes him fly into an insane rage and blast you repeatedly in the face until"</span>
+      <span class="nb">puts</span> <span class="s2">"you are dead.  Then he eats you."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"dodge!"</span>
+      <span class="nb">puts</span> <span class="s2">"Like a world class boxer you dodge, weave, slip and slide right"</span>
+      <span class="nb">puts</span> <span class="s2">"as the Gothon's blaster cranks a laser past your head."</span>
+      <span class="nb">puts</span> <span class="s2">"In the middle of your artful dodge your foot slips and you"</span>
+      <span class="nb">puts</span> <span class="s2">"bang your head on the metal wall and pass out."</span>
+      <span class="nb">puts</span> <span class="s2">"You wake up shortly after only to die as the Gothon stomps on"</span>
+      <span class="nb">puts</span> <span class="s2">"your head and eats you."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"tell a joke"</span>
+      <span class="nb">puts</span> <span class="s2">"Lucky for you they made you learn Gothon insults in the academy."</span>
+      <span class="nb">puts</span> <span class="s2">"You tell the one Gothon joke you know:"</span>
+      <span class="nb">puts</span> <span class="s2">"Lbhe zbgure vf fb sng, jura fur fvgf nebhaq gur ubhfr, fur fvgf nebhaq gur ubhfr."</span>
+      <span class="nb">puts</span> <span class="s2">"The Gothon stops, tries not to laugh, then busts out laughing and can't move."</span>
+      <span class="nb">puts</span> <span class="s2">"While he's laughing you run up and shoot him square in the head"</span>
+      <span class="nb">puts</span> <span class="s2">"putting him down, then jump through the Weapon Armory door."</span>
+      <span class="k">return</span> <span class="ss">:laser_weapon_armory</span>
+
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"DOES NOT COMPUTE!"</span>
+      <span class="k">return</span> <span class="ss">:central_corridor</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">laser_weapon_armory</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You do a dive roll into the Weapon Armory, crouch and scan the room"</span>
+    <span class="nb">puts</span> <span class="s2">"for more Gothons that might be hiding.  It's dead quiet, too quiet."</span>
+    <span class="nb">puts</span> <span class="s2">"You stand up and run to the far side of the room and find the"</span>
+    <span class="nb">puts</span> <span class="s2">"neutron bomb in its container.  There's a keypad lock on the box"</span>
+    <span class="nb">puts</span> <span class="s2">"and you need the code to get the bomb out.  If you get the code"</span>
+    <span class="nb">puts</span> <span class="s2">"wrong 10 times then the lock closes forever and you can't"</span>
+    <span class="nb">puts</span> <span class="s2">"get the bomb.  The code is 3 digits."</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s2">"%s%s%s"</span> <span class="o">%</span> <span class="o">[</span><span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span>
+    <span class="nb">print</span> <span class="s2">"[keypad]&gt; "</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+    <span class="n">guesses</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="n">guess</span> <span class="o">!=</span> <span class="n">code</span> <span class="ow">and</span> <span class="n">guesses</span> <span class="o">&lt;</span> <span class="mi">10</span>
+      <span class="nb">puts</span> <span class="s2">"BZZZZEDDD!"</span>
+      <span class="n">guesses</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="nb">print</span> <span class="s2">"[keypad]&gt; "</span>
+      <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+    <span class="k">end</span>
+
+    <span class="k">if</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">code</span>
+      <span class="nb">puts</span> <span class="s2">"The container clicks open and the seal breaks, letting gas out."</span>
+      <span class="nb">puts</span> <span class="s2">"You grab the neutron bomb and run as fast as you can to the"</span>
+      <span class="nb">puts</span> <span class="s2">"bridge where you must place it in the right spot."</span>
+      <span class="k">return</span> <span class="ss">:the_bridge</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"The lock buzzes one last time and then you hear a sickening"</span>
+      <span class="nb">puts</span> <span class="s2">"melting sound as the mechanism is fused together."</span>
+      <span class="nb">puts</span> <span class="s2">"You decide to sit there, and finally the Gothons blow up the"</span>
+      <span class="nb">puts</span> <span class="s2">"ship from their ship and you die."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">the_bridge</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You burst onto the Bridge with the netron destruct bomb"</span>
+    <span class="nb">puts</span> <span class="s2">"under your arm and surprise 5 Gothons who are trying to"</span>
+    <span class="nb">puts</span> <span class="s2">"take control of the ship.  Each of them has an even uglier"</span>
+    <span class="nb">puts</span> <span class="s2">"clown costume than the last.  They haven't pulled their"</span>
+    <span class="nb">puts</span> <span class="s2">"weapons out yet, as they see the active bomb under your"</span>
+    <span class="nb">puts</span> <span class="s2">"arm and don't want to set it off."</span>
+
+    <span class="n">prompt</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"throw the bomb"</span>
+      <span class="nb">puts</span> <span class="s2">"In a panic you throw the bomb at the group of Gothons"</span>
+      <span class="nb">puts</span> <span class="s2">"and make a leap for the door.  Right as you drop it a"</span>
+      <span class="nb">puts</span> <span class="s2">"Gothon shoots you right in the back killing you."</span>
+      <span class="nb">puts</span> <span class="s2">"As you die you see another Gothon frantically try to disarm"</span>
+      <span class="nb">puts</span> <span class="s2">"the bomb. You die knowing they will probably blow up when"</span>
+      <span class="nb">puts</span> <span class="s2">"it goes off."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"slowly place the bomb"</span>
+      <span class="nb">puts</span> <span class="s2">"You point your blaster at the bomb under your arm"</span>
+      <span class="nb">puts</span> <span class="s2">"and the Gothons put their hands up and start to sweat."</span>
+      <span class="nb">puts</span> <span class="s2">"You inch backward to the door, open it, and then carefully"</span>
+      <span class="nb">puts</span> <span class="s2">"place the bomb on the floor, pointing your blaster at it."</span>
+      <span class="nb">puts</span> <span class="s2">"You then jump back through the door, punch the close button"</span>
+      <span class="nb">puts</span> <span class="s2">"and blast the lock so the Gothons can't get out."</span>
+      <span class="nb">puts</span> <span class="s2">"Now that the bomb is placed you run to the escape pod to"</span>
+      <span class="nb">puts</span> <span class="s2">"get off this tin can."</span>
+      <span class="k">return</span> <span class="ss">:escape_pod</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"DOES NOT COMPUTE!"</span>
+      <span class="k">return</span> <span class="ss">:the_bridge</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">escape_pod</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You rush through the ship desperately trying to make it to"</span>
+    <span class="nb">puts</span> <span class="s2">"the escape pod before the whole ship explodes.  It seems like"</span>
+    <span class="nb">puts</span> <span class="s2">"hardly any Gothons are on the ship, so your run is clear of"</span>
+    <span class="nb">puts</span> <span class="s2">"interference.  You get to the chamber with the escape pods, and"</span>
+    <span class="nb">puts</span> <span class="s2">"now need to pick one to take.  Some of them could be damaged"</span>
+    <span class="nb">puts</span> <span class="s2">"but you don't have time to look.  There's 5 pods, which one"</span>
+    <span class="nb">puts</span> <span class="s2">"do you take?"</span>
+
+    <span class="n">good_pod</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> 
+    <span class="nb">print</span> <span class="s2">"[pod #]&gt;"</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">guess</span><span class="o">.</span><span class="n">to_i</span> <span class="o">!=</span> <span class="n">good_pod</span>
+      <span class="nb">puts</span> <span class="s2">"You jump into pod %s and hit the eject button."</span> <span class="o">%</span> <span class="n">guess</span>
+      <span class="nb">puts</span> <span class="s2">"The pod escapes out into the void of space, then"</span>
+      <span class="nb">puts</span> <span class="s2">"implodes as the hull ruptures, crushing your body"</span>
+      <span class="nb">puts</span> <span class="s2">"into jam jelly."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"You jump into pod %s and hit the eject button."</span> <span class="o">%</span> <span class="n">guess</span>
+      <span class="nb">puts</span> <span class="s2">"The pod easily slides out into space heading to"</span>
+      <span class="nb">puts</span> <span class="s2">"the planet below.  As it flies to the planet, you look"</span>
+      <span class="nb">puts</span> <span class="s2">"back and see your ship implode then explode like a"</span>
+      <span class="nb">puts</span> <span class="s2">"bright star, taking out the Gothon ship at the same"</span>
+      <span class="nb">puts</span> <span class="s2">"time.  You won!"</span>
+      <span class="no">Process</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">a_game</span> <span class="o">=</span> <span class="no">Game</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:central_corridor</span><span class="p">)</span>
+<span class="n">a_game</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>See the <tt class="docutils literal"><span class="pre">@</span></tt> symbol before the <tt class="docutils literal"><span class="pre">@name</span></tt> variable? That makes it an
+instance variable. Every instance of <tt class="docutils literal"><span class="pre">TheThing</span></tt> that you create will
+have its own value for <tt class="docutils literal"><span class="pre">@name</span></tt>. Instance variables are hidden away
+inside the object. We can't get at the name simply by typing
+<tt class="docutils literal"><span class="pre">a.number</span></tt> <em>unless</em> we explicitly make that data readable to the
+outside world.</p>
+<p>By including the <tt class="docutils literal"><span class="pre">attr_reader</span> <span class="pre">:name</span></tt> line. To make <tt class="docutils literal"><span class="pre">@name</span></tt>
+write-only, we could do <tt class="docutils literal"><span class="pre">attr_writer</span> <span class="pre">:name</span></tt>. And to make it read/write
+we could do <tt class="docutils literal"><span class="pre">attr_accessor</span> <span class="pre">:name</span></tt>. Ruby uses the good object-oriented
+principle of encapsulating data.</p>
+<p>Next, see the <tt class="docutils literal"><span class="pre">initialize</span></tt> method? That is how you set up a Ruby class
+with internal variables. You can set them with the <tt class="docutils literal"><span class="pre">@</span></tt> symbol just
+like I showed you here. See also how we then use this in <tt class="docutils literal"><span class="pre">add_me_up()</span></tt>
+later which lets you add to the <tt class="docutils literal"><span class="pre">@number</span></tt> you created. Later you can
+see how we use this to add to our number and print it.</p>
+<p>Classes are very powerful, so you should read everything you can about
+them and play with them. You actually know how to use them, you just
+have to try it. In fact, I want to play some guitar right now so I'm not
+going to give you an exercise to type. You're going to write an exercise
+using classes.</p>
+<p>Here's how we'd do exercise 41 using classes instead of the thing we
+created:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Game</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="vi">@quips</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s2">"You died.  You kinda suck at this."</span><span class="p">,</span>
+      <span class="s2">"Nice job, you died ...jackass."</span><span class="p">,</span>
+      <span class="s2">"Such a luser."</span><span class="p">,</span>
+      <span class="s2">"I have a small puppy that's better at this."</span>
+    <span class="o">]</span>
+    <span class="vi">@start</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="nb">puts</span> <span class="s2">"in init @start = "</span> <span class="o">+</span> <span class="vi">@start</span><span class="o">.</span><span class="n">inspect</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">prompt</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="s2">"&gt; "</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">play</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"@start =&gt; "</span> <span class="o">+</span> <span class="vi">@start</span><span class="o">.</span><span class="n">inspect</span>
+    <span class="n">next_room</span> <span class="o">=</span> <span class="vi">@start</span>
+
+    <span class="k">while</span> <span class="kp">true</span>
+      <span class="nb">puts</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">--------"</span>
+      <span class="n">room</span> <span class="o">=</span> <span class="nb">method</span><span class="p">(</span><span class="n">next_room</span><span class="p">)</span>
+      <span class="n">next_room</span> <span class="o">=</span> <span class="n">room</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">death</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="vi">@quips</span><span class="o">[</span><span class="nb">rand</span><span class="p">(</span><span class="vi">@quips</span><span class="o">.</span><span class="n">length</span><span class="p">())</span><span class="o">]</span>
+    <span class="no">Process</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">central_corridor</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"The Gothons of Planet Percal #25 have invaded your ship and destroyed"</span>
+    <span class="nb">puts</span> <span class="s2">"your entire crew.  You are the last surviving member and your last"</span>
+    <span class="nb">puts</span> <span class="s2">"mission is to get the neutron destruct bomb from the Weapons Armory,"</span>
+    <span class="nb">puts</span> <span class="s2">"put it in the bridge, and blow the ship up after getting into an "</span>
+    <span class="nb">puts</span> <span class="s2">"escape pod."</span>
+    <span class="nb">puts</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="nb">puts</span> <span class="s2">"You're running down the central corridor to the Weapons Armory when"</span>
+    <span class="nb">puts</span> <span class="s2">"a Gothon jumps out, red scaly skin, dark grimy teeth, and evil clown costume"</span>
+    <span class="nb">puts</span> <span class="s2">"flowing around his hate filled body.  He's blocking the door to the"</span>
+    <span class="nb">puts</span> <span class="s2">"Armory and about to pull a weapon to blast you."</span>
+
+    <span class="n">prompt</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"shoot!"</span>
+      <span class="nb">puts</span> <span class="s2">"Quick on the draw you yank out your blaster and fire it at the Gothon."</span>
+      <span class="nb">puts</span> <span class="s2">"His clown costume is flowing and moving around his body, which throws"</span>
+      <span class="nb">puts</span> <span class="s2">"off your aim.  Your laser hits his costume but misses him entirely.  This"</span>
+      <span class="nb">puts</span> <span class="s2">"completely ruins his brand new costume his mother bought him, which"</span>
+      <span class="nb">puts</span> <span class="s2">"makes him fly into an insane rage and blast you repeatedly in the face until"</span>
+      <span class="nb">puts</span> <span class="s2">"you are dead.  Then he eats you."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"dodge!"</span>
+      <span class="nb">puts</span> <span class="s2">"Like a world class boxer you dodge, weave, slip and slide right"</span>
+      <span class="nb">puts</span> <span class="s2">"as the Gothon's blaster cranks a laser past your head."</span>
+      <span class="nb">puts</span> <span class="s2">"In the middle of your artful dodge your foot slips and you"</span>
+      <span class="nb">puts</span> <span class="s2">"bang your head on the metal wall and pass out."</span>
+      <span class="nb">puts</span> <span class="s2">"You wake up shortly after only to die as the Gothon stomps on"</span>
+      <span class="nb">puts</span> <span class="s2">"your head and eats you."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"tell a joke"</span>
+      <span class="nb">puts</span> <span class="s2">"Lucky for you they made you learn Gothon insults in the academy."</span>
+      <span class="nb">puts</span> <span class="s2">"You tell the one Gothon joke you know:"</span>
+      <span class="nb">puts</span> <span class="s2">"Lbhe zbgure vf fb sng, jura fur fvgf nebhaq gur ubhfr, fur fvgf nebhaq gur ubhfr."</span>
+      <span class="nb">puts</span> <span class="s2">"The Gothon stops, tries not to laugh, then busts out laughing and can't move."</span>
+      <span class="nb">puts</span> <span class="s2">"While he's laughing you run up and shoot him square in the head"</span>
+      <span class="nb">puts</span> <span class="s2">"putting him down, then jump through the Weapon Armory door."</span>
+      <span class="k">return</span> <span class="ss">:laser_weapon_armory</span>
+
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"DOES NOT COMPUTE!"</span>
+      <span class="k">return</span> <span class="ss">:central_corridor</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">laser_weapon_armory</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You do a dive roll into the Weapon Armory, crouch and scan the room"</span>
+    <span class="nb">puts</span> <span class="s2">"for more Gothons that might be hiding.  It's dead quiet, too quiet."</span>
+    <span class="nb">puts</span> <span class="s2">"You stand up and run to the far side of the room and find the"</span>
+    <span class="nb">puts</span> <span class="s2">"neutron bomb in its container.  There's a keypad lock on the box"</span>
+    <span class="nb">puts</span> <span class="s2">"and you need the code to get the bomb out.  If you get the code"</span>
+    <span class="nb">puts</span> <span class="s2">"wrong 10 times then the lock closes forever and you can't"</span>
+    <span class="nb">puts</span> <span class="s2">"get the bomb.  The code is 3 digits."</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s2">"%s%s%s"</span> <span class="o">%</span> <span class="o">[</span><span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span>
+    <span class="nb">print</span> <span class="s2">"[keypad]&gt; "</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+    <span class="n">guesses</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="n">guess</span> <span class="o">!=</span> <span class="n">code</span> <span class="ow">and</span> <span class="n">guesses</span> <span class="o">&lt;</span> <span class="mi">10</span>
+      <span class="nb">puts</span> <span class="s2">"BZZZZEDDD!"</span>
+      <span class="n">guesses</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="nb">print</span> <span class="s2">"[keypad]&gt; "</span>
+      <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+    <span class="k">end</span>
+
+    <span class="k">if</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">code</span>
+      <span class="nb">puts</span> <span class="s2">"The container clicks open and the seal breaks, letting gas out."</span>
+      <span class="nb">puts</span> <span class="s2">"You grab the neutron bomb and run as fast as you can to the"</span>
+      <span class="nb">puts</span> <span class="s2">"bridge where you must place it in the right spot."</span>
+      <span class="k">return</span> <span class="ss">:the_bridge</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"The lock buzzes one last time and then you hear a sickening"</span>
+      <span class="nb">puts</span> <span class="s2">"melting sound as the mechanism is fused together."</span>
+      <span class="nb">puts</span> <span class="s2">"You decide to sit there, and finally the Gothons blow up the"</span>
+      <span class="nb">puts</span> <span class="s2">"ship from their ship and you die."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">the_bridge</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You burst onto the Bridge with the netron destruct bomb"</span>
+    <span class="nb">puts</span> <span class="s2">"under your arm and surprise 5 Gothons who are trying to"</span>
+    <span class="nb">puts</span> <span class="s2">"take control of the ship.  Each of them has an even uglier"</span>
+    <span class="nb">puts</span> <span class="s2">"clown costume than the last.  They haven't pulled their"</span>
+    <span class="nb">puts</span> <span class="s2">"weapons out yet, as they see the active bomb under your"</span>
+    <span class="nb">puts</span> <span class="s2">"arm and don't want to set it off."</span>
+
+    <span class="n">prompt</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"throw the bomb"</span>
+      <span class="nb">puts</span> <span class="s2">"In a panic you throw the bomb at the group of Gothons"</span>
+      <span class="nb">puts</span> <span class="s2">"and make a leap for the door.  Right as you drop it a"</span>
+      <span class="nb">puts</span> <span class="s2">"Gothon shoots you right in the back killing you."</span>
+      <span class="nb">puts</span> <span class="s2">"As you die you see another Gothon frantically try to disarm"</span>
+      <span class="nb">puts</span> <span class="s2">"the bomb. You die knowing they will probably blow up when"</span>
+      <span class="nb">puts</span> <span class="s2">"it goes off."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+
+    <span class="k">elsif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"slowly place the bomb"</span>
+      <span class="nb">puts</span> <span class="s2">"You point your blaster at the bomb under your arm"</span>
+      <span class="nb">puts</span> <span class="s2">"and the Gothons put their hands up and start to sweat."</span>
+      <span class="nb">puts</span> <span class="s2">"You inch backward to the door, open it, and then carefully"</span>
+      <span class="nb">puts</span> <span class="s2">"place the bomb on the floor, pointing your blaster at it."</span>
+      <span class="nb">puts</span> <span class="s2">"You then jump back through the door, punch the close button"</span>
+      <span class="nb">puts</span> <span class="s2">"and blast the lock so the Gothons can't get out."</span>
+      <span class="nb">puts</span> <span class="s2">"Now that the bomb is placed you run to the escape pod to"</span>
+      <span class="nb">puts</span> <span class="s2">"get off this tin can."</span>
+      <span class="k">return</span> <span class="ss">:escape_pod</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"DOES NOT COMPUTE!"</span>
+      <span class="k">return</span> <span class="ss">:the_bridge</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">escape_pod</span><span class="p">()</span>
+    <span class="nb">puts</span> <span class="s2">"You rush through the ship desperately trying to make it to"</span>
+    <span class="nb">puts</span> <span class="s2">"the escape pod before the whole ship explodes.  It seems like"</span>
+    <span class="nb">puts</span> <span class="s2">"hardly any Gothons are on the ship, so your run is clear of"</span>
+    <span class="nb">puts</span> <span class="s2">"interference.  You get to the chamber with the escape pods, and"</span>
+    <span class="nb">puts</span> <span class="s2">"now need to pick one to take.  Some of them could be damaged"</span>
+    <span class="nb">puts</span> <span class="s2">"but you don't have time to look.  There's 5 pods, which one"</span>
+    <span class="nb">puts</span> <span class="s2">"do you take?"</span>
+
+    <span class="n">good_pod</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> 
+    <span class="nb">print</span> <span class="s2">"[pod #]&gt;"</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">guess</span><span class="o">.</span><span class="n">to_i</span> <span class="o">!=</span> <span class="n">good_pod</span>
+      <span class="nb">puts</span> <span class="s2">"You jump into pod %s and hit the eject button."</span> <span class="o">%</span> <span class="n">guess</span>
+      <span class="nb">puts</span> <span class="s2">"The pod escapes out into the void of space, then"</span>
+      <span class="nb">puts</span> <span class="s2">"implodes as the hull ruptures, crushing your body"</span>
+      <span class="nb">puts</span> <span class="s2">"into jam jelly."</span>
+      <span class="k">return</span> <span class="ss">:death</span>
+    <span class="k">else</span>
+      <span class="nb">puts</span> <span class="s2">"You jump into pod %s and hit the eject button."</span> <span class="o">%</span> <span class="n">guess</span>
+      <span class="nb">puts</span> <span class="s2">"The pod easily slides out into space heading to"</span>
+      <span class="nb">puts</span> <span class="s2">"the planet below.  As it flies to the planet, you look"</span>
+      <span class="nb">puts</span> <span class="s2">"back and see your ship implode then explode like a"</span>
+      <span class="nb">puts</span> <span class="s2">"bright star, taking out the Gothon ship at the same"</span>
+      <span class="nb">puts</span> <span class="s2">"time.  You won!"</span>
+      <span class="no">Process</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">a_game</span> <span class="o">=</span> <span class="no">Game</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:central_corridor</span><span class="p">)</span>
+<span class="n">a_game</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+</pre></div>
+</td>
+</tr></table></div>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<p>The output from this version of the game should be exactly the same as
+the previous version. In fact you'll notice that some of the code is
+nearly the same. Compare this new version of the game with the last one
+so you understand the changes that were made. Key things to really get
+are:</p>
+<ol class="arabic simple">
+<li>How you made a <tt class="docutils literal"><span class="pre">class</span> <span class="pre">Game</span></tt> and put functions inside it.</li>
+<li>How <tt class="docutils literal"><span class="pre">initialize</span></tt> is a special initialization method that sets up
+important variables.</li>
+<li>How you added functions to the class by nesting their definitions
+under the <tt class="docutils literal"><span class="pre">class</span></tt> keyword.</li>
+<li>How you nested the contents of the functions under their names.</li>
+<li>The concept of <tt class="docutils literal"><span class="pre">@</span></tt> and how it's used in <tt class="docutils literal"><span class="pre">initialize</span></tt>, <tt class="docutils literal"><span class="pre">play</span></tt>,
+and <tt class="docutils literal"><span class="pre">death</span></tt>.</li>
+<li>How a Game was created at the end and then told to <tt class="docutils literal"><span class="pre">play()</span></tt> and how
+that got everything started.</li>
+</ol>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Add some rooms to make sure you know how to work with a class.</li>
+<li>Create a two-class version of this, where one is the <tt class="docutils literal"><span class="pre">Map</span></tt> and the
+other is the <tt class="docutils literal"><span class="pre">Engine</span></tt>. Hint: <tt class="docutils literal"><span class="pre">play</span></tt> goes in the <tt class="docutils literal"><span class="pre">Engine</span></tt>.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

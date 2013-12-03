@@ -1,0 +1,2 @@
+#/usr/bin/env bash
+./run.sh|egrep -o 'line [0-9]+'|egrep -o '[0-9]+'

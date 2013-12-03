@@ -1,0 +1,81 @@
+<!doctype html>
+<htmllang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Calc</title>
+    <meta name="description" content="D:evolve">
+    <meta name="author" content="Jacek Wysocki">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/kalkulatory.utf8.js"></script>
+</head>
+<body>
+<div class="belka">
+    <a href="index.html"> &laquo; Lista kalkulatorów </a>
+</div>
+<form name="calc2" id="calc2" onsubmit="Calc2(); return false;">
+    <div class="userInput">
+        <!-- czesc w ktorej user wprowadza dane -->
+        <table>
+            <tbody><tr>
+            <td class="label">
+                Jaką kwotę zamierzasz odkładać co miesiąc:
+            </td>
+            <td class="input">
+                <input type="text" class="inputbox" id="kapital_i" size="7" value=""> zł
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Ile lat zamierzasz oszczędzać:
+            </td>
+            <td class="input">
+                <input type="text" class="inputbox" id="okres_inwest_i" size="7" value="20"> lat
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Stopa zwrotu z inwestycji:
+            </td>
+            <td class="input">
+                <input type="text" class="inputbox" id="stopa_zwrotu_i" size="7" value="15"> %
+            </td>
+            </tr>
+
+        </tbody></table>
+    <div class="button">
+        <input type="button" class="button1" onclick="Calc2();" name="cmdCalc" value="◀ Oblicz"> 
+    </div>
+    </div>
+
+    <div class="middleOutput">
+        <table>
+            <tbody><tr>
+                <td class="first">
+                    Zobacz wyniki symulacji
+                </td>
+                <td class="last"></td>
+            </tr>
+        </tbody></table>
+    </div>
+
+    <div class="userOutput">
+        <!-- wyniki -->
+
+        <table>
+            <tbody><tr>
+                <td>
+                    <div id="output_i"></div>
+                </td>
+            </tr>
+        </tbody></table>
+        
+    </div>
+
+</form>
+</body>
+</html>
+
+

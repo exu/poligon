@@ -1,0 +1,31 @@
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+  -nan    0.000000           0         4           read
+  -nan    0.000000           0        17        13 open
+  -nan    0.000000           0         6           close
+  -nan    0.000000           0         4         3 stat
+  -nan    0.000000           0         3           fstat
+  -nan    0.000000           0        25           mmap
+  -nan    0.000000           0         7           mprotect
+  -nan    0.000000           0         2           munmap
+  -nan    0.000000           0         3           brk
+  -nan    0.000000           0        61           rt_sigaction
+  -nan    0.000000           0         6           rt_sigprocmask
+  -nan    0.000000           0         4         4 access
+  -nan    0.000000           0         3           socket
+  -nan    0.000000           0         1         1 connect
+  -nan    0.000000           0         2           bind
+  -nan    0.000000           0         3           setsockopt
+  -nan    0.000000           0         2           clone
+  -nan    0.000000           0         1           execve
+  -nan    0.000000           0         1           getrlimit
+  -nan    0.000000           0         1           sigaltstack
+  -nan    0.000000           0         1           arch_prctl
+  -nan    0.000000           0         2         1 futex
+  -nan    0.000000           0         1           sched_getaffinity
+  -nan    0.000000           0         1           set_tid_address
+  -nan    0.000000           0         1           epoll_ctl
+  -nan    0.000000           0         1           set_robust_list
+  -nan    0.000000           0         1           epoll_create1
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000000                   164        22 total

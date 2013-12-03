@@ -1,0 +1,5 @@
+source :rubygems
+
+gem 'cramp', '~> 0.15.1'
+
+gem 'thin'

@@ -1,0 +1,104 @@
+<!doctype html>
+<htmllang="en">
+<head>
+	<meta charset="utf-8">
+    <title>Calc</title>
+	<meta name="description" content="D:evolve">
+	<meta name="author" content="Jacek Wysocki">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="js/kalkulatory.utf8.js"></script>
+	<script src="js/number-format.js"></script>
+	<script src="js/ile-placic.js"></script>
+</head>
+<body>
+<div class="belka">
+    <a href="index.html"> &laquo; Lista kalkulatorów </a>
+</div>
+<form name="form">
+    <div class="userInput">
+        <!-- czesc w ktorej user wprowadza dane -->
+        <table>
+            <tbody><tr>
+            <td class="label">
+                Jaki kapitał zamierzasz zgromadzić:
+            </td>
+            <td>
+                <input type="text" class="inputbox" size="10" value="10000.00" name="kapital"> zł
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Ile lat chcesz inwestować:
+            </td>
+            <td>
+                <input type="text" class="inputbox" value="2" name="lata"> lat
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Twoja stopa zwrotu:
+            </td>
+            <td>
+                <input type="text" class="inputbox" value="7" name="zwrot"> %
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Jaką kwotę możesz jednorazowo zainwestować na początku:
+            </td>
+            <td>
+                <input type="text" class="inputbox" value="1000.00" name="kwota"> zł
+            </td>
+            </tr>
+        
+        </tbody></table>
+	<div class="button">
+                    <input type="button" class="button1" onclick="wylicz()" name="cmdCalc" value="◀ Oblicz"> 
+	</div>
+    </div>
+
+    <div class="middleOutput">
+        <table>
+            <tbody><tr>
+                <td class="first">
+                    Zobacz wyniki symulacji
+                </td>
+                <td class="last">
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+
+    <div class="userOutput">
+        <!-- wyniki -->
+
+        <table>
+            <tbody><tr>
+            <td class="label">
+                Oto ile musisz miesięcznie oszczędzać:
+            </td>
+            <td>
+                <input type="text" class="inputbox" disabled="disabled" value="" name="wynik"> zł
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Suma nominalna dokonanych wpłat:
+            </td>
+            <td>
+                <input type="text" class="inputbox" disabled="disabled" value="" name="suma"> zł
+            </td>
+            </tr>
+        </tbody></table>
+        
+    </div>
+</form>
+</body>
+</html>
+
+

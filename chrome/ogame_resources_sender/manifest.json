@@ -1,0 +1,21 @@
+{
+  "name": "Ogame resources Sender",
+  "version": "2.0",
+  "description": "Sends resources from all planets to planet starting with M",
+  "background_page": "background.html",
+  "page_action" :
+  {
+    "default_icon" : "icon-19.png",
+    "default_title" : "Ogame sender",
+    "popup" : "popup.html"
+  },
+  "permissions" : ["tabs", "http://*/", "https://*/"],
+  "icons" : {
+    "48" : "icon-48.png",
+    "128" : "icon-128.png"
+  },
+  "content_scripts": [ {
+    "matches": ["http://*/*"],
+    "js": ["jquery.js", "content.js"]
+  }]
+}

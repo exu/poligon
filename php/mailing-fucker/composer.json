@@ -1,0 +1,15 @@
+{
+    "autoload" : {
+        "psr-0": {"": "src/"}
+    },
+
+    "config": {
+        "bin-dir": "bin"
+    },
+
+    "require" :{
+        "guzzle/guzzle": "3.5.*"
+    }
+
+
+}

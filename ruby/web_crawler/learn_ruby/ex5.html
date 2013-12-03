@@ -1,0 +1,93 @@
+<div class="body">
+            
+  <div class="section" id="exercise-5-more-variables-and-printing">
+<h1>Exercise 5: More Variables And Printing<a class="headerlink" href="#exercise-5-more-variables-and-printing" title="Permalink to this headline">¶</a>
+</h1>
+<p>Now we'll do even more typing of variables and printing them out. This
+time we'll use something called a "format string". Every time you put
+<tt class="docutils literal"><span class="pre">"</span></tt> (double-quotes) around a piece of text you have been making a
+string. A string is how you make something that your program might give
+to a human. You print them, save them to files, send them to web
+servers, all sorts of things.</p>
+<p>Strings are really handy, so in this exercise you will learn how to make
+strings that have variables embedded in them. You embed variables inside
+a string by using specialized format sequences and then putting the
+variables at the end with a special syntax that tells Ruby, "Hey, this
+is a format string, put these variables in there."</p>
+<p>As usual, just type this in even if you do not understand it and make it
+exactly the same.</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">my_name</span> <span class="o">=</span> <span class="s1">'Zed A. Shaw'</span>
+<span class="n">my_age</span> <span class="o">=</span> <span class="mi">35</span> <span class="c1"># not a lie</span>
+<span class="n">my_height</span> <span class="o">=</span> <span class="mi">74</span> <span class="c1"># inches</span>
+<span class="n">my_weight</span> <span class="o">=</span> <span class="mi">180</span> <span class="c1"># lbs</span>
+<span class="n">my_eyes</span> <span class="o">=</span> <span class="s1">'Blue'</span>
+<span class="n">my_teeth</span> <span class="o">=</span> <span class="s1">'White'</span>
+<span class="n">my_hair</span> <span class="o">=</span> <span class="s1">'Brown'</span>
+
+<span class="nb">puts</span> <span class="s2">"Let's talk about %s."</span> <span class="o">%</span> <span class="n">my_name</span>
+<span class="nb">puts</span> <span class="s2">"He's %d inches tall."</span> <span class="o">%</span> <span class="n">my_height</span>
+<span class="nb">puts</span> <span class="s2">"He's %d pounds heavy."</span> <span class="o">%</span> <span class="n">my_weight</span>
+<span class="nb">puts</span> <span class="s2">"Actually that's not too heavy."</span>
+<span class="nb">puts</span> <span class="s2">"He's got %s eyes and %s hair."</span> <span class="o">%</span> <span class="o">[</span><span class="n">my_eyes</span><span class="p">,</span> <span class="n">my_hair</span><span class="o">]</span>
+<span class="nb">puts</span> <span class="s2">"His teeth are usually %s depending on the coffee."</span> <span class="o">%</span> <span class="n">my_teeth</span>
+
+<span class="c1"># this line is tricky, try to get it exactly right</span>
+<span class="nb">puts</span> <span class="s2">"If I add %d, %d, and %d I get %d."</span> <span class="o">%</span> <span class="o">[</span>
+    <span class="n">my_age</span><span class="p">,</span> <span class="n">my_height</span><span class="p">,</span> <span class="n">my_weight</span><span class="p">,</span> <span class="n">my_age</span> <span class="o">+</span> <span class="n">my_height</span> <span class="o">+</span> <span class="n">my_weight</span><span class="o">]</span>
+</pre></div>
+</td>
+</tr></table></div>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex5.rb
+<span class="go">Let's talk about Zed A. Shaw.</span>
+<span class="go">He's 74 inches tall.</span>
+<span class="go">He's 180 pounds heavy.</span>
+<span class="go">Actually that's not too heavy.</span>
+<span class="go">He's got Blue eyes and Brown hair.</span>
+<span class="go">His teeth are usually White depending on the coffee.</span>
+<span class="go">If I add 35, 74, and 180 I get 289.</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Change all the variables so there isn't the <tt class="docutils literal"><span class="pre">my_</span></tt> in front. Make
+sure you change the name everywhere, not just where you used <tt class="docutils literal"><span class="pre">=</span></tt> to
+set them.</li>
+<li>Try more format sequences.</li>
+<li>Search online for all of the Ruby format sequences.</li>
+<li>Try to write some variables that convert the inches and pounds to
+centimeters and kilos. Do not just type in the measurements. Work out
+the math in Ruby.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

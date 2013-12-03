@@ -1,0 +1,108 @@
+<div class="body">
+            
+  <div class="section" id="exercise-4-variables-and-names">
+<h1>Exercise 4: Variables And Names<a class="headerlink" href="#exercise-4-variables-and-names" title="Permalink to this headline">¶</a>
+</h1>
+<p>Now you can print things with <tt class="docutils literal"><span class="pre">puts</span></tt> and you can do math. The next
+step is to learn about variables. In programming a variable is nothing
+more than a name for something so you can use the name rather than the
+something as you code. Programmers use these variable names to make
+their code read more like English, and because they have lousy memories.
+If they didn't use good names for things in their software, they'd get
+lost when they tried to read their code again.</p>
+<p>If you get stuck with this exercise, remember the tricks you have been
+taught so far of finding differences and focusing on details:</p>
+<ol class="arabic simple">
+<li>Write a comment above each line explaining to yourself what it does
+in English.</li>
+<li>Read your <tt class="docutils literal"><span class="pre">.rb</span></tt> file backwards.</li>
+<li>Read your <tt class="docutils literal"><span class="pre">.rb</span></tt> file out loud saying even the characters.</li>
+</ol>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">cars</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">space_in_a_car</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">drivers</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">passengers</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">cars_not_driven</span> <span class="o">=</span> <span class="n">cars</span> <span class="o">-</span> <span class="n">drivers</span>
+<span class="n">cars_driven</span> <span class="o">=</span> <span class="n">drivers</span>
+<span class="n">carpool_capacity</span> <span class="o">=</span> <span class="n">cars_driven</span> <span class="o">*</span> <span class="n">space_in_a_car</span>
+<span class="n">average_passengers_per_car</span> <span class="o">=</span> <span class="n">passengers</span> <span class="o">/</span> <span class="n">cars_driven</span>
+
+<span class="nb">puts</span> <span class="s2">"There are </span><span class="si">#{</span><span class="n">cars</span><span class="si">}</span><span class="s2"> cars available."</span>
+<span class="nb">puts</span> <span class="s2">"There are only </span><span class="si">#{</span><span class="n">drivers</span><span class="si">}</span><span class="s2"> drivers available."</span>
+<span class="nb">puts</span> <span class="s2">"There will be </span><span class="si">#{</span><span class="n">cars_not_driven</span><span class="si">}</span><span class="s2"> empty cars today."</span>
+<span class="nb">puts</span> <span class="s2">"We can transport </span><span class="si">#{</span><span class="n">carpool_capacity</span><span class="si">}</span><span class="s2"> people today."</span>
+<span class="nb">puts</span> <span class="s2">"We have </span><span class="si">#{</span><span class="n">passengers</span><span class="si">}</span><span class="s2"> passengers to carpool today."</span>
+<span class="nb">puts</span> <span class="s2">"We need to put about </span><span class="si">#{</span><span class="n">average_passengers_per_car</span><span class="si">}</span><span class="s2"> in each car."</span>
+</pre></div>
+</td>
+</tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">_</span></tt> in <tt class="docutils literal"><span class="pre">space_in_a_car</span></tt> is called an underscore
+character. Find out how to type it if you do not already know. We
+use this character a lot to put an imaginary space between words in
+variable names.</p>
+</div>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex4.rb
+<span class="go">There are 100 cars available.</span>
+<span class="go">There are only 30 drivers available.</span>
+<span class="go">There will be 70 empty cars today.</span>
+<span class="go">We can transport 120.0 people today.</span>
+<span class="go">We have 90 passengers to carpool today.</span>
+<span class="go">We need to put about 3 in each car.</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<p>When I wrote this program the first time I had a mistake, and Ruby told
+me about it like this:</p>
+<div class="highlight-python">
+<pre>ex4.rb:8:in `&lt;main&gt;': undefined local variable or method `car_pool_capacity' for main:Object (NameError)</pre>
+</div>
+<p>Explain this error in your own words. Make sure you use line numbers and
+explain why.</p>
+</div>
+<div class="section" id="here-s-more-extra-credit">
+<h2>Here's more extra credit:<a class="headerlink" href="#here-s-more-extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Explain why the 4.0 is used instead of just 4.</li>
+<li>Remember that 4.0 is a "floating point" number. Find out what that
+means.</li>
+<li>Write comments above each of the variable assignments.</li>
+<li>Make sure you know what <tt class="docutils literal"><span class="pre">=</span></tt> is called (equals) and that it's making
+names for things.</li>
+<li>Remember <tt class="docutils literal"><span class="pre">_</span></tt> is an underscore character.</li>
+<li>Try running IRB as a calculator like you did before and use variable
+names to do your calculations. Popular variable names are also <tt class="docutils literal"><span class="pre">i</span></tt>,
+<tt class="docutils literal"><span class="pre">x</span></tt>, and <tt class="docutils literal"><span class="pre">j</span></tt>.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

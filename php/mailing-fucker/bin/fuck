@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+require_once '../vendor/autoload.php';
+
+use Guzzle\Http\Client;
+
+
+$client = new \Guzzle\Http\Client();
+
+
+$request = $client->post("http://mailing.semotic.com/", null, ['signin' => ['username' => $arg1]]);
+$response = $request->send();

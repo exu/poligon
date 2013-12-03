@@ -1,0 +1,3 @@
+scp 10.0.0.90:/home/exu/log.txt ubuntu-12.04-64bit.log.txt
+scp 10.0.0.91:/home/exu/log.txt ubuntu-12.10-32bit.log.txt
+scp 10.0.0.92:/home/exu/log.txt ubuntu-12.10-64bit.log.txt

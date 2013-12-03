@@ -1,0 +1,66 @@
+<div class="body">
+            
+  <div class="section" id="exercise-12-libraries">
+<h1>Exercise 12: Libraries<a class="headerlink" href="#exercise-12-libraries" title="Permalink to this headline">¶</a>
+</h1>
+<p>Take a look at this code:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="nb">require</span> <span class="s1">'open-uri'</span>
+
+<span class="nb">open</span><span class="p">(</span><span class="s2">"http://www.ruby-lang.org/en"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">each_line</span> <span class="p">{</span><span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="nb">p</span> <span class="n">line</span><span class="p">}</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">base_uri</span>         <span class="c1"># &lt;URI::HTTP:0x40e6ef2 URL:http://www.ruby-lang.org/en/&gt;</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">content_type</span>     <span class="c1"># "text/html"</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">charset</span>          <span class="c1"># "iso-8859-1"</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">content_encoding</span> <span class="c1"># []</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">last_modified</span>    <span class="c1"># Thu Dec 05 02:45:02 UTC 2002</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>On line 1 we have what's called a "require". This is how you add
+features to your script from the Ruby feature set or other sources
+(e.g., Ruby Gems, stuff you wrote yourself). Rather than give you all
+the features at once, Ruby asks you to say what you plan to use. This
+keeps your programs small, but it also acts as documentation for other
+programmers who read your code later.</p>
+<div class="section" id="hold-up-features-have-another-name">
+<h2>Hold Up! Features Have Another Name<a class="headerlink" href="#hold-up-features-have-another-name" title="Permalink to this headline">¶</a>
+</h2>
+<p>I call them "features" here (these little things you require to make
+your Ruby program do more) but nobody else calls them features. I just
+used that name because I needed to trick you into learning what they are
+without jargon. Before you can continue, you need to learn their real
+name: <tt class="docutils literal"><span class="pre">libraries</span></tt>.</p>
+<p>From now on we will be calling these "features" that we require
+<tt class="docutils literal"><span class="pre">libraries</span></tt>. I'll say things like, "You want to require the
+<tt class="docutils literal"><span class="pre">open-uri</span></tt> library." They are also called "modules" by other
+programmers, but let's just stick with <tt class="docutils literal"><span class="pre">libraries</span></tt>.</p>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Research the difference between <tt class="docutils literal"><span class="pre">require</span></tt> and <tt class="docutils literal"><span class="pre">include</span></tt>. How are
+they different?</li>
+<li>Can you <tt class="docutils literal"><span class="pre">require</span></tt> a script that doesn't contain a <tt class="docutils literal"><span class="pre">library</span></tt>
+specifically?</li>
+<li>Figure out which directories on your system Ruby will look in to find
+the libraries you require.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

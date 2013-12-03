@@ -1,0 +1,152 @@
+<div class="body">
+            
+  <div class="section" id="exercise-21-functions-can-return-something">
+<h1>Exercise 21: Functions Can Return Something<a class="headerlink" href="#exercise-21-functions-can-return-something" title="Permalink to this headline">¶</a>
+</h1>
+<p>You have been using the <tt class="docutils literal"><span class="pre">=</span></tt> character to name variables and set them
+to numbers or strings. We're now going to blow your mind again by
+showing you how to use <tt class="docutils literal"><span class="pre">=</span></tt> to set variables to be a value from a
+function. There will be one thing to pay close attention to, but first
+type this in:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"ADDING </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2"> + </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">"</span>
+  <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"SUBTRACTING </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2"> - </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">"</span>
+  <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"MULTIPLYING </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2"> * </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">"</span>
+  <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"DIVIDING </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">"</span>
+  <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="k">end</span>
+
+<span class="nb">puts</span> <span class="s2">"Let's do some math with just functions!"</span>
+
+<span class="n">age</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">height</span> <span class="o">=</span> <span class="n">subtract</span><span class="p">(</span><span class="mi">78</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">multiply</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">iq</span> <span class="o">=</span> <span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">"Age: </span><span class="si">#{</span><span class="n">age</span><span class="si">}</span><span class="s2">, Height: </span><span class="si">#{</span><span class="n">height</span><span class="si">}</span><span class="s2">, Weight: </span><span class="si">#{</span><span class="n">weight</span><span class="si">}</span><span class="s2">, IQ: </span><span class="si">#{</span><span class="n">iq</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="c1"># A puzzle for the extra credit, type it in anyway.</span>
+<span class="nb">puts</span> <span class="s2">"Here is a puzzle."</span>
+
+<span class="n">what</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">subtract</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">multiply</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">divide</span><span class="p">(</span><span class="n">iq</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
+
+<span class="nb">puts</span> <span class="s2">"That becomes: </span><span class="si">#{</span><span class="n">what</span><span class="si">}</span><span class="s2"> Can you do it by hand?"</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p>We are now doing our own math functions for <tt class="docutils literal"><span class="pre">add</span></tt>, <tt class="docutils literal"><span class="pre">subtract</span></tt>,
+<tt class="docutils literal"><span class="pre">multiply</span></tt>, and <tt class="docutils literal"><span class="pre">divide</span></tt>. The important thing to notice is the last
+line where we say <tt class="docutils literal"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></tt> (in <tt class="docutils literal"><span class="pre">add</span></tt>). What this does is the
+following:</p>
+<ol class="arabic simple">
+<li>Our function is called with two arguments: <tt class="docutils literal"><span class="pre">a</span></tt> and <tt class="docutils literal"><span class="pre">b</span></tt>.</li>
+<li>We print out what our function is doing, in this case "ADDING".</li>
+<li>Then we tell Ruby to do something kind of backward: we return the
+addition of <tt class="docutils literal"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></tt>. You might say this as, "I add a and b then
+return them." In Ruby, the last evaluated statement in a method is
+its return value. You can be more explicit if you want and type
+<tt class="docutils literal"><span class="pre">return</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></tt>, but that is totally optional.</li>
+<li>Ruby adds the two numbers. Then when the function ends any line that
+runs it will be able to assign this a + b result to a variable.</li>
+</ol>
+<p>As with many other things in this book, you should take this real slow,
+break it down and try to trace what's going on. To help there's extra
+credit to get you to solve a puzzle and learn something cool.</p>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex21.rb
+<span class="go">Let's do some math with just functions!</span>
+<span class="go">ADDING 30 + 5</span>
+<span class="go">SUBTRACTING 78 - 4</span>
+<span class="go">MULTIPLYING 90 * 2</span>
+<span class="go">DIVIDING 100 / 2</span>
+<span class="go">Age: 35, Height: 74, Weight: 180, IQ: 50</span>
+<span class="go">Here is a puzzle.</span>
+<span class="go">DIVIDING 50 / 2</span>
+<span class="go">MULTIPLYING 180 * 25</span>
+<span class="go">SUBTRACTING 74 - 4500</span>
+<span class="go">ADDING 35 + -4426</span>
+<span class="go">That becomes:  -4391 Can you do it by hand?</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>If you aren't really sure what return values are, try writing a few
+of your own functions and have them return some values. You can
+return anything that you can put to the right of an <tt class="docutils literal"><span class="pre">=</span></tt>.</li>
+<li>At the end of the script is a puzzle. I'm taking the return value of
+one function, and using it as the argument of another function. I'm
+doing this in a chain so that I'm kind of creating a formula using
+the functions. It looks really weird, but if you run the script you
+can see the results. What you should do is try to figure out the
+normal formula that would recreate this same set of operations.</li>
+<li>Once you have the formula worked out for the puzzle, get in there and
+see what happens when you modify the parts of the functions. Try to
+change it on purpose to make another value.</li>
+<li>Finally, do the inverse. Write out a simple formula and use the
+functions in the same way to calculate it.</li>
+</ol>
+<p>This exercise might really whack your brain out, but take it slow and
+easy and treat it like a little game. Figuring out puzzles like this is
+what makes programming fun, so I'll be giving you more little problems
+like this as we go.</p>
+</div>
+</div>
+
+
+          </div>

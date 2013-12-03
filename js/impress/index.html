@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>impress.js | presentation tool based on the power of CSS3 transforms and transitions in modern browsers | by Bartek Szopka @bartaz</title>
+    
+    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+    <meta name="author" content="Bartek Szopka" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <style type="text/css" media="screen">
+        q { text-align : center; }
+        #big b {  line-height:1em; font-size: 1.4em; }
+    </style>
+</head>
+
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+    <p>Twoja przeglądarka <b>nie obsługuje funckji wymaganych przez tą stronę</b> dlatego nie widzisz wszystkich
+    efektów</p>
+    <p>Aby widzieć wszystko tak jak reszta świata zainstaluj jedną z powyższych:  <b>Chrome</b>, <b>Safari</b>
+    or <b>Firefox</b> przeglądarek.</p>
+
+    <br/><br/>
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+    <div id="bored" class="step slide" data-x="-1000" data-y="-1500">
+        <q style="font-size: 2.5em;text-align:center;">Twoje oprogramowanie jest <br/><b style="font-size:
+        2em;line-height: 2em;">SŁABE?</b></q>
+    </div>
+
+    <div class="step slide" data-x="0" data-y="-1500">
+        <q><s style="font-size: 3em; color: darkred;">Odp: NIE</s><br/> - nie jest poprawna, po prostu jeszcze o jeszcze o tym nie wiesz :)</q>
+    </div>
+
+    <div id="title" class="step" data-x="0" data-y="0" data-scale="4">
+        <span>*Jesteśmy odpowiedzią na twoje rozterki</span>
+        <h1 style="color: white;">D::Evolve<sup>*</sup></h1>
+        
+    </div>
+
+    <div id="its" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="5">
+        <p>Produkujemy oprogramowanie <strong style="color: darkred; letter-spacing: 16px;">szyte na miarę</strong> <br/>
+        dopasujemy się do Twoich istniejących rozwiązań <br/>
+        a jeżeli będzie to możliwe<br/><strong>ulepszymy już istniejące</strong></p>
+    </div>
+
+    <div id="big" class="step" data-x="3500" data-y="2100" data-rotate="180" data-scale="6">
+        <p>Nowoczesne techologie <b class="scaling">WWW</b> to nasz żywioł</p>
+    </div>
+
+    <div id="tiny" class="step" data-x="2825" data-y="2325" data-z="-3000" data-rotate="300" data-scale="1">
+        <p>Możesz <b>na nas polegać w zupełności</b> i być pewnym że twoje aplikacje będą nowoczesne</p>
+    </div>
+    <div id="ing" class="step" data-x="3500" data-y="-850" data-rotate="270" data-scale="6">
+        <p>To my wiemy co to
+        jest <b class="rotating">ERP</b>  <b class="positioning">MES</b> <b class="scaling">CRM</b>
+        Ty nie musisz, wyjaśnimy Ci to w przystępnych słowach</p>
+    </div>
+
+    <div id="imagination" class="step" data-x="6700" data-y="-300" data-scale="6">
+        <p>Dla nas nie ma  <b>limitów</b> <b class="imagination">Dasz pomysł</b> a my go zrealizujemy</p>
+    </div>
+
+    <div id="source" class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
+        <p>Chcesz wiedzieć więcej?</p>
+        <q><a href="callto:+48695828396">Skontaktuj się z naszym przedstawicielem</a></q>
+    </div>
+
+    <div id="one-more-thing" class="step" data-x="6000" data-y="4000" data-scale="2">
+        <p>dziękujemy za uwagę</p>
+    </div>
+
+    <div id="its-in-3d" class="step" data-x="6200" data-y="4300" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-scale="2">
+        <p><span class="have">D</span><span class="you">::</span><span class="noticed">Evo</span><span class="its">lve</span> <span class="in">in</span> <b>3D<sup>*</sup></b>?</p>
+        <span class="footnote" style="color:red">* ;)</span>
+    </div>
+
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    </div>
+
+</div>
+
+<div class="hint">
+    <p>Użyj SPACJI (dlugi klawisz) aby przejść dalej<br/>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>

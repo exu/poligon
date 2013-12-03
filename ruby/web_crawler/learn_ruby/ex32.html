@@ -1,0 +1,168 @@
+<div class="body">
+            
+  <div class="section" id="exercise-32-loops-and-arrays">
+<h1>Exercise 32: Loops And Arrays<a class="headerlink" href="#exercise-32-loops-and-arrays" title="Permalink to this headline">¶</a>
+</h1>
+<p>You should now be able to do some programs that are much more
+interesting. If you have been keeping up, you should realize that now
+you can combine all the other things you have learned with
+<tt class="docutils literal"><span class="pre">if-statements</span></tt> and boolean expressions to make your programs do smart
+things.</p>
+<p>However, programs also need to do repetitive things very quickly. We are
+going to use a <tt class="docutils literal"><span class="pre">for-loop</span></tt> in this exercise to build and print various
+arrays. When you do the exercise, you will start to figure out what they
+are. I won't tell you right now. You have to figure it out.</p>
+<p>Before you can use a <tt class="docutils literal"><span class="pre">for-loop</span></tt>, you need a way to store the results
+of loops somewhere. The best way to do this is with an <tt class="docutils literal"><span class="pre">array</span></tt>. An
+array is a container of things that are organized in order. It's not
+complicated; you just have to learn a new syntax. First, there's how you
+make an array:</p>
+<div class="highlight-ruby">
+<div class="highlight"><pre><span class="n">hairs</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'brown'</span><span class="p">,</span> <span class="s1">'blond'</span><span class="p">,</span> <span class="s1">'red'</span><span class="o">]</span>
+<span class="n">eyes</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'brown'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">,</span> <span class="s1">'green'</span><span class="o">]</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>What you do is start the array with the <tt class="docutils literal"><span class="pre">[</span></tt> (left-bracket) which
+"opens" the array. Then you put each item you want in the array
+separated by commas, just like when you did function arguments. Lastly
+you end the array with a <tt class="docutils literal"><span class="pre">]</span></tt> (right-bracket) to indicate that it's
+over. Ruby then takes this array and all its contents, and assigns them
+to the variable.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is where things get tricky for people who can't
+program. Your brain has been taught that the world is flat. Remember
+in the last exercise where you put <tt class="docutils literal"><span class="pre">if-statements</span></tt> inside
+<tt class="docutils literal"><span class="pre">if-statements</span></tt>? That probably made your brain hurt because most
+people do not ponder how to "nest" things inside things. In
+programming this is all over the place. You will find functions that
+call other functions that have <tt class="docutils literal"><span class="pre">if-statements</span></tt> that have arrays
+with arrays inside arrays. If you see a structure like this that you
+can't figure out, take out pencil and paper and break it down
+manually bit by bit until you understand it.</p>
+</div>
+<p>We now will build some arrays using some loops and print them out:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">the_count</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
+<span class="n">fruits</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'apples'</span><span class="p">,</span> <span class="s1">'oranges'</span><span class="p">,</span> <span class="s1">'pears'</span><span class="p">,</span> <span class="s1">'apricots'</span><span class="o">]</span>
+<span class="n">change</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'pennies'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'dimes'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'quarters'</span><span class="o">]</span>
+
+<span class="c1"># this first kind of for-loop goes through an array</span>
+<span class="k">for</span> <span class="n">number</span> <span class="k">in</span> <span class="n">the_count</span>
+  <span class="nb">puts</span> <span class="s2">"This is count </span><span class="si">#{</span><span class="n">number</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+
+<span class="c1"># same as above, but using a block instead</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">fruit</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">"A fruit of type: </span><span class="si">#{</span><span class="n">fruit</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+
+<span class="c1"># also we can go through mixed arrays too</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">change</span>
+  <span class="nb">puts</span> <span class="s2">"I got </span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+
+<span class="c1"># we can also build arrays, first start with an empty one</span>
+<span class="n">elements</span> <span class="o">=</span> <span class="o">[]</span> 
+
+<span class="c1"># then use a range object to do 0 to 5 counts</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Adding </span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2"> to the list."</span>
+  <span class="c1"># push is a function that arrays understand</span>
+  <span class="n">elements</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="c1"># now we can puts them out too</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">elements</span>
+  <span class="nb">puts</span> <span class="s2">"Element was: </span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr></table></div>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex32.rb
+<span class="go">This is count 1</span>
+<span class="go">This is count 2</span>
+<span class="go">This is count 3</span>
+<span class="go">This is count 4</span>
+<span class="go">This is count 5</span>
+<span class="go">A fruit of type: apples</span>
+<span class="go">A fruit of type: oranges</span>
+<span class="go">A fruit of type: pears</span>
+<span class="go">A fruit of type: apricots</span>
+<span class="go">I got 1</span>
+<span class="go">I got 'pennies'</span>
+<span class="go">I got 2</span>
+<span class="go">I got 'dimes'</span>
+<span class="go">I got 3</span>
+<span class="go">I got 'quarters'</span>
+<span class="go">Adding 0 to the list.</span>
+<span class="go">Adding 1 to the list.</span>
+<span class="go">Adding 2 to the list.</span>
+<span class="go">Adding 3 to the list.</span>
+<span class="go">Adding 4 to the list.</span>
+<span class="go">Adding 5 to the list.</span>
+<span class="go">Element was: 0</span>
+<span class="go">Element was: 1</span>
+<span class="go">Element was: 2</span>
+<span class="go">Element was: 3</span>
+<span class="go">Element was: 4</span>
+<span class="go">Element was: 5</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Take a look at how you used the range <tt class="docutils literal"><span class="pre">(0..5)</span></tt>. Look up the
+<tt class="docutils literal"><span class="pre">Range</span></tt> class to understand it.</li>
+<li>Could you have avoided that <tt class="docutils literal"><span class="pre">for-loop</span></tt> entirely on line 24 and just
+assigned <tt class="docutils literal"><span class="pre">(0..5)</span></tt> directly to <tt class="docutils literal"><span class="pre">elements</span></tt>?</li>
+<li>Find the Ruby documentation on arrays and read about them. What other
+operations can you do to arrays besides <tt class="docutils literal"><span class="pre">push</span></tt>?</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

@@ -1,0 +1,25 @@
+# A sample Guardfile
+# More info at https://github.com/guard/guard#readme
+
+# Add files and commands to this file, like the example:
+#   watch('file/path') { `command(s)` }
+#
+require 'guard/guard'
+
+module ::Guard
+  class Avi < ::Guard::Guard
+    def run_all
+      true
+    end
+
+    def run_on_change(paths)
+      true
+    end
+  end
+end
+
+
+guard 'avi' do
+  watch(/(.*).txt/) {|m| `notify-send -t 1000 "Zmieniłeś pliczek #{m[0]}"` }
+  watch(/(.*).avi/) {|m| `qnapi -c #{m[0]} && notify-send "Napisy do #{m[0]}"` }
+end

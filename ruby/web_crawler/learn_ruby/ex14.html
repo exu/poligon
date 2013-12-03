@@ -1,0 +1,103 @@
+<div class="body">
+            
+  <div class="section" id="exercise-14-prompting-and-passing">
+<h1>Exercise 14: Prompting And Passing<a class="headerlink" href="#exercise-14-prompting-and-passing" title="Permalink to this headline">¶</a>
+</h1>
+<p>Let's do one exercise that uses <tt class="docutils literal"><span class="pre">ARGV</span></tt> and <tt class="docutils literal"><span class="pre">gets.chomp()</span></tt> together
+to ask the user something specific. You will need this for the next
+exercise where we learn to read and write files. In this exercise we'll
+print a simple <tt class="docutils literal"><span class="pre">&gt;</span></tt> prompt. This is similar to a game like Zork or
+Adventure.</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr>
+<td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td>
+<td class="code">
+<div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="s1">'&gt; '</span>
+
+<span class="nb">puts</span> <span class="s2">"Hi </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">, I'm the </span><span class="si">#{</span><span class="vg">$0</span><span class="si">}</span><span class="s2"> script."</span>
+<span class="nb">puts</span> <span class="s2">"I'd like to ask you a few questions."</span>
+<span class="nb">puts</span> <span class="s2">"Do you like me </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">?"</span>
+<span class="nb">print</span> <span class="n">prompt</span>
+<span class="n">likes</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+<span class="nb">puts</span> <span class="s2">"Where do you live </span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">?"</span>
+<span class="nb">print</span> <span class="n">prompt</span>
+<span class="n">lives</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+<span class="nb">puts</span> <span class="s2">"What kind of computer do you have?"</span>
+<span class="nb">print</span> <span class="n">prompt</span>
+<span class="n">computer</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span><span class="p">()</span>
+
+<span class="nb">puts</span> <span class="o">&lt;&lt;</span><span class="no">MESSAGE</span>
+<span class="sh">Alright, so you said #{likes} about liking me.</span>
+<span class="sh">You live in #{lives}.  Not sure where that is.</span>
+<span class="sh">And you have a #{computer} computer.  Nice.</span>
+<span class="no">MESSAGE</span>
+</pre></div>
+</td>
+</tr></table></div>
+<p><strong>Important:</strong> Also notice that we're using <tt class="docutils literal"><span class="pre">STDIN.gets</span></tt>
+instead of plain 'ol <tt class="docutils literal"><span class="pre">gets</span></tt>. That is because if there is stuff in
+<tt class="docutils literal"><span class="pre">ARGV</span></tt>, the default <tt class="docutils literal"><span class="pre">gets</span></tt> method tries to treat the first one as a
+file and read from that. To read from the user's input (i.e., <tt class="docutils literal"><span class="pre">stdin</span></tt>)
+in such a situation, you have to use it <tt class="docutils literal"><span class="pre">STDIN.gets</span></tt> explicitly.</p>
+<div class="section" id="what-you-should-see">
+<h2>What You Should See<a class="headerlink" href="#what-you-should-see" title="Permalink to this headline">¶</a>
+</h2>
+<p>When you run this, remember that you have to give the script your name
+for the <tt class="docutils literal"><span class="pre">ARGV</span></tt> arguments.</p>
+<div class="highlight-console">
+<div class="highlight"><pre><span class="gp">$</span> ruby ex14.rb Zed
+<span class="go">Hi Zed, I'm the ex14.rb script.</span>
+<span class="go">I'd like to ask you a few questions.</span>
+<span class="go">Do you like me Zed?</span>
+<span class="gp">&gt;</span> yes
+<span class="go">Where do you live Zed?</span>
+<span class="gp">&gt;</span> America
+<span class="go">What kind of computer do you have?</span>
+<span class="gp">&gt;</span> Tandy
+
+<span class="go">Alright, so you said 'yes' about liking me.</span>
+<span class="go">You live in 'America'.  Not sure where that is.</span>
+<span class="go">And you have a 'Tandy' computer.  Nice.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a>
+</h2>
+<ol class="arabic simple">
+<li>Find out what Zork and Adventure were. Try to find a copy and play
+it.</li>
+<li>Change the <tt class="docutils literal"><span class="pre">prompt</span></tt> variable to something else entirely.</li>
+<li>Add another argument and use it in your script.</li>
+<li>Make sure you understand how I combined a <tt class="docutils literal"><span class="pre">&lt;&lt;SOMETHING</span></tt> style
+multi-line string with <tt class="docutils literal"><span class="pre">#{</span> <span class="pre">}</span></tt> string interpolation as the last
+print.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>

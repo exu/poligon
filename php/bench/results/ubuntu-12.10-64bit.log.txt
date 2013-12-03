@@ -1,0 +1,27 @@
+Linux serv 3.5.0-23-generic #35-Ubuntu SMP Thu Jan 24 13:15:40 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+1.50	0m 0s 83ms		83ms
+138.25	0m 0s 299ms		299ms
+146.25	0m 0s 596ms		596ms
+54.00	0m 0s 200ms		200ms
+138.50	0m 0s 266ms		266ms
+146.00	0m 0s 674ms		674ms
+54.00	0m 0s 197ms		197ms
+230.00	0m 0s 526ms		526ms
+237.75	0m 0s 894ms		894ms
+145.50	0m 0s 429ms		429ms
+230.00	0m 0s 700ms		700ms
+138.50	0m 0s 465ms		465ms
+146.00	0m 0s 667ms		667ms
+54.00	0m 0s 234ms		234ms
+138.50	0m 0s 272ms		272ms
+146.00	0m 0s 609ms		609ms
+54.00	0m 0s 213ms		213ms
+222.50	0m 0s 356ms		356ms
+230.00	0m 0s 876ms		876ms
+138.00	0m 0s 380ms		380ms
+428.50	0m 0s 704ms		704ms
+436.00	0m 1s 578ms		1578ms
+344.00	0m 0s 943ms		943ms
+428.25	0m 0s 814ms		814ms
+436.00	0m 1s 547ms		1547ms
+344.00	0m 0s 990ms		990ms

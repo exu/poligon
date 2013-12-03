@@ -1,0 +1,19 @@
+            <div id="map_canvas" style="width:370px; height:300px;"></div>
+            <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+            <script type="text/javascript">
+                google.load("maps", "3",  {other_params:"sensor=false"});
+                google.setOnLoadCallback(function() {
+                     var map, myLatlng, myOptions;
+
+                     myLatlng = new google.maps.LatLng(<?php echo $map['ll']?>);
+                     myOptions = {zoom: 15, center: myLatlng, mapTypeId: google.maps.MapTypeId.ROADMAP}
+
+                     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                     new google.maps.Marker({
+                         position: myLatlng,
+                         map: map,
+                         title: '<?php echo $company['name']?>',
+                         icon: '<?php echo $map['icon']?>'
+                     });
+                 });
+            </script>

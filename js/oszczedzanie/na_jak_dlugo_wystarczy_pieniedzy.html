@@ -1,0 +1,104 @@
+<!doctype html>
+<htmllang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Calc</title>
+    <meta name="description" content="D:evolve">
+    <meta name="author" content="Jacek Wysocki">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/kalkulatory.utf8.js"></script>
+    <script src="js/number-format.js"></script>
+    <script src="js/jak-dlugo.js"></script>
+</head>
+<body>
+<div class="belka">
+    <a href="index.html"> &laquo; Lista kalkulatorów </a>
+</div>
+
+<form name="form">
+    <div class="userInput">
+        <!-- czesc w ktorej user wprowadza dane -->
+        <table>
+            <tbody><tr>
+            <td class="label">
+                Ile pieniędzy masz teraz:
+            </td>
+            <td class="input">
+                <input size="8" type="text" name="ilemasz" value="50000" class="inputbox"> zł
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Jaka ma być wielkość comiesięcznej płatności:
+            </td>
+            <td class="input">
+                <input size="8" type="text" name="ilemies" value="1000" class="inputbox"> zł
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Twoja stopa zwrotu:
+            </td>
+            <td class="input">
+                <input size="8" type="text" name="sz" value="10" class="inputbox"> %
+            </td>
+            </tr>
+        
+        </tbody></table>
+    <div class="button">
+                    <input size="8" type="button" value="◀ Oblicz" name="cmdCalc" onclick="wylicz()" class="button1"> 
+    </div>
+    </div>
+
+    <div class="middleOutput">
+        <table>
+            <tbody><tr>
+                <td class="first">
+                    Zobacz wyniki symulacji
+                </td>
+                <td class="last"></td>
+            </tr>
+        </tbody></table>
+    </div>
+
+    <div class="userOutput">
+        <!-- wyniki -->
+
+        <table>
+            <tbody><tr>
+            <td class="label">
+                Wynik wstępny (w latach):
+            </td>
+            <td class="input">
+                <input size="8" type="text" name="wynik_lat" value="" disabled="disabled" class="inputbox"> lat
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Ostateczny rezultat:
+            </td>
+            <td class="input">
+                <input size="8" type="text" name="rezultat" value="" disabled="disabled" class="inputbox"> lat
+            </td>
+            </tr>
+
+            <tr>
+            <td class="label">
+                Ile możesz wypłacać aby saldo na rachunku się nie zmieniało:
+            </td>
+            <td class="input">
+                <input size="8" type="text" name="ile_wyplata" value="" disabled="disabled" class="inputbox"> zł
+            </td>
+            </tr>
+        </tbody></table>
+        
+    </div>
+</form>
+</body>
+</html>
+
+

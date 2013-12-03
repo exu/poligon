@@ -1,0 +1,6 @@
+guard :shell do
+  watch /(.*)\.go/ do |m|
+    n m[0], 'Changed'
+    `go test`
+  end
+end

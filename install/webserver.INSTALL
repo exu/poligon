@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+USERNAME='jacek.wysocki'
+
+apt-get -y install apache2
+apt-get -y install php5 php5-gd php5-pgsql php5-dev php5-cli php-pear php5-curl
+apt-get -y install libapache2-mod-php5
+apt-get -y install make
+apt-get -y install libpcre3-dev
+apt-get -y install mysql-server mysql-client
+apt-get -y install phpmyadmin
+
+pecl install apc
+
+pear channel-discover pear.twig-project.org &&  pear install twig/Twig
+pear channel-discover pear.symfony-project.com && pear install symfony/Symfony
+
+pear channel-discover pear.phing.info
+pear install phing/phing
+
+echo 'extension=ssh2.so' > /etc/php5/conf.d/ssh2.ini
+echo 'extension=apc.so' > /etc/php5/conf.d/apc.ini
+
+echo '<VirtualHost *:80>
+    ServerName $USERNAME.local
+    ServerAlias $USERNAME
+    DocumentRoot /home/$USERNAME/htdocs
+
+    ErrorLog /var/log/apache2/crm.lts-error_log
+    CustomLog /var/log/apache2/crm.lts-access_log combined
+
+    HostnameLookups Off
+
+    <Directory "/home/$USERNAME/htdocs">
+        AllowOverride All
+        Allow from All
+    </Directory>
+
+    Alias /sf "/usr/share/php/data/symfony/web/sf"
+    <Directory "/usr/share/php/data/symfony/web/sf">
+        AllowOverride All
+        Allow from All
+    </Directory>
+</VirtualHost>
+' > /etc/apache2/sites-available/$USERNAME
+a2ensite $USERNAME
+echo "ServerName $USERNAME" >> /etc/apache2/httpd.conf
+a2enmod rewrite
+service apache2 restart
+
+#setup CRM
+chown -R www-data:www-data /srv/www/$USERNAME
+chmod g+w /srv/www/$USERNAME
+
+sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php5/apache2/php.ini
+service apache2 restart
+
+#locales
+echo 'pl_PL ISO-8859-2' > /var/lib/locales/supported.d/pl
+echo 'pl_PL.UTF-8 UTF-8' >> /var/lib/locales/supported.d/pl
+echo 'fr_FR.UTF-8 UTF-8' > /var/lib/locales/supported.d/fr
+echo 'de_DE.UTF-8 UTF-8' > /var/lib/locales/supported.d/de
+dpkg-reconfigure locales
