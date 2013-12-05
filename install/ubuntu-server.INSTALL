@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# recent ubuntu server 13:10 installation
+
+USERNAME='exu'
+
+apt-get -y install apache2
+apt-get -y install php5 php5-gd php5-pgsql php5-dev php5-cli php-pear php5-curl php5-apcu
+apt-get -y install libapache2-mod-php5
+apt-get -y install make
+apt-get -y install libpcre3-dev
+apt-get -y install mysql-server mysql-client phpmyadmin
+
+pear channel-discover pear.phing.info
+pear install phing/phing
+
+echo 'extension=ssh2.so' > /etc/php5/conf.d/ssh2.ini
+echo 'extension=apc.so' > /etc/php5/conf.d/apc.ini
+
+echo '<VirtualHost *:80>
+    ServerName $USERNAME.local
+    ServerAlias $USERNAME
+    DocumentRoot /home/$USERNAME/htdocs
+
+    ErrorLog /var/log/apache2/$USERNAME.lts-error_log
+    CustomLog /var/log/apache2/$USERNAME.lts-access_log combined
+
+    <Directory "/home/$USERNAME/htdocs">
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+' > /etc/apache2/sites-available/$USERNAME.conf
+a2ensite $USERNAME.conf
+echo "ServerName $USERNAME" >> /etc/apache2/httpd.conf
+a2enmod rewrite
+service apache2 restart
+
+#setup CRM
+chown -R www-data:www-data /srv/www/$USERNAME
+chmod g+w /srv/www/$USERNAME
+
+sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php5/apache2/php.ini
+sed -i 's/memory_limit = .*/memory_limit = 1024M/' /etc/php5/cli/php.ini
+service apache2 restart
+
+#locales
+echo 'pl_PL ISO-8859-2' > /var/lib/locales/supported.d/pl
+echo 'pl_PL.UTF-8 UTF-8' >> /var/lib/locales/supported.d/pl
+echo 'fr_FR.UTF-8 UTF-8' > /var/lib/locales/supported.d/fr
+echo 'de_DE.UTF-8 UTF-8' > /var/lib/locales/supported.d/de
+dpkg-reconfigure locales
