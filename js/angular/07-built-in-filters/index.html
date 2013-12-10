@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	  <head>
+		    <title>Built in filters</title>
+		    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	  </head>
+    <body>
+
+
+
+
+        <div class="container" ng-app="myApp">
+            <h1>Built-in Filters</h1>
+	          <hr>
+
+	          <div ng-controller="AvengersCtrl">
+		            <p>Search thru the table:</p>
+		            <!-- For all columns -->
+		            <!-- <input type="text" ng-model="search.$"> -->
+		            <!-- for actor -->
+		            <input type="text" ng-model="search.name">
+		            <table class="table table-striped">
+			              <thead>
+				                <tr>
+					                  <th>Actor</th>
+					                  <th>Character</th>
+					                  <th>Yyyyyyy?</th>
+					                  <th>Yyyy hmmmmm?</th>
+				                </tr>
+			              </thead>
+			              <tr ng-repeat="actor in avengers.cast | orderBy:'name' | filter:search | limitTo:5">
+				                <td>{{actor.name | lowercase}}</td>
+				                <td>{{actor | json | uppercase}}</td>
+				                <td>{{actor | json | fuckedUp }}</td>
+				                <td>{{actor | json | fuckedUp:true }}</td>
+			              </tr>
+		            </table>
+
+	          </div>
+
+        </div>
+
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
+</html>
