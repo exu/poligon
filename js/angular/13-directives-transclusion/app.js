@@ -1,25 +1,13 @@
-var app = angular.module("app",[]);
+var app = angular.module('phoneApp', []);
 
-app.directive("clock", function () {
-  return {
-    restrict: 'E',
-    scope: {
-      timezone: "@"
-    },
-    template: '<div class="btn btn-warning">12:00pm {{timezone}}</div>'
-  };
+app.controller("AppCtrl", function ($scope) {
+
 });
-
 
 app.directive("panel", function () {
     return {
         restrict: "E",
         transclude: true,
-        scope: {
-            title: "@"
-        },
-        template: "<div style='border: 3px solid #000000'>" +
-            "<div class='alert alert-danger'>{{title}}</div>" +
-            "<div ng-transclude></div></div>"
+        template: '<h1>Transclude example</h1> <div class="panel" ng-transclude>This is a panel component</div>'
     };
 });

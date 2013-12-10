@@ -6,12 +6,16 @@
 	  </head>
     <body>
 
-        <div ng-app="phoneApp">
-            <div ng-controller="AppCtrl">
-                <panel>
-                    <div class="btn btn-primary">Click me!</div>
-                </panel>
-            </div>
+        <div ng-app="app">
+            <panel title="I'm a title">
+                <clock timezone="PST"></clock>
+            </panel>
+            <panel title="I'm a title">
+                <clock timezone="PST"></clock>
+                <clock timezone="PST"></clock>
+                <clock timezone="PST"></clock>
+                <clock timezone="PST"></clock>
+            </panel>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
