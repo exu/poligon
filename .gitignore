@@ -1,3 +1,5 @@
 html/
 vendor/
 node_modules/
+/cpp/net
+/cpp/a.out
