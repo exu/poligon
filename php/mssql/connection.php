@@ -2,7 +2,7 @@
 
 ini_set('display_errors', 1);
 $server = '192.168.0.20:49322';
-$link = mssql_connect($server, 'exu', 'p-o0i9');
+$link = mssql_connect($server, 'exu', '1e0f7a4c96b33e8670c9134f27d66ca6');
 
 if (!$link) {
     die('<br/><br/>Something went wrong while connecting to MSSQL');
@@ -20,7 +20,7 @@ if (!$link) {
 echo "\n\n==============================================\n\n";
 
 
-$db = new PDO("dblib:host=192.168.0.20:49322;dbname=test", "exu", "p-o0i9");
+$db = new PDO("dblib:host=192.168.0.20:49322;dbname=test", "exu", "1e0f7a4c96b33e8670c9134f27d66ca6");
 
 print_r($db);
 

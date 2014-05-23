@@ -8,4 +8,8 @@ $h       = fopen('a.txt');
 $h       = fopen('a.txt');
 $h       = fopen('a.txt');
 
-fwrite($h, 'djashfjsdhjfhsdhjkfsd');fwrite($h, 'djashfjsdhjfhsdhjkfsd');fwrite($h, 'djashfjsdhjfhsdhjkfsd');fwrite($h, 'djashfjsdhjfhsdhjkfsd');fwrite($h, 'djashfjsdhjfhsdhjkfsd');
+fwrite($h, 'djashfjsdhjfhsdhjkfsd');
+fwrite($h, 'djashfjsdhjfhsdhjkfsd');
+fwrite($h, 'djashfjsdhjfhsdhjkfsd');
+fwrite($h, 'djashfjsdhjfhsdhjkfsd');
+fwrite($h, 'djashfjsdhjfhsdhjkfsd');
