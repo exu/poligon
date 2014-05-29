@@ -1,0 +1,10 @@
+services:
+    car:
+        class: Car
+        arguments:
+            - @doors
+
+    doors:
+        class: Doors
+        arguments:
+            - 15
