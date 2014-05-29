@@ -57,8 +57,8 @@ class SiteWatcher
      */
     public function run()
     {
-        foreach($this->sites as $name => $url) {
-            if($this->getStatus($url) >= 300) {
+        foreach ($this->sites as $name => $url) {
+            if ($this->getStatus($url) >= 300) {
 
             }
         }
@@ -66,7 +66,6 @@ class SiteWatcher
     }
 
 }
-
 
 $app = new App;
 $app->run();
