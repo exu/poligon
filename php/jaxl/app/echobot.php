@@ -29,7 +29,7 @@
 
     $jaxl = new JAXL(array(
         'user'=>'edp@jid.pl',
-        'pass'=>'p-o0i9u8',
+        'pass'=>'81a33cf24b60c6f4c5cd4edd11692f09',
         'host'=>'jid.pl',
         'domain'=>'jid.pl',
         'authType'=>'PLAIN',

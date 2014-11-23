@@ -1,0 +1,29 @@
+applications:
+  php_fpm:
+    type: php-fpm
+    links:
+      - mysql
+    ports:
+      '9000': 9000
+    volumes:
+      .: /var/www
+    modules:
+      - zip
+  nginx:
+    type: nginx
+    links:
+      - mysql
+      - php_fpm
+    custom:
+      fastCgi: php_fpm
+      documentRoot: /var/www
+    ports:
+      '80': 80
+    volumes:
+      .: /var/www
+  mysql:
+    type: mysql
+    ports:
+      '3306': 3306
+    volumes:
+      .gaudi/mysql: /var/lib/mysql

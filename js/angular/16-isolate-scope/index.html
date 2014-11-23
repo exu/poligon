@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+	  <head>
+		    <title>Directives</title>
+		    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	  </head>
+    <body>
+
+        <div ng-app="choreApp">
+            <div ng-controller="ChoreCtrl">
+                <input ng-model="someName">
+                <br>
+                Drink: <div drink flavor="{{ someName }}"></div><br>
+                Coffe: <div coffe flavor="someName"></div><br>
+
+                <br><br>
+                Kid: <kid done="logChore(chore)"></kid><br>
+            </div>
+
+            <div ng-controller="AppCtrl">
+                <div phone dial="callHome('called home!')"></div>
+            </div>
+
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
+</html>

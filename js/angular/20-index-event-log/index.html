@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	  <head>
+		    <title>Directives</title>
+		    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	  </head>
+    <body>
+
+
+        <div ng-app class="form-group">
+            <div
+                class="btn btn-primary form-control"
+                ng-repeat="item in 'ab cd ef gf momomo'.split(' ')"
+                ng-click="ev = $event"
+                >
+
+                {{ $index + 1 }} {{ item }}
+                {{ev.pageX}}
+
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
+</html>

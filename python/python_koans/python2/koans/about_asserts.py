@@ -44,7 +44,7 @@ class AboutAsserts(Koan):
 
     def test_that_unittest_asserts_work_the_same_way_as_python_asserts(self):
         """
-        Knowing how things really work is half the battle
+        Understand what lies within.
         """
 
         # This throws an AssertionError exception

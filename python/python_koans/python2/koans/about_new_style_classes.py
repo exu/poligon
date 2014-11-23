@@ -37,7 +37,7 @@ class AboutNewStyleClasses(Koan):
         self.assertEqual('classobj', type(self.OldStyleClass).__name__)
 
         try:
-            cls = self.OldStyleClass.__class__
+            cls = self.OldStyleClass.__class__.__name__
         except Exception as ex:
             pass
 

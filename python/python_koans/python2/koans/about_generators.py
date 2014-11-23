@@ -134,7 +134,7 @@ class AboutGenerators(Koan):
         next(generator2)
         self.assertEqual('no value', next(generator2))
 
-    def test_send_none_is_equivelant_to_next(self):
+    def test_send_none_is_equivalent_to_next(self):
         generator = self.yield_tester()
 
         next(generator)

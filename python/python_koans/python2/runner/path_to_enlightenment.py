@@ -6,11 +6,12 @@
 import unittest
 
 from koans.about_asserts import AboutAsserts
+from koans.about_strings import AboutStrings
 from koans.about_none import AboutNone
 from koans.about_lists import AboutLists
 from koans.about_list_assignments import AboutListAssignments
 from koans.about_dictionaries import AboutDictionaries
-from koans.about_strings import AboutStrings
+from koans.about_string_manipulation import AboutStringManipulation
 from koans.about_tuples import AboutTuples
 from koans.about_methods import AboutMethods
 from koans.about_control_statements import AboutControlStatements
@@ -20,6 +21,7 @@ from koans.about_triangle_project import AboutTriangleProject
 from koans.about_exceptions import AboutExceptions
 from koans.about_triangle_project2 import AboutTriangleProject2
 from koans.about_iteration import AboutIteration
+from koans.about_comprehension import AboutComprehension
 from koans.about_generators import AboutGenerators
 from koans.about_lambdas import AboutLambdas
 from koans.about_scoring_project import AboutScoringProject
@@ -48,11 +50,12 @@ def koans():
     suite = unittest.TestSuite()
     loader.sortTestMethodsUsing = None
     suite.addTests(loader.loadTestsFromTestCase(AboutAsserts))
+    suite.addTests(loader.loadTestsFromTestCase(AboutStrings))
     suite.addTests(loader.loadTestsFromTestCase(AboutNone))
     suite.addTests(loader.loadTestsFromTestCase(AboutLists))
     suite.addTests(loader.loadTestsFromTestCase(AboutListAssignments))
     suite.addTests(loader.loadTestsFromTestCase(AboutDictionaries))
-    suite.addTests(loader.loadTestsFromTestCase(AboutStrings))
+    suite.addTests(loader.loadTestsFromTestCase(AboutStringManipulation))
     suite.addTests(loader.loadTestsFromTestCase(AboutTuples))
     suite.addTests(loader.loadTestsFromTestCase(AboutMethods))
     suite.addTests(loader.loadTestsFromTestCase(AboutControlStatements))
@@ -62,6 +65,7 @@ def koans():
     suite.addTests(loader.loadTestsFromTestCase(AboutExceptions))
     suite.addTests(loader.loadTestsFromTestCase(AboutTriangleProject2))
     suite.addTests(loader.loadTestsFromTestCase(AboutIteration))
+    suite.addTests(loader.loadTestsFromTestCase(AboutComprehension))
     suite.addTests(loader.loadTestsFromTestCase(AboutGenerators))
     suite.addTests(loader.loadTestsFromTestCase(AboutLambdas))
     suite.addTests(loader.loadTestsFromTestCase(AboutScoringProject))
@@ -84,5 +88,6 @@ def koans():
     suite.addTests(loader.loadTestsFromTestCase(AboutProxyObjectProject))
     suite.addTests(loader.loadTestsFromTestCase(TelevisionTest))
     suite.addTests(loader.loadTestsFromTestCase(AboutExtraCredit))
+    suite.addTests(loader.loadTestsFromTestCase(AboutRegex))
 
     return suite
