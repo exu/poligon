@@ -1,0 +1,2 @@
+newrelic==2.30.0.27
+wsgiref==0.1.2
