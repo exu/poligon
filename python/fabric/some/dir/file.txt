@@ -1,0 +1,13 @@
+This is a list of ways to say hello in various languages.
+It is not intended to be comprehensive, but to demonstrate
+some of the character sets that Emacs supports.
+
+Non-ASCII examples:
+  Europe: ¡Hola!, Grüß Gott, Hyvää päivää, Tere õhtust, Bonġu
+          Cześć!, Dobrý den, Здравствуйте!, Γειά σας, გამარჯობა
+  Africa: ሠላም
+  Middle/Near East: שלום, السّلام عليكم
+  East Asia: 你好, 早晨, こんにちは, 안녕하세요
+  Misc: Eĥoŝanĝo ĉiuĵaŭde, ⠓⠑⠇⠇⠕, ∀ p ∈ world • hello p  □
+  CJK variety: GB(元气,开发), BIG5(元氣,開發), JIS(元気,開発), KSC(元氣,開發)
+  Unicode charset: Eĥoŝanĝo ĉiuĵaŭde, Γειά σας, שלום, Здравствуйте!
